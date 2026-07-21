@@ -13,7 +13,6 @@ import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
 import { ParentReports } from "@/components/parent-reports";
 import { SantierGallery } from "@/components/santier-gallery";
-import { SantierUpload } from "@/components/santier-upload";
 import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
@@ -117,7 +116,7 @@ export default function Page() {
     <main>
       {/* HERO */}
       <header className="border-b-[3px] border-primary bg-[#14151a] text-[#f0eee7]">
-        <div className="mx-auto max-w-5xl px-5 pb-10 pt-8">
+        <div className="mx-auto max-w-2xl px-5 pb-10 pt-8">
           <div className="flex items-start justify-between gap-4">
             <span className="text-[0.74rem] font-bold uppercase tracking-[0.18em] text-[#d9a15a]">
               Monitorizare civică · Școala Gimnazială nr. 13 · Botoșani
@@ -166,7 +165,7 @@ export default function Page() {
         </div>
       </header>
 
-      <div className="mx-auto max-w-5xl px-5">
+      <div className="mx-auto max-w-2xl px-5">
         {/* LEDGER */}
         <Reveal className="-mt-6">
           <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-card sm:grid-cols-4">
@@ -209,10 +208,10 @@ export default function Page() {
 
         <AppCTA />
 
-        <div className="mt-8 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-6 lg:gap-y-8">
+        <div className="mt-10 space-y-10">
 
         {/* PETIȚIE */}
-        <section id="petitie" className="mb-8 scroll-mt-4 lg:col-span-2 lg:mb-0">
+        <section id="petitie" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Acțiune" title="Petiția părinților" />
             <Card className="relative overflow-hidden">
@@ -256,7 +255,7 @@ export default function Page() {
         </section>
 
         {/* TERMENE */}
-        <section id="termene" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="termene" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Promisiuni" title="Istoricul termenelor" />
             <Card>
@@ -277,7 +276,7 @@ export default function Page() {
         </section>
 
         {/* ESTIMARE */}
-        <section id="estimare" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="estimare" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Proiecție" title="Va fi gata la timp?" />
             <Card>
@@ -303,7 +302,7 @@ export default function Page() {
         </section>
 
         {/* DETALII PROIECT */}
-        <section id="proiect" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+        <section id="proiect" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Date publice" title="Detalii despre proiect" />
             <Card>
@@ -325,7 +324,7 @@ export default function Page() {
         </section>
 
         {/* STADIU PE ETAJE */}
-        <section id="stadiu" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="stadiu" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Pe teren" title="Stadiul lucrărilor, pe etaje" />
             <Card>
@@ -372,7 +371,7 @@ export default function Page() {
         </section>
 
         {/* EVALUARE */}
-        <section id="evaluare" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="evaluare" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Analiză automată" title="Evaluarea stadiului" />
             <EvaluareCard />
@@ -380,14 +379,13 @@ export default function Page() {
         </section>
 
         {/* JURNAL FOTO/VIDEO */}
-        <section id="santier" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+        <section id="santier" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Documentare" title="Jurnal de pe șantier" />
             <p className="mb-4 max-w-2xl text-muted-foreground">
               Poze și video de pe șantier, adăugate pe măsură ce lucrările avansează, cu analiza noastră
               despre progresul de la o săptămână la alta.
             </p>
-            <SantierUpload />
             <SantierGallery />
             <div className="space-y-4">
               {saptamani.map((s, i) => (
@@ -424,7 +422,7 @@ export default function Page() {
         </section>
 
         {/* RAPORTEAZĂ DE PE TEREN */}
-        <section id="raporteaza" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+        <section id="raporteaza" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="De pe teren" title="Ai trecut pe la școală? Raportează" />
             <p className="mb-4 max-w-2xl text-muted-foreground">
@@ -444,7 +442,7 @@ export default function Page() {
         <ParentReports />
 
         {/* CRONOLOGIE */}
-        <section id="cronologie" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+        <section id="cronologie" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Istoric" title="Cronologie" />
             <Card>
@@ -475,7 +473,7 @@ export default function Page() {
         </section>
 
         {/* REVENDICĂRI */}
-        <section id="revendicari" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="revendicari" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Cereri" title="Ce cerem" />
             <Card>
@@ -513,7 +511,7 @@ export default function Page() {
         </section>
 
         {/* DISTRIBUIE */}
-        <section id="distribuie" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="distribuie" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Amplifică" title="Trimite mai departe" />
             <Card>
@@ -528,7 +526,7 @@ export default function Page() {
         </section>
 
         {/* ACTUALIZĂRI */}
-        <section id="actualizari" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="actualizari" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="La zi" title="Actualizări" />
             <Card>
@@ -545,7 +543,7 @@ export default function Page() {
         </section>
 
         {/* SURSE */}
-        <section id="surse" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
+        <section id="surse" className="scroll-mt-4">
           <Reveal>
             <SectionHead kicker="Referințe" title="Surse" />
             <Card>
@@ -573,7 +571,7 @@ export default function Page() {
       </div>
 
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-5xl px-5 py-8 text-center text-sm text-muted-foreground">
+        <div className="mx-auto max-w-2xl px-5 py-8 text-center text-sm text-muted-foreground">
           Pagină întreținută voluntar de comunitatea părinților · Corecturi și completări sunt binevenite.
         </div>
       </footer>

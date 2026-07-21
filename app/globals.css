@@ -4,19 +4,19 @@
 
 @layer base {
   :root {
-    --background: 45 16% 89%;
-    --foreground: 220 10% 11%;
-    --card: 45 20% 96%;
-    --card-foreground: 220 10% 11%;
-    --card-2: 45 16% 92%;
-    --muted: 45 12% 92%;
-    --muted-foreground: 90 4% 43%;
-    --primary: 30 76% 43%;
-    --primary-2: 32 82% 33%;
-    --primary-foreground: 40 40% 97%;
-    --border: 44 14% 82%;
-    --input: 44 14% 82%;
-    --ring: 30 76% 43%;
+    --background: 40 24% 98%;
+    --foreground: 220 14% 13%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 14% 13%;
+    --card-2: 40 20% 97%;
+    --muted: 40 16% 95%;
+    --muted-foreground: 220 6% 45%;
+    --primary: 28 82% 46%;
+    --primary-2: 30 84% 36%;
+    --primary-foreground: 40 40% 99%;
+    --border: 40 13% 90%;
+    --input: 40 13% 90%;
+    --ring: 28 82% 46%;
     --ok: 148 46% 34%;
     --ok-soft: 140 34% 89%;
     --warn: 38 82% 36%;
