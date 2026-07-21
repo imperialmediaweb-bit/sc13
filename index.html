@@ -114,6 +114,19 @@
   /* Stadiu */
   .work-item { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; padding: .5rem 0; border-bottom: 1px dashed var(--border); }
   .work-item:last-child { border-bottom: none; }
+  /* Clădire pe etaje */
+  .building { display: flex; flex-direction: column; gap: 6px; }
+  .floor { position: relative; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg); }
+  .floor .fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--accent), #4fae7c); opacity: .22; transition: width 1.1s ease; }
+  .floor.low .fill { background: linear-gradient(90deg, var(--warn), var(--bad)); opacity: .25; }
+  .floor .row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .7rem .9rem; flex-wrap: wrap; }
+  .floor .name { font-weight: 700; }
+  .floor .note { color: var(--muted); font-size: .85rem; flex: 1 1 100%; margin-top: .1rem; }
+  .floor .pct { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .floor .roof { height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; }
+  .roof-cap { text-align: center; color: var(--muted); font-size: .8rem; padding-bottom: .3rem; }
+  /* Card AI */
+  .ai-card { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--card) 60%); }
   /* Jurnal foto săptămânal */
   .week { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1rem; background: var(--card); }
   .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .85rem 1.1rem; }
@@ -226,10 +239,26 @@
     </div>
   </section>
 
-  <!-- STADIU -->
+  <!-- STADIU PE ETAJE -->
   <section id="stadiu">
-    <h2>Stadiul lucrărilor</h2>
-    <div class="card" id="works"></div>
+    <h2>Stadiul lucrărilor, pe etaje</h2>
+    <div class="card">
+      <div class="building" id="building"></div>
+    </div>
+  </section>
+
+  <!-- EVALUARE AI -->
+  <section id="evaluare-ai">
+    <h2>🤖 Evaluare automată a stadiului</h2>
+    <div class="card ai-card">
+      <p id="ai-verdict" style="font-weight:700;font-size:1.05rem;margin-bottom:.5rem"></p>
+      <p id="ai-body" style="margin-bottom:.8rem"></p>
+      <strong style="font-size:.95rem">Ce a mai rămas de făcut:</strong>
+      <ul id="ai-remaining" style="margin:.4rem 0 .3rem 1.2rem"></ul>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:.7rem">
+        Evaluare generată automat din procentele pe etaje și din informațiile apărute în presă. Are rol orientativ, nu de expertiză tehnică.
+      </p>
+    </div>
   </section>
 
   <!-- JURNAL FOTO -->
@@ -302,12 +331,26 @@ const DATE = {
   // Termenul final promis (an, luna 0-11, zi) — 1 septembrie 2026
   termenFinal: [2026, 8, 1],
 
+  // --- Stadiul pe etaje (de sus în jos) ---
+  // procent 0–100; progresul general se calculează automat ca medie.
+  etaje: [
+    { nume: "Etajul 3", procent: 99, nota: "Practic finalizat." },
+    { nume: "Etajul 2", procent: 99, nota: "Practic finalizat." },
+    { nume: "Etajul 1", procent: 90, nota: "Aproape gata, finisaje finale." },
+    { nume: "Parter", procent: 40, nota: "Se dă încă cu glet; finisaje interioare de făcut." },
+  ],
+
+  // Ce a mai rămas de făcut (din observații pe șantier + presă)
+  ramasDeFacut: [
+    "Finisaje interioare la parter (glet, gletuire, vopsire)",
+    "Sala de sport — intervenții importante rămase",
+    "Montaj final gresie/parchet acolo unde nu e gata",
+    "Recepția și curățenia finală / curtea școlii",
+  ],
+
   // --- Estimare „va fi gata la timp?” ---
-  // progresGeneral: procentul total estimat al lucrărilor finalizate (0–100).
-  //   Actualizați-l după fiecare vizită pe șantier — din el se calculează
-  //   automat ritmul necesar și data probabilă de finalizare.
-  progresGeneral: 70,
-  progresSaptamanaTrecuta: 68, // procentul de acum o săptămână (pentru ritm real)
+  // progresGeneral se calculează automat din media etajelor de mai sus.
+  progresSaptamanaTrecuta: 78, // % general de acum o săptămână (pentru ritm real)
 
   termene: [
     { cand: "16 octombrie 2025", status: "bad",      text: "termenul contractual inițial de finalizare" },
@@ -353,6 +396,8 @@ const DATE = {
   surse: [
     { url: "https://agerpres.ro/educatie-stiinta/2026/07/16/botosani-protest-al-parintilor-elevilor-unei-scoli-fata-de-ritmul-lent-al-lucrarilor-de-reabilitare---1576737", text: "AGERPRES — Protest al părinților față de ritmul lent al lucrărilor (16 iulie 2026)" },
     { url: "https://www.edupedu.ro/parintii-elevilor-de-la-scoala-13-din-botosani-au-protestat-din-cauza-intarzierii-lucrarilor-de-reabilitare/", text: "Edupedu.ro — Părinții elevilor de la Școala 13 au protestat" },
+    { url: "https://www.botosaninews.ro/744543/administratie/foto-video-lucrarile-la-scoala-nr-13-din-botosani-sunt-in-toi-vezi-stadiul-acestora/", text: "BotosaniNews.ro — FOTO/VIDEO Lucrările la Școala 13 sunt în toi. Vezi stadiul" },
+    { url: "https://www.botosaninews.ro/693246/social/foto-situatie-grava-la-o-importanta-scoala-din-botosani-constructorul-a-anuntat-ca-vrea-sa-rezilieze-contractul-lucrarile-au-fost-oprite/", text: "BotosaniNews.ro — Constructorul (Katar Conneg) a vrut să rezilieze contractul" },
     { url: "https://www.botosaninews.ro/744496/eveniment/foto-video-protest-la-botosani-cu-zeci-de-parinti-nemultumiti-oamenii-si-au-spus-of-ul-in-fata-primariei/", text: "BotosaniNews.ro — Protest cu zeci de părinți nemulțumiți" },
     { url: "https://www.botosaninews.ro/744519/administratie/video-viceprimarul-municipiului-botosani-explicatii-in-fata-protestatarilor-despre-intarzierea-finalizarii-lucrarilor-la-scoala-13-nu-a-depins-de-primaria-botosani/", text: "BotosaniNews.ro — Viceprimarul, explicații în fața protestatarilor" },
     { url: "https://www.botosaneanul.ro/parintii-au-intrat-pe-santierul-scolii-nr-13-viceprimarul-promite-vizite-saptamanale-pentru-monitorizarea-lucrarilor", text: "Botoșăneanul — Părinții au intrat pe șantier; vizite săptămânale promise" },
@@ -367,6 +412,11 @@ const DATE = {
 /* ===================== sfârșitul secțiunii DATE ====================== */
 
 const $ = id => document.getElementById(id);
+
+// Progres general = media procentelor pe etaje
+const PROGRES_GENERAL = Math.round(
+  DATE.etaje.reduce((s, e) => s + e.procent, 0) / DATE.etaje.length
+);
 
 // --- Petiție ---
 const pct = Math.min(100, Math.round(DATE.semnaturi / DATE.obiectivSemnaturi * 100));
@@ -395,7 +445,7 @@ requestAnimationFrame(() => { $("sig-bar").style.width = pct + "%"; });
   const [y, m, d] = DATE.termenFinal;
   const deadline = new Date(y, m, d);
   const now = new Date();
-  const prog = DATE.progresGeneral;
+  const prog = PROGRES_GENERAL;
   const ritm = prog - DATE.progresSaptamanaTrecuta; // puncte % pe săptămână
   const ramas = 100 - prog;
   const zileRamase = Math.ceil((deadline - now) / 86400000);
@@ -448,10 +498,48 @@ $("deadlines").innerHTML = DATE.termene.map(t => `
     <span>${t.text}</span>
   </div>`).join("");
 
-// --- Lucrări ---
-$("works").innerHTML = DATE.lucrari.map(l => `
-  <div class="work-item"><span>${l.nume}</span><span class="badge b-${l.status}">${l.eticheta}</span></div>
-`).join("");
+// --- Clădirea pe etaje ---
+$("building").innerHTML =
+  '<div class="roof-cap">▲ acoperiș</div>' +
+  DATE.etaje.map(e => `
+    <div class="floor ${e.procent < 60 ? "low" : ""}">
+      <div class="fill" data-w="${e.procent}"></div>
+      <div class="row">
+        <span class="name">${e.nume}</span>
+        <span class="pct">${e.procent}%</span>
+        ${e.nota ? `<span class="note">${e.nota}</span>` : ""}
+      </div>
+    </div>`).join("");
+requestAnimationFrame(() => {
+  document.querySelectorAll("#building .fill").forEach(f => { f.style.width = f.dataset.w + "%"; });
+});
+
+// --- Evaluare automată (AI) a stadiului ---
+(function () {
+  const etaje = DATE.etaje;
+  const gata = etaje.filter(e => e.procent >= 98);
+  const slab = etaje.reduce((a, b) => a.procent < b.procent ? a : b);
+  const [y, m, d] = DATE.termenFinal;
+  const zile = Math.ceil((new Date(y, m, d) - new Date()) / 86400000);
+
+  let stare, culoare;
+  if (PROGRES_GENERAL >= 95) { stare = "aproape finalizat"; culoare = "var(--ok)"; }
+  else if (PROGRES_GENERAL >= 75) { stare = "avansat, dar cu un punct critic"; culoare = "var(--warn)"; }
+  else { stare = "în întârziere"; culoare = "var(--bad)"; }
+
+  $("ai-verdict").textContent = `Stadiul general: ${PROGRES_GENERAL}% — ${stare}.`;
+  $("ai-verdict").style.color = culoare;
+
+  $("ai-body").innerHTML =
+    `Etajele superioare stau bine: ${gata.length >= 1 ? gata.map(e => e.nume.toLowerCase()).join(" și ") + " sunt practic gata" : "lucrările avansează la etaje"}. ` +
+    `Punctul critic este <strong>${slab.nume.toLowerCase()}</strong>, la doar <strong>${slab.procent}%</strong> — ${slab.nota || "aici se concentrează munca rămasă"}. ` +
+    `Mai sunt <strong>${zile} zile</strong> până la 1 septembrie 2026. ` +
+    (PROGRES_GENERAL >= 75
+      ? "Ritmul general e bun, dar finalizarea la timp depinde direct de recuperarea rapidă la parter și la sala de sport."
+      : "În acest ritm, respectarea termenului este incertă.");
+
+  $("ai-remaining").innerHTML = DATE.ramasDeFacut.map(r => `<li>${r}</li>`).join("");
+})();
 
 // --- Jurnal foto ---
 const progresBadge = {

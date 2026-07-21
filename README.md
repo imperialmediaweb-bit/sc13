@@ -26,11 +26,22 @@ scriptului (aproape de final). Acolo, într-un singur loc, editezi:
 
 - `semnaturi` — numărul curent de semnături de pe petiție;
 - `obiectivSemnaturi` — obiectivul propus;
-- `termene`, `lucrari` — statusurile;
+- `etaje` — procentul fiecărui etaj (ex. Etaj 3: 99%, Parter: 40%). Din
+  aceste valori se calculează **automat** progresul general, vizualizarea
+  clădirii și evaluarea AF a stadiului;
+- `progresSaptamanaTrecuta` — procentul general de acum o săptămână (pentru
+  calculul ritmului și al estimării „va fi gata la timp?”);
+- `ramasDeFacut` — lista lucrurilor rămase (apare în evaluarea automată);
+- `termene` — statusurile termenelor;
 - `saptamani` — jurnalul foto (vezi mai jos);
 - `cronologie`, `actualizari`, `surse`.
 
-Statusurile folosesc: `"done"` (verde), `"progress"` (galben), `"bad"` (roșu).
+Statusurile termenelor folosesc: `"done"` (verde), `"progress"` (galben),
+`"bad"` (roșu).
+
+> Evaluarea „🤖 automată” și estimarea de finalizare se recalculează singure din
+> procentele pe etaje — nu trebuie scrise de mână. Tu doar actualizezi
+> procentele după fiecare vizită pe șantier.
 
 ## Cum adaugi pozele săptămânal
 
