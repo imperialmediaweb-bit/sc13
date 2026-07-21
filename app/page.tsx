@@ -18,6 +18,7 @@ import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
   petitie,
+  proiect,
   termenFinal,
   etaje,
   progresSaptamanaTrecuta,
@@ -295,6 +296,28 @@ export default function Page() {
                 <p className="mt-3 text-xs text-muted-foreground">
                   Estimare orientativă, calculată automat din ritmul de progres raportat (procentul actual față
                   de cel de acum o săptămână). Nu înlocuiește un grafic oficial de execuție.
+                </p>
+              </CardContent>
+            </Card>
+          </Reveal>
+        </section>
+
+        {/* DETALII PROIECT */}
+        <section id="proiect" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+          <Reveal>
+            <SectionHead kicker="Date publice" title="Detalii despre proiect" />
+            <Card>
+              <CardContent>
+                <dl className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                  {proiect.map((p, i) => (
+                    <div key={i} className="flex flex-col border-b border-border pb-3 last:border-b-0">
+                      <dt className="text-xs font-bold uppercase tracking-wide text-muted-foreground">{p.eticheta}</dt>
+                      <dd className="font-semibold">{p.valoare}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <p className="mt-4 text-xs text-muted-foreground">
+                  Informații publice, din presă și comunicate. Vezi sursele la finalul paginii.
                 </p>
               </CardContent>
             </Card>

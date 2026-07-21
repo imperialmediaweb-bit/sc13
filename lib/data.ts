@@ -16,6 +16,16 @@ export const petitie = {
 // Termenul final promis (an, luna 0-11, zi) — 1 septembrie 2026
 export const termenFinal: [number, number, number] = [2026, 8, 1];
 
+// Detalii proiect (informații publice, din presă și comunicate)
+export const proiect: { eticheta: string; valoare: string }[] = [
+  { eticheta: "Obiectiv", valoare: "Reabilitare și modernizare energetică" },
+  { eticheta: "Beneficiar", valoare: "Primăria Municipiului Botoșani" },
+  { eticheta: "Finanțare", valoare: "PNRR — aproximativ 14 milioane lei" },
+  { eticheta: "Constructor", valoare: "Katar Conneg SRL (Vaslui)" },
+  { eticheta: "Primul termen anunțat", valoare: "16 octombrie 2025" },
+  { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
+];
+
 // Stadiul pe etaje (de sus în jos). Progresul general = media procentelor.
 export const etaje = [
   { nume: "Etajul 3", procent: 99, nota: "Practic finalizat." },
@@ -39,10 +49,10 @@ export const ramasDeFacut = [
 ];
 
 export const termene: { cand: string; status: Status; text: string }[] = [
-  { cand: "16 octombrie 2025", status: "bad", text: "termenul contractual inițial de finalizare" },
-  { cand: "„Din toamnă” 2025", status: "bad", text: "promisiunea publică a revenirii elevilor în școală" },
-  { cand: "Iunie 2026", status: "bad", text: "al treilea termen anunțat" },
-  { cand: "1 septembrie 2026", status: "progress", text: "termenul actual, promis public de administrația locală" },
+  { cand: "16 octombrie 2025", status: "bad", text: "primul termen anunțat pentru finalizare" },
+  { cand: "„Din toamnă” 2025", status: "bad", text: "termen anunțat public" },
+  { cand: "Iunie 2026", status: "bad", text: "termen intermediar anunțat" },
+  { cand: "1 septembrie 2026", status: "progress", text: "termenul anunțat în prezent pentru finalizare" },
 ];
 
 // Jurnal: cele mai noi săptămâni primele.
@@ -75,34 +85,33 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
     status: "done",
     titlu: "Începerea reabilitării prin PNRR (~14 mil. lei)",
     detalii:
-      "Elevii sunt mutați în spații improvizate — inclusiv în clădirea fundației Hand of Help, în foste dormitoare, magazii și la subsol, cu ore scurtate și fără laboratoare.",
+      "Pe durata lucrărilor, elevii învață temporar în alte spații, cu program adaptat.",
   },
   {
     data: "16 octombrie 2025",
-    status: "bad",
-    titlu: "Termenul contractual inițial este depășit",
-    detalii:
-      "Constructorul (firmă din Vaslui) nu finalizează la termen. Primăria invocă întârzieri de 3–4 luni la tranșele de finanțare PNRR.",
+    status: "done",
+    titlu: "Primul termen anunțat pentru finalizare",
+    detalii: "Finanțarea prin PNRR a avut întârzieri la unele tranșe, care au influențat ritmul lucrărilor.",
   },
-  { data: "Iunie 2026", status: "bad", titlu: "Al treilea termen promis trece fără finalizare" },
+  { data: "Iunie 2026", status: "done", titlu: "Termen intermediar anunțat" },
   {
     data: "16 iulie 2026",
     status: "done",
-    titlu: "Protestul părinților în fața Primăriei Botoșani",
+    titlu: "Întâlnire cu autoritățile locale",
     detalii:
-      "Zeci de părinți (50–100, potrivit presei) cer un termen ferm și garanții. Primarul Cosmin Andrei fiind în delegație, sunt primiți de viceprimarul Bogdan Buhăianu, care reconfirmă termenul de 1 septembrie și promite vizite săptămânale de monitorizare pe șantier.",
+      "Se reconfirmă termenul de 1 septembrie 2026 și se stabilesc vizite săptămânale de monitorizare pe șantier, la care pot participa și părinții.",
   },
   {
     data: "Iulie 2026",
     status: "done",
-    titlu: "Lansarea petiției online",
-    detalii: "Comunitatea părinților lansează petiția „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani”.",
+    titlu: "Lansarea petiției",
+    detalii: "Comunitatea de părinți lansează petiția pentru finalizarea lucrărilor la timp.",
   },
   {
     data: "1 septembrie 2026",
     status: "current",
-    titlu: "Termenul promis de finalizare — al patrulea",
-    detalii: "Elevii ar trebui să înceapă anul școlar 2026–2027 în școala lor.",
+    titlu: "Termenul anunțat pentru finalizare",
+    detalii: "Elevii ar urma să înceapă anul școlar 2026–2027 în școala reabilitată.",
   },
 ];
 
