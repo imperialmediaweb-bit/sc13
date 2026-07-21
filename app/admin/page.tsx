@@ -61,6 +61,33 @@ export default function Admin() {
     setSemnMsg(res.ok ? `Salvat: ${data.value} semnături.` : "Eroare la salvare.");
   }
 
+  // --- Actualizări ---
+  const [updText, setUpdText] = React.useState("");
+  const [updDate, setUpdDate] = React.useState("");
+  const [updMsg, setUpdMsg] = React.useState("");
+
+  async function addUpdate(e: React.FormEvent) {
+    e.preventDefault();
+    if (!updText.trim()) {
+      setUpdMsg("Scrie textul.");
+      return;
+    }
+    setUpdMsg("Se publică…");
+    const res = await fetch("/api/updates", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-notify-secret": secret },
+      body: JSON.stringify({ data: updDate, text: updText }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) {
+      setUpdText("");
+      setUpdDate("");
+      setUpdMsg("Publicat" + (data.text && data.text !== updText ? " (corectat gramatical)." : "."));
+    } else {
+      setUpdMsg("Eroare la publicare.");
+    }
+  }
+
   // --- Upload poze de șantier, pe dată ---
   const [upDate, setUpDate] = React.useState("");
   const [upFiles, setUpFiles] = React.useState<File[]>([]);
@@ -151,6 +178,33 @@ export default function Admin() {
             <div className="mt-1 text-xs text-muted-foreground">{c.l}</div>
           </div>
         ))}
+      </section>
+
+      <section className="rounded-lg border border-border bg-card p-4">
+        <h2 className="mb-2 font-bold">Publică o actualizare</h2>
+        <p className="mb-2 text-sm text-muted-foreground">
+          Apare imediat la „Actualizări” pe pagină. Textul este corectat gramatical automat înainte de
+          publicare.
+        </p>
+        <form onSubmit={addUpdate} className="space-y-2">
+          <input
+            value={updDate}
+            onChange={(e) => setUpdDate(e.target.value)}
+            placeholder="Data (ex: 21 iulie 2026)"
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
+          <textarea
+            value={updText}
+            onChange={(e) => setUpdText(e.target.value)}
+            rows={3}
+            placeholder="Scrie ce s-a întâmplat (nu contează greșelile — se corectează)."
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
+          <button className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
+            Publică actualizarea
+          </button>
+        </form>
+        {updMsg && <p className="mt-2 text-sm text-muted-foreground">{updMsg}</p>}
       </section>
 
       <section className="rounded-lg border border-border bg-card p-4">

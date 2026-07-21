@@ -53,6 +53,14 @@ export function ensureTables(): Promise<void> {
            value TEXT
          )`
       );
+      await p.query(
+        `CREATE TABLE IF NOT EXISTS updates (
+           id         UUID PRIMARY KEY,
+           created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+           data       TEXT,
+           text       TEXT NOT NULL
+         )`
+      );
     })().catch((e) => {
       ready = null; // permite reîncercarea la următoarea cerere
       throw e;

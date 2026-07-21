@@ -124,10 +124,15 @@ export default function Page() {
   }, []);
 
   const [sig, setSig] = React.useState(petitie.semnaturi);
+  const [dbUpdates, setDbUpdates] = React.useState<{ id: string; data: string; text: string }[]>([]);
   React.useEffect(() => {
     fetch("/api/signatures")
       .then((r) => r.json())
       .then((d) => typeof d.count === "number" && setSig(d.count))
+      .catch(() => {});
+    fetch("/api/updates")
+      .then((r) => r.json())
+      .then((d) => Array.isArray(d.updates) && setDbUpdates(d.updates))
       .catch(() => {});
   }, []);
 
@@ -427,8 +432,11 @@ export default function Page() {
         {/* ACTUALIZĂRI */}
         <Section id="actualizari" title="Actualizări">
           <div className="space-y-4">
-            {actualizari.map((u, i) => (
-              <div key={i} className="border-l-4 border-primary pl-4">
+            {[
+              ...dbUpdates.map((u) => ({ key: u.id, data: u.data, text: u.text })),
+              ...actualizari.map((u, i) => ({ key: "s" + i, data: u.data, text: u.text })),
+            ].map((u) => (
+              <div key={u.key} className="border-l-4 border-primary pl-4">
                 <div className="text-xs font-semibold text-muted-foreground">{u.data}</div>
                 <div className="text-sm">{u.text}</div>
               </div>

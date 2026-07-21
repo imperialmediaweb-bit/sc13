@@ -117,6 +117,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 
 export const actualizari = [
   {
+    data: "21 iulie 2026",
+    text: "Mâine depunem petiția la Primăria Municipiului Botoșani.",
+  },
+  {
     data: "16 iulie 2026",
     text: "Protest în fața Primăriei Botoșani. Viceprimarul Bogdan Buhăianu reconfirmă termenul de 1 septembrie 2026 și promite vizite săptămânale pe șantier.",
   },
