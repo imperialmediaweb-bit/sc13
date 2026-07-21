@@ -47,6 +47,12 @@ export function ensureTables(): Promise<void> {
            value BIGINT NOT NULL DEFAULT 0
          )`
       );
+      await p.query(
+        `CREATE TABLE IF NOT EXISTS settings (
+           key   TEXT PRIMARY KEY,
+           value TEXT
+         )`
+      );
     })().catch((e) => {
       ready = null; // permite reîncercarea la următoarea cerere
       throw e;

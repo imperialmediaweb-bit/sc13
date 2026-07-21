@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { petitie } from "@/lib/data";
+import { getSetting } from "@/lib/settings";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,9 +26,15 @@ function parseCount(html: string): number | null {
 }
 
 export async function GET() {
-  const manual = petitie.semnaturi;
+  // baza = numărul setat din admin (dacă există), altfel cel din cod
+  let manual = petitie.semnaturi;
+  try {
+    const s = await getSetting("semnaturi");
+    if (s) manual = Number(s);
+  } catch {}
+
   const now = Date.now();
-  if (cache && now - cache.at < TTL) {
+  if (cache && now - cache.at < TTL && cache.count >= manual) {
     return NextResponse.json({ count: cache.count, source: cache.source });
   }
 

@@ -46,6 +46,21 @@ export default function Admin() {
     load(secret);
   }
 
+  // --- Număr de semnături ---
+  const [semn, setSemn] = React.useState("");
+  const [semnMsg, setSemnMsg] = React.useState("");
+
+  async function saveSemn(e: React.FormEvent) {
+    e.preventDefault();
+    const res = await fetch("/api/settings", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-notify-secret": secret },
+      body: JSON.stringify({ key: "semnaturi", value: semn }),
+    });
+    const data = await res.json().catch(() => ({}));
+    setSemnMsg(res.ok ? `Salvat: ${data.value} semnături.` : "Eroare la salvare.");
+  }
+
   // --- Upload poze de șantier, pe dată ---
   const [upDate, setUpDate] = React.useState("");
   const [upFiles, setUpFiles] = React.useState<File[]>([]);
@@ -136,6 +151,24 @@ export default function Admin() {
             <div className="mt-1 text-xs text-muted-foreground">{c.l}</div>
           </div>
         ))}
+      </section>
+
+      <section className="rounded-lg border border-border bg-card p-4">
+        <h2 className="mb-2 font-bold">Număr de semnături (petiție)</h2>
+        <p className="mb-2 text-sm text-muted-foreground">
+          Se afișează pe pagină. Dacă citirea automată de pe petitieonline nu merge, pune aici numărul curent.
+        </p>
+        <form onSubmit={saveSemn} className="flex flex-wrap gap-2">
+          <input
+            type="number"
+            value={semn}
+            onChange={(e) => setSemn(e.target.value)}
+            placeholder="ex: 168"
+            className="w-40 rounded-md border border-border bg-background px-3 py-2 text-sm"
+          />
+          <button className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">Salvează</button>
+        </form>
+        {semnMsg && <p className="mt-2 text-sm text-muted-foreground">{semnMsg}</p>}
       </section>
 
       <section className="rounded-lg border border-border bg-card p-4">

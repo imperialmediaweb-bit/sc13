@@ -10,7 +10,7 @@ export const petitie = {
   obiectiv: 500, // ← obiectivul propus
   // Semnare pe hârtie (lăsați gol dacă nu e cazul)
   peHartie:
-    "Se poate semna și pe hârtie, până luni. În fiecare zi, între orele 16:00 și 20:00, părinții vă așteaptă la foișorul de lângă locul de joacă din Parcul Curcubeu.",
+    "Petiția se mai poate semna până mâine. Pe hârtie, între orele 16:00 și 20:00, părinții vă așteaptă la foișorul de lângă locul de joacă din Parcul Curcubeu.",
 };
 
 // Termenul final promis (an, luna 0-11, zi) — 1 septembrie 2026
