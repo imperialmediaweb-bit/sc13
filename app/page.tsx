@@ -107,20 +107,19 @@ export default function Page() {
 
   return (
     <main>
-      {/* ===== Antet colorat ===== */}
-      <header
-        className="relative text-white"
-        style={{
-          backgroundImage:
-            "linear-gradient(135deg, hsl(214 68% 22%) 0%, hsl(211 62% 32%) 55%, hsl(200 70% 42%) 100%)",
-        }}
-      >
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-2.5 text-xs">
-          <span className="font-semibold uppercase tracking-wide text-white/85">Monitorizare civică · Botoșani</span>
+      {/* ===== Antet închis cu accent portocaliu ===== */}
+      <header className="relative overflow-hidden border-b-[3px] border-primary bg-[#14151a] text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{ backgroundImage: "radial-gradient(70% 60% at 85% -10%, rgba(224,145,46,.28), transparent 70%)" }}
+        />
+        <div className="relative mx-auto flex max-w-4xl items-center justify-between px-5 py-2.5 text-xs">
+          <span className="font-semibold uppercase tracking-wide text-[#d9a15a]">Monitorizare civică · Botoșani</span>
           <ThemeToggle />
         </div>
-        <div className="mx-auto max-w-4xl px-5 pb-9 pt-4">
-          <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/25">
+        <div className="relative mx-auto max-w-4xl px-5 pb-9 pt-4">
+          <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#e6a34f] ring-1 ring-white/15">
             Școala Gimnazială nr. 13 Botoșani
           </span>
           <h1 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-[2.6rem] sm:leading-[1.1]">
@@ -149,7 +148,7 @@ export default function Page() {
           <div className="mt-6 flex flex-wrap gap-2">
             <a
               href="#petitie"
-              className="inline-flex h-11 items-center justify-center rounded-md bg-white px-5 text-sm font-bold text-[hsl(214,68%,24%)] transition-colors hover:bg-white/90"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-px hover:brightness-105"
             >
               Semnează petiția
             </a>
@@ -432,10 +431,7 @@ export default function Page() {
         </Section>
       </div>
 
-      <footer
-        className="mt-4 text-white/80"
-        style={{ backgroundImage: "linear-gradient(135deg, hsl(214 68% 22%), hsl(211 62% 30%))" }}
-      >
+      <footer className="mt-4 border-t-[3px] border-primary bg-[#14151a] text-white/75">
         <div className="mx-auto max-w-4xl px-5 py-7 text-sm">
           <p className="mb-2 font-display text-base font-bold text-white">Școala Gimnazială nr. 13 Botoșani</p>
           Pagină independentă, întreținută voluntar de comunitatea părinților. Nu este un site oficial al
