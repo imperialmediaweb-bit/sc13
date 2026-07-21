@@ -30,17 +30,53 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
 ];
 
-// Stadiul pe etaje (de sus în jos). Progresul general = media procentelor.
-export const etaje = [
-  { nume: "Etajul 3", procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 2", procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 1", procent: 90, nota: "Aproape gata, finisaje finale." },
+// Câți oameni lucrează acum pe șantier (estimativ). Influențează ritmul și data.
+export const muncitori = 3;
+
+// Etapele de finisaj și cât cântărește fiecare din total (%). Suma = 100.
+export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = [
+  { cheie: "tamplarie", nume: "Tâmplărie (ferestre)", pondere: 10 },
+  { cheie: "glet", nume: "Tencuială + glet pereți", pondere: 20 },
+  { cheie: "instalatii", nume: "Instalații electrice/sanitare", pondere: 15 },
+  { cheie: "pardoseli", nume: "Șapă + gresie/parchet", pondere: 20 },
+  { cheie: "tavane", nume: "Tavane", pondere: 10 },
+  { cheie: "zugraveala", nume: "Zugrăveală", pondere: 15 },
+  { cheie: "finisaje", nume: "Uși interioare + finisaje", pondere: 10 },
+];
+
+export type Etaj = {
+  nume: string;
+  nota?: string;
+  mp?: number; // suprafață estimată (pentru ponderare + afișare)
+  etapeGata?: string[]; // etape finalizate (din poze)
+  etapePartial?: string[]; // etape în curs (jumătate de credit)
+  procent?: number; // fallback dacă nu sunt etape
+};
+
+// Stadiul pe etaje (de sus în jos). Procentul se ia din etapele văzute în poze
+// (fallback pe `procent`). `mp` sunt estimați și ponderează progresul general.
+export const etaje: Etaj[] = [
+  { nume: "Etajul 3", mp: 450, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 2", mp: 450, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 1", mp: 450, procent: 90, nota: "Aproape gata, finisaje finale." },
   {
     nume: "Parter",
-    procent: 35,
-    nota: "Ferestre montate și glet pe pereți, dar pardoseli desfăcute și instalații neterminate (din pozele de pe șantier).",
+    mp: 480,
+    etapeGata: ["tamplarie", "glet"],
+    etapePartial: ["pardoseli"],
+    nota: "Din poze: ferestre montate și glet pe pereți, șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
   },
 ];
+
+// Procentul unui nivel: din etapele gata (+ jumătate pentru cele în curs); altfel `procent`.
+export function procentEtaj(e: Etaj): number {
+  if (e.etapeGata || e.etapePartial) {
+    const w = (keys?: string[]) =>
+      (keys || []).reduce((s, k) => s + (etapeLucrare.find((x) => x.cheie === k)?.pondere || 0), 0);
+    return Math.min(100, Math.round(w(e.etapeGata) + 0.5 * w(e.etapePartial)));
+  }
+  return e.procent ?? 0;
+}
 
 // % general de acum o săptămână (pentru calculul ritmului real)
 export const progresSaptamanaTrecuta = 78;

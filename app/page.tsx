@@ -32,6 +32,9 @@ import {
   termenFinal,
   anScolarStart,
   etaje,
+  etapeLucrare,
+  procentEtaj,
+  muncitori,
   progresSaptamanaTrecuta,
   ramasDeFacut,
   termene,
@@ -42,7 +45,17 @@ import {
   type Status,
 } from "@/lib/data";
 
-const PROGRES_GENERAL = Math.round(etaje.reduce((s, e) => s + e.procent, 0) / etaje.length);
+// Progres general = media procentelor pe niveluri, ponderată pe mp (nivel mare contează mai mult).
+const PROGRES_GENERAL = (() => {
+  const totMp = etaje.reduce((s, e) => s + (e.mp || 0), 0);
+  if (totMp > 0) {
+    return Math.round(etaje.reduce((s, e) => s + procentEtaj(e) * (e.mp || 0), 0) / totMp);
+  }
+  return Math.round(etaje.reduce((s, e) => s + procentEtaj(e), 0) / etaje.length);
+})();
+
+// Etichetă de ritm în funcție de câți muncitori sunt pe șantier.
+const ritmLabel = muncitori <= 3 ? "ritm mic" : muncitori <= 7 ? "ritm mediu" : "ritm bun";
 
 const badgeTone: Record<Status, "done" | "progress" | "bad" | "none"> = {
   done: "done",
@@ -153,10 +166,12 @@ export default function Page() {
       dataFinal = fmt(finalMs);
       estVerdict = "Progresul a stagnat față de săptămâna anterioară.";
       estColor = "hsl(var(--bad))";
-      estDetail = `Dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă, la ritm minim: ${dataFinal}.`;
+      estDetail = `Cu ~${muncitori} muncitori (${ritmLabel}), dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă: ${dataFinal}.`;
       sanse = 8;
     } else {
-      const saptNecesare = Math.ceil(ramas / ritm);
+      // puțini muncitori → ritm efectiv mai mic → mai multe săptămâni → data se împinge
+      const factorMuncitori = muncitori <= 3 ? 1.3 : muncitori <= 7 ? 1.05 : 1;
+      const saptNecesare = Math.ceil((ramas / ritm) * factorMuncitori);
       const finalMs = now + saptNecesare * 7 * 86400000;
       const laTimp = finalMs <= deadline;
       dataFinal = fmt(finalMs);
@@ -168,7 +183,7 @@ export default function Page() {
         ? "La ritmul actual, lucrările s-ar încadra în termenul anunțat."
         : "La ritmul actual, finalizarea ar depăși termenul anunțat.";
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
-      estDetail = `Ritm raportat: ${ritm}% pe săptămână · Rest de executat: ${ramas}% · Dată realistă estimată de finalizare: ${dataFinal}.`;
+      estDetail = `Ritm: ${ritm}% pe săptămână · ~${muncitori} muncitori (${ritmLabel}) · Rest de executat: ${ramas}% · Dată realistă estimată: ${dataFinal}.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
@@ -323,23 +338,61 @@ export default function Page() {
               </thead>
               <tbody>
                 {etaje.map((e, i) => {
-                  const low = e.procent < 60;
+                  const pct = procentEtaj(e);
+                  const low = pct < 60;
+                  const hasStages = !!(e.etapeGata || e.etapePartial);
+                  const nameOf = (keys?: string[]) =>
+                    etapeLucrare.filter((x) => (keys || []).includes(x.cheie)).map((x) => x.nume.toLowerCase());
+                  const gata = nameOf(e.etapeGata);
+                  const partial = nameOf(e.etapePartial);
+                  const lipsa = etapeLucrare
+                    .filter((x) => !(e.etapeGata || []).includes(x.cheie) && !(e.etapePartial || []).includes(x.cheie))
+                    .map((x) => x.nume.toLowerCase());
                   return (
-                    <tr key={i} className="border-t border-border">
-                      <td className="px-4 py-3 font-semibold">{e.nume}</td>
+                    <tr key={i} className="border-t border-border align-top">
+                      <td className="px-4 py-3">
+                        <div className="font-semibold">{e.nume}</div>
+                        {e.mp && <div className="text-xs text-muted-foreground tnum">~{e.mp} mp</div>}
+                      </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <span className={cn("font-bold tnum", low ? "text-bad" : "text-ok")}>{e.procent}%</span>
-                          <Progress value={e.procent} tone={low ? "bad" : "primary"} className="h-1.5 flex-1" />
+                          <span className={cn("font-bold tnum", low ? "text-bad" : "text-ok")}>{pct}%</span>
+                          <Progress value={pct} tone={low ? "bad" : "primary"} className="h-1.5 flex-1" />
                         </div>
                       </td>
-                      <td className="hidden px-4 py-3 text-muted-foreground sm:table-cell">{e.nota}</td>
+                      <td className="hidden px-4 py-3 text-muted-foreground sm:table-cell">
+                        {hasStages ? (
+                          <span className="[&_strong]:text-foreground">
+                            {gata.length > 0 && (
+                              <>
+                                <strong>Gata:</strong> {gata.join(", ")}.{" "}
+                              </>
+                            )}
+                            {partial.length > 0 && (
+                              <>
+                                <strong>În curs:</strong> {partial.join(", ")}.{" "}
+                              </>
+                            )}
+                            {lipsa.length > 0 && (
+                              <>
+                                <strong>Lipsă:</strong> {lipsa.join(", ")}.
+                              </>
+                            )}
+                          </span>
+                        ) : (
+                          e.nota
+                        )}
+                      </td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
           </div>
+          <p className="mt-2 text-xs text-muted-foreground">
+            Suprafață estimată: ~{etaje.reduce((s, e) => s + (e.mp || 0), 0)} mp în total (estimativ). Procentul
+            fiecărui nivel este dat de etapele văzute în pozele de pe șantier.
+          </p>
 
           <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
             <p className="font-semibold" style={{ color: view?.estColor }}>
