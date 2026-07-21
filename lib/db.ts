@@ -41,6 +41,12 @@ export function ensureTables(): Promise<void> {
       // pentru tabelele create înainte de adăugarea coloanelor
       await p.query(`ALTER TABLE reports ADD COLUMN IF NOT EXISTS data_vizita TEXT`);
       await p.query(`ALTER TABLE reports ADD COLUMN IF NOT EXISTS published BOOLEAN NOT NULL DEFAULT false`);
+      await p.query(
+        `CREATE TABLE IF NOT EXISTS counters (
+           name  TEXT PRIMARY KEY,
+           value BIGINT NOT NULL DEFAULT 0
+         )`
+      );
     })().catch((e) => {
       ready = null; // permite reîncercarea la următoarea cerere
       throw e;

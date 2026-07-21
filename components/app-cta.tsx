@@ -26,7 +26,18 @@ export function AppCTA() {
       setDeferred(e as BIPEvent);
     };
     window.addEventListener("beforeinstallprompt", onBIP);
-    window.addEventListener("appinstalled", () => setInstalled(true));
+    const onInstalled = () => {
+      setInstalled(true);
+      try {
+        localStorage.setItem("pwa-installed", "1");
+      } catch {}
+      fetch("/api/track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ event: "install" }),
+      }).catch(() => {});
+    };
+    window.addEventListener("appinstalled", onInstalled);
 
     const ua = window.navigator.userAgent;
     if (/iphone|ipad|ipod/i.test(ua) && /safari/i.test(ua) && !/crios|fxios|chrome/i.test(ua)) {

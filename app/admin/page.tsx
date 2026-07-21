@@ -9,6 +9,7 @@ export default function Admin() {
   const [secret, setSecret] = React.useState("");
   const [authed, setAuthed] = React.useState(false);
   const [reports, setReports] = React.useState<Report[]>([]);
+  const [stats, setStats] = React.useState<{ installs: number; abonati: number; reports: { total: number; published: number } } | null>(null);
   const [msg, setMsg] = React.useState("");
 
   React.useEffect(() => {
@@ -26,6 +27,10 @@ export default function Admin() {
       setReports(data.reports);
       setAuthed(true);
       localStorage.setItem("admin-secret", s);
+      fetch("/api/stats", { headers: { "x-notify-secret": s } })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((d) => d && setStats(d))
+        .catch(() => {});
     } else {
       setAuthed(false);
       setMsg("Secret greșit.");
@@ -118,6 +123,20 @@ export default function Admin() {
   return (
     <main className="mx-auto max-w-3xl space-y-6 p-5">
       <h1 className="font-display text-2xl font-extrabold">Administrare — Școala 13</h1>
+
+      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {[
+          { n: stats?.installs, l: "instalări (PWA)" },
+          { n: stats?.abonati, l: "abonați notificări" },
+          { n: stats?.reports.total, l: "rapoarte primite" },
+          { n: stats?.reports.published, l: "rapoarte publicate" },
+        ].map((c, i) => (
+          <div key={i} className="rounded-lg border border-border bg-card p-4 text-center">
+            <div className="font-display text-3xl font-bold tabular-nums">{c.n ?? "…"}</div>
+            <div className="mt-1 text-xs text-muted-foreground">{c.l}</div>
+          </div>
+        ))}
+      </section>
 
       <section className="rounded-lg border border-border bg-card p-4">
         <h2 className="mb-2 font-bold">Urcă poze / video de pe șantier (pe dată)</h2>
