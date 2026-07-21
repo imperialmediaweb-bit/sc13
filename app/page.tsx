@@ -102,7 +102,15 @@ export default function Page() {
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail });
   }, []);
 
-  const semnPct = Math.min(100, Math.round((petitie.semnaturi / petitie.obiectiv) * 100));
+  const [sig, setSig] = React.useState(petitie.semnaturi);
+  React.useEffect(() => {
+    fetch("/api/signatures")
+      .then((r) => r.json())
+      .then((d) => typeof d.count === "number" && setSig(d.count))
+      .catch(() => {});
+  }, []);
+
+  const semnPct = Math.min(100, Math.round((sig / petitie.obiectiv) * 100));
   const semnListUrl = petitie.url.replace("/finalizati", "/signatures/finalizati") + "/";
 
   return (
@@ -168,7 +176,7 @@ export default function Page() {
         <Section id="petitie" title="Petiția părinților">
           <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
             <div className="rounded-md border border-border bg-card p-5 text-center sm:w-56">
-              <div className="font-display text-4xl font-bold text-primary tnum">{petitie.semnaturi}</div>
+              <div className="font-display text-4xl font-bold text-primary tnum">{sig}</div>
               <div className="text-sm text-muted-foreground">semnături din {petitie.obiectiv}</div>
               <Progress value={semnPct} className="mt-3 h-2" />
             </div>

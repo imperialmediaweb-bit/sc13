@@ -6,7 +6,7 @@ export type Status = "done" | "progress" | "bad" | "current" | "none";
 
 export const petitie = {
   url: "https://www.petitieonline.com/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor",
-  semnaturi: 58, // ← actualizați numărul de semnături
+  semnaturi: 168, // ← număr de rezervă (folosit dacă citirea automată nu reușește)
   obiectiv: 500, // ← obiectivul propus
   // Semnare pe hârtie (lăsați gol dacă nu e cazul)
   peHartie:
