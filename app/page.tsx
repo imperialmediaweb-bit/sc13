@@ -446,32 +446,47 @@ export default function Page() {
 
 function ShareButtons() {
   const [copied, setCopied] = React.useState(false);
-  const share = (net: "fb" | "wa") => {
-    const url = typeof window !== "undefined" ? window.location.href.split("#")[0] : "";
-    const txt = "Stadiul lucrărilor la Școala 13 Botoșani:";
-    const href =
-      net === "fb"
-        ? "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url)
-        : "https://wa.me/?text=" + encodeURIComponent(txt + " " + url);
-    window.open(href, "_blank", "noopener");
-  };
+  const url = typeof window !== "undefined" ? window.location.href.split("#")[0] : "https://sc13-production.up.railway.app/";
+  const txt = "Stadiul lucrărilor la Școala Gimnazială nr. 13 Botoșani:";
+
+  const links: { label: string; href: string }[] = [
+    { label: "Facebook", href: "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url) },
+    { label: "WhatsApp", href: "https://wa.me/?text=" + encodeURIComponent(txt + " " + url) },
+    { label: "Messenger", href: "https://www.facebook.com/dialog/send?link=" + encodeURIComponent(url) + "&app_id=0&redirect_uri=" + encodeURIComponent(url) },
+    { label: "Telegram", href: "https://t.me/share/url?url=" + encodeURIComponent(url) + "&text=" + encodeURIComponent(txt) },
+    { label: "Email", href: "mailto:?subject=" + encodeURIComponent("Școala 13 Botoșani — stadiul lucrărilor") + "&body=" + encodeURIComponent(txt + "\n" + url) },
+  ];
+
   const copy = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href.split("#")[0]);
+      await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {}
   };
+
+  const nativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: "Școala 13 Botoșani — stadiul lucrărilor", text: txt, url });
+      } catch {}
+    } else {
+      copy();
+    }
+  };
+
   return (
     <div className="flex flex-wrap gap-2">
-      <button onClick={() => share("fb")} className={buttonVariants()}>
-        Facebook
-      </button>
-      <button onClick={() => share("wa")} className={buttonVariants()}>
-        WhatsApp
-      </button>
+      {links.map((l) => (
+        <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline" })}>
+          {l.label}
+        </a>
+      ))}
       <button onClick={copy} className={buttonVariants({ variant: "outline" })}>
         {copied ? "Link copiat ✓" : "Copiază linkul"}
+      </button>
+      <button onClick={nativeShare} className={buttonVariants()}>
+        Distribuie…
       </button>
     </div>
   );
