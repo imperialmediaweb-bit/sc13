@@ -41,6 +41,44 @@ export default function Admin() {
     load(secret);
   }
 
+  // --- Upload poze de șantier, pe dată ---
+  const [upDate, setUpDate] = React.useState("");
+  const [upFiles, setUpFiles] = React.useState<File[]>([]);
+  const [upState, setUpState] = React.useState<"idle" | "up" | "done">("idle");
+  const [upMsg, setUpMsg] = React.useState("");
+
+  async function uploadSantier(e: React.FormEvent) {
+    e.preventDefault();
+    if (!upDate) {
+      setUpMsg("Alege data.");
+      return;
+    }
+    if (upFiles.length === 0) {
+      setUpMsg("Alege pozele/video.");
+      return;
+    }
+    setUpState("up");
+    setUpMsg("");
+    const folder = `scoala13/santier/${upDate}`;
+    let ok = 0;
+    for (const f of upFiles) {
+      try {
+        const fd = new FormData();
+        fd.append("file", f);
+        fd.append("folder", folder);
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          headers: { "x-notify-secret": secret },
+          body: fd,
+        });
+        if (res.ok) ok++;
+      } catch {}
+    }
+    setUpState("done");
+    setUpFiles([]);
+    setUpMsg(`Urcate ${ok}/${upFiles.length} fișiere în ${folder}. Apar automat pe pagină.`);
+  }
+
   async function sendNotify(e: React.FormEvent) {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
@@ -80,6 +118,38 @@ export default function Admin() {
   return (
     <main className="mx-auto max-w-3xl space-y-6 p-5">
       <h1 className="font-display text-2xl font-extrabold">Administrare — Școala 13</h1>
+
+      <section className="rounded-lg border border-border bg-card p-4">
+        <h2 className="mb-2 font-bold">Urcă poze / video de pe șantier (pe dată)</h2>
+        <form onSubmit={uploadSantier} className="space-y-2">
+          <div>
+            <label className="mb-1 block text-sm font-semibold">Data pozelor</label>
+            <input
+              type="date"
+              value={upDate}
+              onChange={(e) => setUpDate(e.target.value)}
+              className="rounded-md border border-border bg-background px-3 py-2 text-sm"
+            />
+          </div>
+          <input
+            type="file"
+            accept="image/*,video/*"
+            multiple
+            onChange={(e) => setUpFiles(e.target.files ? Array.from(e.target.files) : [])}
+            className="block w-full text-sm"
+          />
+          {upFiles.length > 0 && (
+            <p className="text-xs text-muted-foreground">{upFiles.length} fișiere alese</p>
+          )}
+          <button
+            disabled={upState === "up"}
+            className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground disabled:opacity-60"
+          >
+            {upState === "up" ? "Se urcă…" : "Urcă pe pagină"}
+          </button>
+        </form>
+        {upMsg && <p className="mt-2 text-sm text-muted-foreground">{upMsg}</p>}
+      </section>
 
       <section className="rounded-lg border border-border bg-card p-4">
         <h2 className="mb-2 font-bold">Trimite notificare tuturor abonaților</h2>
