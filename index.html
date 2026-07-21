@@ -136,6 +136,7 @@
   .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .5rem; padding: 0 1.1rem 1.1rem; }
   .gallery img { border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--accent-soft); }
   .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1rem; text-align: center; border: 1px dashed var(--border); border-radius: 8px; }
+  .ai-week { margin: 0 1.1rem 1.1rem; padding: .8rem 1rem; background: var(--accent-soft); border: 1px solid var(--border); border-radius: 8px; font-size: .92rem; }
   /* Cronologie */
   .timeline { list-style: none; position: relative; padding-left: 1.5rem; }
   .timeline::before { content: ""; position: absolute; left: .45rem; top: .3rem; bottom: .3rem; width: 2px; background: var(--border); }
@@ -337,7 +338,7 @@ const DATE = {
     { nume: "Etajul 3", procent: 99, nota: "Practic finalizat." },
     { nume: "Etajul 2", procent: 99, nota: "Practic finalizat." },
     { nume: "Etajul 1", procent: 90, nota: "Aproape gata, finisaje finale." },
-    { nume: "Parter", procent: 40, nota: "Se dă încă cu glet; finisaje interioare de făcut." },
+    { nume: "Parter", procent: 35, nota: "Ferestre montate și glet pe pereți, dar pardoseli desfăcute și instalații neterminate (din pozele de pe șantier)." },
   ],
 
   // Ce a mai rămas de făcut (din observații pe șantier + presă)
@@ -372,11 +373,17 @@ const DATE = {
   // poze: căi către imagini din assets/santier/saptamana-NN/ (gol = încă nu avem poze)
   saptamani: [
     {
-      titlu: "Săptămâna 1",
-      data: "de completat (ex: 21–27 iulie 2026)",
-      progres: "nu",
-      nota: "Prima săptămână de monitorizare. Adăugați aici pozele făcute pe șantier și notați ce s-a schimbat.",
-      poze: [] // ex: ["assets/santier/saptamana-01/1.jpg", "assets/santier/saptamana-01/2.jpg"]
+      titlu: "Săptămâna 1 — parter",
+      data: "iulie 2026",
+      progres: "putin",
+      nota: "Poze de la parter, în timpul unei vizite pe șantier.",
+      analizaAI: "Imaginile sunt de la parter. <strong>Punctele bune:</strong> ferestrele sunt montate (noi, încă cu folia de protecție) și pereții sunt gletuiți/tencuiți în mare parte — holul e neted și alb. <strong>Ce lipsește:</strong> pardoseala e desfăcută în mai multe camere (moloz, șapă nefinalizată, fără gresie/parchet), instalația electrică e neterminată (cabluri atârnând, doze deschise, tavanul fără corpuri de iluminat), iar unele coloane au încă tencuială brută. Nu s-a făcut încă zugrăveala finală, nu sunt uși și nu sunt tavane. Concluzie: parterul e la stadiul de glet + tâmplărie, dar cu multă muncă rămasă la pardoseli, electrice, zugrăveală, uși și tavane — estimativ ~35% finalizat.",
+      poze: [
+        "assets/santier/saptamana-01/1.jpg",
+        "assets/santier/saptamana-01/2.jpg",
+        "assets/santier/saptamana-01/3.jpg",
+        "assets/santier/saptamana-01/4.jpg"
+      ]
     },
   ],
 
@@ -560,6 +567,7 @@ $("weeks").innerHTML = DATE.saptamani.map(s => {
       </div>
       ${s.nota ? `<p class="week-note">${s.nota}</p>` : ""}
       <div class="gallery">${poze}</div>
+      ${s.analizaAI ? `<div class="ai-week"><strong>🤖 Analiza pozelor:</strong> ${s.analizaAI}</div>` : ""}
     </div>`;
 }).join("");
 
