@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { getCounter, countSubscribers, countReports } from "@/lib/stats";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 // Statistici pentru admin — protejat cu NOTIFY_SECRET.
 export async function GET(req: Request) {
-  const secret = process.env.NOTIFY_SECRET;
-  if (!secret || req.headers.get("x-notify-secret") !== secret) {
+  if (!authorized(req)) {
     return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
   }
   try {

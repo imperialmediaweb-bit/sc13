@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -33,8 +34,7 @@ export async function POST(req: Request) {
     let folder = "scoala13/rapoarte";
     const requested = String(form.get("folder") || "").trim();
     if (requested) {
-      const secret = process.env.NOTIFY_SECRET;
-      if (!secret || req.headers.get("x-notify-secret") !== secret) {
+      if (!authorized(req)) {
         return NextResponse.json({ error: "Neautorizat pentru acest folder" }, { status: 401 });
       }
       // curățăm calea: doar litere, cifre, / - _

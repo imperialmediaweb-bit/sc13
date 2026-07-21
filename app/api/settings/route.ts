@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
 import { getSetting, setSetting } from "@/lib/settings";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const ALLOWED = new Set(["semnaturi"]);
-
-function authorized(req: Request) {
-  const secret = process.env.NOTIFY_SECRET;
-  return Boolean(secret) && req.headers.get("x-notify-secret") === secret;
-}
 
 export async function GET(req: Request) {
   if (!authorized(req)) return NextResponse.json({ error: "Neautorizat" }, { status: 401 });

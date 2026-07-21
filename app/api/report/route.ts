@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { addReport, readReports, setPublished, deleteReport } from "@/lib/reports";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-function authorized(req: Request) {
-  const secret = process.env.NOTIFY_SECRET;
-  return Boolean(secret) && req.headers.get("x-notify-secret") === secret;
-}
 
 // Primește un raport de la un părinte (text obligatoriu, poze/video opționale).
 export async function POST(req: Request) {

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import webpush from "web-push";
 import { allSubs, removeSub } from "@/lib/subs";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,22 +16,20 @@ function configured() {
 
 /**
  * Trimite o notificare tuturor abonaților.
- * Protejat cu NOTIFY_SECRET (antet `x-notify-secret` sau câmpul `secret`).
- * Body: { title?, body?, url?, secret? }
+ * Protejat cu NOTIFY_SECRET (antet `x-notify-secret`, comparație în timp constant).
+ * Body: { title?, body?, url? }
  */
 export async function POST(req: Request) {
   if (!configured()) {
     return NextResponse.json({ error: "VAPID neconfigurat pe server" }, { status: 500 });
   }
-  const secret = process.env.NOTIFY_SECRET;
-  let payload: { title?: string; body?: string; url?: string; secret?: string } = {};
+  if (!authorized(req)) {
+    return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
+  }
+  let payload: { title?: string; body?: string; url?: string } = {};
   try {
     payload = await req.json();
   } catch {}
-  const provided = req.headers.get("x-notify-secret") || payload.secret;
-  if (!secret || provided !== secret) {
-    return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
-  }
 
   const message = JSON.stringify({
     title: payload.title || "Școala 13 — actualizare",

@@ -2,14 +2,11 @@ import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import { addUpdate, listUpdates, deleteUpdate } from "@/lib/updates";
 import { correctGrammar } from "@/lib/correct";
+import { authorized } from "@/lib/auth";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-function authorized(req: Request) {
-  const secret = process.env.NOTIFY_SECRET;
-  return Boolean(secret) && req.headers.get("x-notify-secret") === secret;
-}
 
 // Public — actualizările afișate pe pagină.
 export async function GET() {
