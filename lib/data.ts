@@ -62,9 +62,9 @@ export const etaje: Etaj[] = [
   {
     nume: "Parter",
     mp: 480,
-    etapeGata: ["tamplarie", "glet"],
-    etapePartial: ["pardoseli"],
-    nota: "Din poze: ferestre montate și glet pe pereți, șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
+    etapeGata: ["tamplarie"],
+    etapePartial: ["glet", "pardoseli"],
+    nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
   },
 ];
 
