@@ -1,78 +1,88 @@
-# Școala 13 Botoșani — Pagina de progres a lucrărilor
+# Școala 13 Botoșani — Monitorul lucrărilor
 
-Pagină web independentă, realizată de comunitatea părinților elevilor de la
-**Școala Gimnazială nr. 13 Botoșani**, pentru monitorizarea publică a stadiului
-lucrărilor de reabilitare (investiție ~14 milioane lei prin PNRR) și a
-respectării termenului promis: **1 septembrie 2026**.
+Aplicație **Next.js** (App Router) + **Tailwind** + componente în stil
+**shadcn/ui** și **Magic UI**, pentru monitorizarea publică a stadiului
+lucrărilor de reabilitare de la **Școala Gimnazială nr. 13 Botoșani**
+(investiție ~14 milioane lei prin PNRR) și a respectării termenului promis:
+**1 septembrie 2026**.
 
-Pagina conține:
+Conține: card cu petiția (număr de semnături + bară de progres), contor de zile
+până la termen, estimare automată „va fi gata la timp?”, istoricul termenelor,
+stadiul pe etaje, evaluare automată, **jurnal cu poze și video** de pe șantier,
+cronologie, revendicări, butoane de distribuire și surse de presă. Temă
+light/dark cu comutator.
 
-- card cu **petiția** și numărul de semnături + bară de progres;
-- **contor** de zile până la termenul promis;
-- **istoricul termenelor** promise și depășite;
-- **stadiul lucrărilor** pe etape;
-- **jurnal foto săptămânal** de pe șantier, cu marcaj „progres / fără progres”;
-- cronologie, revendicări, butoane de distribuire și surse de presă.
+## Rulare locală
 
-Totul este un singur fișier: [`index.html`](index.html). Fără build, fără
-dependențe.
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
 
----
+Pentru producție:
 
-## Cum actualizezi datele
+```bash
+npm run build
+npm start
+```
 
-Deschide `index.html` și mergi la secțiunea marcată **`DATE`** de la începutul
-scriptului (aproape de final). Acolo, într-un singur loc, editezi:
+## Publicare pe Railway
 
-- `semnaturi` — numărul curent de semnături de pe petiție;
-- `obiectivSemnaturi` — obiectivul propus;
-- `etaje` — procentul fiecărui etaj (ex. Etaj 3: 99%, Parter: 40%). Din
-  aceste valori se calculează **automat** progresul general, vizualizarea
-  clădirii și evaluarea AF a stadiului;
-- `progresSaptamanaTrecuta` — procentul general de acum o săptămână (pentru
-  calculul ritmului și al estimării „va fi gata la timp?”);
-- `ramasDeFacut` — lista lucrurilor rămase (apare în evaluarea automată);
-- `termene` — statusurile termenelor;
-- `saptamani` — jurnalul foto (vezi mai jos);
-- `cronologie`, `actualizari`, `surse`.
+1. Intră pe [railway.app](https://railway.app) și conectează-ți contul de GitHub.
+2. **New Project → Deploy from GitHub repo** → alege `imperialmediaweb-bit/sc13`.
+3. Railway detectează automat Next.js și rulează `npm install`, `npm run build`,
+   `npm start`. Nu e nevoie de configurare specială (scriptul `start` folosește
+   automat portul dat de Railway prin variabila `PORT`).
+4. După build, Railway îți dă un link public (`Settings → Networking → Generate
+   Domain`).
 
-Statusurile termenelor folosesc: `"done"` (verde), `"progress"` (galben),
-`"bad"` (roșu).
+## Cum actualizezi conținutul
 
-> Evaluarea „🤖 automată” și estimarea de finalizare se recalculează singure din
-> procentele pe etaje — nu trebuie scrise de mână. Tu doar actualizezi
-> procentele după fiecare vizită pe șantier.
+Tot ce se schimbă e într-un singur fișier: **`lib/data.ts`**.
 
-## Cum adaugi pozele săptămânal
+- `petitie.semnaturi` — numărul curent de semnături (se actualizează manual;
+  petitieonline.com nu permite citirea automată).
+- `etaje` — procentul fiecărui etaj. Din ele se calculează automat progresul
+  general, evaluarea și estimarea.
+- `progresSaptamanaTrecuta` — % general de acum o săptămână (pentru ritm).
+- `ramasDeFacut`, `termene`, `cronologie`, `actualizari`, `surse`.
+- `saptamani` — jurnalul de pe șantier (poze + video).
 
-1. Pune pozele într-un folder nou, de exemplu `assets/santier/saptamana-02/`.
-2. În `index.html`, în array-ul `saptamani`, adaugă la **început** un obiect nou:
+După orice modificare: commit + push → Railway reface deploy-ul automat.
 
-   ```js
+## Cum adaugi poze și video săptămânal
+
+1. Pune fișierele în `public/assets/santier/saptamana-NN/`
+   (poze `.jpg/.png`, video `.mp4/.webm/.mov`).
+2. În `lib/data.ts`, adaugă la **începutul** listei `saptamani` un obiect nou:
+
+   ```ts
    {
      titlu: "Săptămâna 2",
      data: "28 iulie – 3 august 2026",
-     progres: "da",              // "da" | "putin" | "nu"
-     nota: "S-a montat gresia la parter. Progres vizibil față de săptămâna trecută.",
-     poze: [
-       "assets/santier/saptamana-02/1.jpg",
-       "assets/santier/saptamana-02/2.jpg"
-     ]
+     progres: "da",            // "da" | "putin" | "nu"
+     nota: "Ce s-a schimbat față de săptămâna trecută.",
+     analizaAI: "Analiza pozelor/video…",
+     media: [
+       "/assets/santier/saptamana-02/1.jpg",
+       "/assets/santier/saptamana-02/clip.mp4",
+     ],
    },
    ```
 
-3. Salvează, fă commit și push. Pagina se actualizează automat.
+3. Commit + push. Galeria afișează automat pozele ca imagini și clipurile ca
+   player video.
 
-> Sfat: redimensionează pozele la ~1200px lățime înainte de a le urca, ca pagina
-> să se încarce repede pe telefon.
+> Sfat: redimensionează pozele la ~1600px lățime înainte de a le urca.
 
-## Publicare gratuită (GitHub Pages)
+## Structură
 
-1. Fă merge / push pe branch-ul principal al repo-ului `sc13`.
-2. În GitHub: **Settings → Pages → Source: Deploy from a branch**.
-3. Alege branch-ul (`main`) și folderul `/ (root)`, apoi **Save**.
-4. După câteva minute, pagina va fi la:
-   `https://imperialmediaweb-bit.github.io/sc13/`
+- `app/` — layout, pagina, stiluri globale (tokeni de temă).
+- `components/ui/` — componente stil shadcn/ui (button, card, badge, progress).
+- `components/magicui/` — number-ticker, shimmer-button, reveal.
+- `lib/data.ts` — **datele editabile**.
+- `public/assets/santier/` — pozele și video-urile de pe șantier.
+- `legacy/index.html` — varianta veche, dintr-un singur fișier (backup).
 
 ---
 
