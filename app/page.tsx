@@ -10,6 +10,8 @@ import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { Reveal } from "@/components/magicui/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
+import { ReportForm } from "@/components/report-form";
+import { NotifyButton } from "@/components/notify-button";
 import { cn } from "@/lib/utils";
 import {
   petitie,
@@ -111,7 +113,7 @@ export default function Page() {
     <main>
       {/* HERO */}
       <header className="border-b-[3px] border-primary bg-[#14151a] text-[#f0eee7]">
-        <div className="mx-auto max-w-3xl px-5 pb-10 pt-8">
+        <div className="mx-auto max-w-5xl px-5 pb-10 pt-8">
           <div className="flex items-start justify-between gap-4">
             <span className="text-[0.74rem] font-bold uppercase tracking-[0.18em] text-[#d9a15a]">
               Monitorizare civică · Școala Gimnazială nr. 13 · Botoșani
@@ -160,7 +162,7 @@ export default function Page() {
         </div>
       </header>
 
-      <div className="mx-auto max-w-3xl px-5">
+      <div className="mx-auto max-w-5xl px-5">
         {/* LEDGER */}
         <Reveal className="-mt-6">
           <div className="grid grid-cols-2 overflow-hidden rounded-xl border border-border bg-card sm:grid-cols-4">
@@ -201,8 +203,10 @@ export default function Page() {
           </span>
         </div>
 
+        <div className="mt-8 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-6 lg:gap-y-8">
+
         {/* PETIȚIE */}
-        <section id="petitie" className="my-11 scroll-mt-4">
+        <section id="petitie" className="mb-8 scroll-mt-4 lg:col-span-2 lg:mb-0">
           <Reveal>
             <SectionHead kicker="Acțiune" title="Petiția părinților" />
             <Card className="relative overflow-hidden">
@@ -238,7 +242,7 @@ export default function Page() {
         </section>
 
         {/* TERMENE */}
-        <section id="termene" className="my-11 scroll-mt-4">
+        <section id="termene" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Promisiuni" title="Istoricul termenelor" />
             <Card>
@@ -259,7 +263,7 @@ export default function Page() {
         </section>
 
         {/* ESTIMARE */}
-        <section id="estimare" className="my-11 scroll-mt-4">
+        <section id="estimare" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Proiecție" title="Va fi gata la timp?" />
             <Card>
@@ -285,7 +289,7 @@ export default function Page() {
         </section>
 
         {/* STADIU PE ETAJE */}
-        <section id="stadiu" className="my-11 scroll-mt-4">
+        <section id="stadiu" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Pe teren" title="Stadiul lucrărilor, pe etaje" />
             <Card>
@@ -332,7 +336,7 @@ export default function Page() {
         </section>
 
         {/* EVALUARE */}
-        <section id="evaluare" className="my-11 scroll-mt-4">
+        <section id="evaluare" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Analiză automată" title="Evaluarea stadiului" />
             <EvaluareCard />
@@ -340,7 +344,7 @@ export default function Page() {
         </section>
 
         {/* JURNAL FOTO/VIDEO */}
-        <section id="santier" className="my-11 scroll-mt-4">
+        <section id="santier" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
           <Reveal>
             <SectionHead kicker="Documentare" title="Jurnal de pe șantier" />
             <p className="mb-4 max-w-2xl text-muted-foreground">
@@ -383,8 +387,25 @@ export default function Page() {
           </Reveal>
         </section>
 
+        {/* RAPORTEAZĂ DE PE TEREN */}
+        <section id="raporteaza" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
+          <Reveal>
+            <SectionHead kicker="De pe teren" title="Ai trecut pe la școală? Raportează" />
+            <p className="mb-4 max-w-2xl text-muted-foreground">
+              Dacă ai fost la școală și ai văzut stadiul lucrărilor, spune-ne ce se întâmplă — cu sau fără
+              poze. Dacă ai poze sau video, urcă-le aici. Le verificăm și le adăugăm pe pagină, iar din poze
+              facem analiza comparativă față de săptămâna trecută.
+            </p>
+            <Card>
+              <CardContent>
+                <ReportForm />
+              </CardContent>
+            </Card>
+          </Reveal>
+        </section>
+
         {/* CRONOLOGIE */}
-        <section id="cronologie" className="my-11 scroll-mt-4">
+        <section id="cronologie" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">
           <Reveal>
             <SectionHead kicker="Istoric" title="Cronologie" />
             <Card>
@@ -415,7 +436,7 @@ export default function Page() {
         </section>
 
         {/* REVENDICĂRI */}
-        <section id="revendicari" className="my-11 scroll-mt-4">
+        <section id="revendicari" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Cereri" title="Ce cerem" />
             <Card>
@@ -453,7 +474,7 @@ export default function Page() {
         </section>
 
         {/* DISTRIBUIE */}
-        <section id="distribuie" className="my-11 scroll-mt-4">
+        <section id="distribuie" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Amplifică" title="Trimite mai departe" />
             <Card>
@@ -468,11 +489,12 @@ export default function Page() {
         </section>
 
         {/* ACTUALIZĂRI */}
-        <section id="actualizari" className="my-11 scroll-mt-4">
+        <section id="actualizari" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="La zi" title="Actualizări" />
             <Card>
               <CardContent className="space-y-4">
+                <NotifyButton />
                 {actualizari.map((u, i) => (
                   <div key={i} className="border-l-[3px] border-primary pl-4">
                     <div className="text-xs font-semibold text-muted-foreground">{u.data}</div>
@@ -485,7 +507,7 @@ export default function Page() {
         </section>
 
         {/* SURSE */}
-        <section id="surse" className="my-11 scroll-mt-4">
+        <section id="surse" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-1">
           <Reveal>
             <SectionHead kicker="Referințe" title="Surse" />
             <Card>
@@ -509,10 +531,11 @@ export default function Page() {
             </Card>
           </Reveal>
         </section>
+        </div>
       </div>
 
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-3xl px-5 py-8 text-center text-sm text-muted-foreground">
+        <div className="mx-auto max-w-5xl px-5 py-8 text-center text-sm text-muted-foreground">
           Pagină întreținută voluntar de comunitatea părinților · Corecturi și completări sunt binevenite.
         </div>
       </footer>

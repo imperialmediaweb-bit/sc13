@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Public_Sans } from "next/font/google";
+import { InstallPrompt } from "@/components/install-prompt";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -26,6 +27,22 @@ export const metadata: Metadata = {
       "Urmărim public stadiul real al lucrărilor de la Școala 13. Copiii merită să înceapă anul școlar în școala lor.",
     type: "website",
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Școala 13",
+  },
+  icons: {
+    icon: "/icons/icon-192.png",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#14151a",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,7 +55,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        {children}
+        <InstallPrompt />
+      </body>
     </html>
   );
 }

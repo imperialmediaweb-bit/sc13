@@ -60,13 +60,9 @@ export const saptamani: {
     progres: "putin",
     nota: "Poze de la parter, în timpul unei vizite pe șantier.",
     analizaAI:
-      "Imaginile sunt de la parter. <strong>Punctele bune:</strong> ferestrele sunt montate (noi, încă cu folia de protecție) și pereții sunt gletuiți/tencuiți în mare parte — holul e neted și alb. <strong>Ce lipsește:</strong> pardoseala e desfăcută în mai multe camere (moloz, șapă nefinalizată, fără gresie/parchet), instalația electrică e neterminată (cabluri atârnând, doze deschise, tavanul fără corpuri de iluminat), iar unele coloane au încă tencuială brută. Nu s-a făcut încă zugrăveala finală, nu sunt uși și nu sunt tavane. Concluzie: parterul e la stadiul de glet + tâmplărie, dar cu multă muncă rămasă la pardoseli, electrice, zugrăveală, uși și tavane — estimativ ~35% finalizat.",
-    media: [
-      "/assets/santier/saptamana-01/1.jpg",
-      "/assets/santier/saptamana-01/2.jpg",
-      "/assets/santier/saptamana-01/3.jpg",
-      "/assets/santier/saptamana-01/4.jpg",
-    ],
+      "Analiză din pozele de la o vizită la parter. <strong>Punctele bune:</strong> ferestrele sunt montate (noi, încă cu folia de protecție) și pereții sunt gletuiți/tencuiți în mare parte — holul e neted și alb. <strong>Ce lipsește:</strong> pardoseala e desfăcută în mai multe camere (moloz, șapă nefinalizată, fără gresie/parchet), instalația electrică e neterminată (cabluri atârnând, doze deschise, tavanul fără corpuri de iluminat), iar unele coloane au încă tencuială brută. Nu s-a făcut încă zugrăveala finală, nu sunt uși și nu sunt tavane. Concluzie: parterul e la stadiul de glet + tâmplărie, dar cu multă muncă rămasă la pardoseli, electrice, zugrăveală, uși și tavane — estimativ ~35% finalizat.",
+    // Adaugă aici link-uri Cloudinary (sau căi din /assets/...) după ce urci pozele/video.
+    media: [],
   },
 ];
 
