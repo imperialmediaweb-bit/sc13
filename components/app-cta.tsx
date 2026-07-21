@@ -78,23 +78,38 @@ export function AppCTA() {
             <span className="inline-flex items-center gap-2 rounded-md border border-ok/40 bg-ok-soft px-3 py-2 text-sm font-bold text-ok">
               <CheckCircle2 className="h-4 w-4" /> Instalată
             </span>
-          ) : iosHint ? (
-            <span className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-2 text-sm text-muted-foreground">
-              Apasă <Share className="h-4 w-4" /> → „Adaugă pe ecranul principal”
-            </span>
           ) : (
-            <button
-              onClick={install}
-              disabled={!deferred}
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-px hover:brightness-105 disabled:cursor-default disabled:opacity-60"
-              title={deferred ? "" : "Deschide meniul browserului → „Adaugă pe ecranul principal”"}
-            >
-              <Smartphone className="h-4 w-4" /> Instalează pe telefon
-            </button>
+            !iosHint && (
+              <button
+                onClick={install}
+                disabled={!deferred}
+                className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-px hover:brightness-105 disabled:cursor-default disabled:opacity-60"
+                title={deferred ? "" : "Deschide meniul browserului → „Adaugă pe ecranul principal”"}
+              >
+                <Smartphone className="h-4 w-4" /> Instalează pe telefon
+              </button>
+            )
           )}
           <NotifyButton />
         </div>
       </div>
+
+      {iosHint && !installed && (
+        <div className="mt-4 rounded-lg border border-primary/30 bg-card p-3.5 text-sm">
+          <p className="flex items-center gap-1.5 font-semibold">
+            <Share className="h-4 w-4 text-primary" /> Pe iPhone, în 2 pași:
+          </p>
+          <ol className="mt-1.5 list-decimal space-y-1 pl-5 text-muted-foreground">
+            <li>
+              Apasă butonul de partajare din bara Safari, apoi <strong>„Adaugă pe ecranul principal”</strong>.
+            </li>
+            <li>
+              Deschide aplicația de pe ecranul principal și apasă <strong>„Primește notificări”</strong> — pe
+              iPhone notificările se pot activa doar din aplicația instalată.
+            </li>
+          </ol>
+        </div>
+      )}
     </div>
   );
 }
