@@ -10,171 +10,295 @@
 <meta property="og:type" content="website">
 <style>
   :root {
-    --bg: #f6f7f9;
+    --bg: #eef1f6;
+    --bg2: #e4e9f1;
     --card: #ffffff;
-    --text: #1e2430;
-    --muted: #5b6472;
-    --accent: #1d6fb8;
-    --accent-soft: #e3eefa;
-    --ok: #2e8b57;
-    --ok-soft: #d9f2e4;
-    --warn: #c77700;
-    --warn-soft: #fdeeda;
-    --bad: #c0392b;
-    --bad-soft: #fadbd8;
-    --border: #e2e6ec;
+    --text: #161c26;
+    --muted: #5d6675;
+    --accent: #1f6fb2;
+    --accent2: #2aa676;
+    --accent-ink: #0f4f86;
+    --accent-soft: #e7f0fb;
+    --ok: #1f8b5b;
+    --ok-soft: #dcf3e8;
+    --warn: #b9770a;
+    --warn-soft: #fbeed6;
+    --bad: #c33a2c;
+    --bad-soft: #fbe0dc;
+    --border: #e0e5ee;
+    --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.06);
+    --shadow-lg: 0 2px 8px rgba(20,30,50,.06), 0 18px 48px rgba(20,30,50,.10);
+    --radius: 16px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #14181f;
-      --card: #1d232d;
-      --text: #e8ecf2;
-      --muted: #9aa4b2;
-      --accent: #5aa2e0;
-      --accent-soft: #22303f;
-      --ok-soft: #1c3327;
-      --warn-soft: #3a2f1c;
-      --bad-soft: #3a2422;
-      --border: #2c3542;
+      --bg: #0f141b;
+      --bg2: #0b0f15;
+      --card: #171e28;
+      --text: #e9edf4;
+      --muted: #9aa5b4;
+      --accent: #58a6e6;
+      --accent2: #4cc38f;
+      --accent-ink: #cfe4f8;
+      --accent-soft: #1a2735;
+      --ok: #43c088;
+      --ok-soft: #16302321;
+      --ok-soft: #14261c;
+      --warn: #e0a63a;
+      --warn-soft: #33291699;
+      --warn-soft: #2e2513;
+      --bad: #ef6b5c;
+      --bad-soft: #331d1a;
+      --border: #262f3c;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+      --shadow-lg: 0 2px 8px rgba(0,0,0,.35), 0 20px 50px rgba(0,0,0,.45);
     }
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     background: var(--bg);
+    background-image: radial-gradient(1200px 500px at 100% -10%, var(--bg2), transparent 60%);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
   img { max-width: 100%; display: block; }
   a { color: var(--accent); }
-  .container { max-width: 920px; margin: 0 auto; padding: 1.25rem; }
+  .container { max-width: 940px; margin: 0 auto; padding: 0 1.15rem; }
+
+  /* ---------- HERO ---------- */
   header {
-    background: linear-gradient(135deg, var(--accent), #14507f);
+    position: relative;
     color: #fff;
-    padding: 2.6rem 0 2.2rem;
+    background: linear-gradient(135deg, #1f6fb2 0%, #14507f 55%, #0f3f68 100%);
+    overflow: hidden;
+    padding: 3.4rem 0 6.2rem;
   }
-  header h1 { font-size: 1.7rem; margin-bottom: .4rem; line-height: 1.25; }
-  header p { opacity: .93; max-width: 46rem; }
+  header::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size: 34px 34px;
+    mask-image: radial-gradient(circle at 80% 0%, #000, transparent 70%);
+    opacity: .7;
+  }
+  header .container { position: relative; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.25);
+    color: #fff;
+    font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    padding: .32rem .7rem; border-radius: 999px;
+    backdrop-filter: blur(4px);
+  }
+  header h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em; margin: .9rem 0 .55rem; font-weight: 800; }
+  header p.lead { opacity: .95; max-width: 42rem; font-size: 1.05rem; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
+
+  /* Strip de statistici care se suprapune peste hero */
+  .stats-strip { margin-top: -4.4rem; position: relative; z-index: 2; }
+  .key-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .fact {
+    text-align: center; padding: 1.4rem 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .fact .num { font-size: 2.1rem; font-weight: 800; color: var(--accent-ink); display: block; line-height: 1.1; letter-spacing: -.02em; }
+  .fact .num.bad { color: var(--bad); }
+  .fact .label { font-size: .84rem; color: var(--muted); margin-top: .25rem; display: block; }
+
   .disclaimer {
-    background: var(--accent-soft);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: .8rem 1rem;
-    margin: 1.25rem 0;
-    font-size: .9rem;
-    color: var(--muted);
+    display: flex; gap: .6rem;
+    background: var(--warn-soft);
+    border: 1px solid color-mix(in srgb, var(--warn) 30%, transparent);
+    border-radius: 12px;
+    padding: .85rem 1rem;
+    margin: 1.6rem 0 0;
+    font-size: .88rem;
+    color: var(--text);
   }
-  section { margin: 2.2rem 0; }
+
+  section { margin: 2.6rem 0; scroll-margin-top: 1rem; }
   h2 {
-    font-size: 1.25rem;
-    margin-bottom: .9rem;
-    padding-bottom: .4rem;
-    border-bottom: 2px solid var(--border);
+    font-size: 1.35rem; font-weight: 800; letter-spacing: -.01em;
+    margin-bottom: 1rem; display: flex; align-items: center; gap: .55rem;
   }
+  h2::before {
+    content: ""; width: .32rem; height: 1.25rem; border-radius: 999px;
+    background: linear-gradient(var(--accent), var(--accent2));
+  }
+  h2.plain::before { display: none; }
+
   .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.1rem 1.25rem;
-    margin-bottom: .9rem;
+    border-radius: var(--radius);
+    padding: 1.3rem 1.4rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
   }
-  /* Petiție */
-  .petition { background: var(--card); border: 2px solid var(--accent); }
-  .petition .count { font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
-  .petition .goal { color: var(--muted); font-size: .95rem; }
-  .bar { background: var(--border); border-radius: 999px; height: 16px; overflow: hidden; margin: .7rem 0 .4rem; }
-  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #4fae7c); border-radius: 999px; width: 0; transition: width 1s ease; }
+
+  /* ---------- Butoane ---------- */
   .btn {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    text-decoration: none;
-    font-weight: 700;
-    padding: .7rem 1.3rem;
-    border-radius: 8px;
-    margin-top: .7rem;
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: linear-gradient(180deg, var(--accent), var(--accent-ink));
+    color: #fff; text-decoration: none; font-weight: 700; font-size: .96rem;
+    padding: .72rem 1.35rem; border-radius: 10px; border: none;
+    box-shadow: 0 6px 16px color-mix(in srgb, var(--accent) 35%, transparent);
+    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
   }
-  .btn:hover { filter: brightness(1.08); }
-  .btn.secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
-  /* Cifre cheie */
-  .key-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .9rem; }
-  .fact { text-align: center; padding: 1.2rem 1rem; }
-  .fact .num { font-size: 2rem; font-weight: 700; color: var(--accent); display: block; line-height: 1.2; }
-  .fact .num.bad { color: var(--bad); }
-  .fact .label { font-size: .86rem; color: var(--muted); }
-  /* Termene */
-  .deadline { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; padding: .55rem 0; border-bottom: 1px dashed var(--border); }
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn:active { transform: translateY(0); }
+  .btn.secondary {
+    background: transparent; color: var(--accent);
+    border: 1.5px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    box-shadow: none;
+  }
+  .btn.ghost-light { background: rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); box-shadow:none; }
+  .btn.ghost-light:hover { background: rgba(255,255,255,.26); }
+
+  /* ---------- Petiție ---------- */
+  .petition { border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .petition::after { content:""; position:absolute; top:0; left:0; right:0; height:4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+  .petition .count { font-size: 3rem; font-weight: 800; color: var(--accent-ink); line-height: 1; letter-spacing: -.03em; }
+  .petition .goal { color: var(--muted); font-size: .95rem; }
+
+  .bar { background: color-mix(in srgb, var(--border) 70%, transparent); border-radius: 999px; height: 14px; overflow: hidden; margin: .8rem 0 .5rem; box-shadow: inset 0 1px 2px rgba(0,0,0,.08); }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 999px; width: 0; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
+
+  /* ---------- Termene ---------- */
+  .deadline { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; padding: .7rem 0; border-bottom: 1px solid var(--border); }
   .deadline:last-child { border-bottom: none; }
-  .deadline .when { font-weight: 600; min-width: 10rem; }
-  .badge { display: inline-block; font-size: .74rem; font-weight: 700; padding: .12rem .55rem; border-radius: 999px; white-space: nowrap; }
+  .deadline .when { font-weight: 700; min-width: 10rem; }
+  .badge { display: inline-flex; align-items:center; font-size: .72rem; font-weight: 800; letter-spacing:.02em; padding: .2rem .6rem; border-radius: 999px; white-space: nowrap; }
   .b-done { background: var(--ok-soft); color: var(--ok); }
   .b-progress { background: var(--warn-soft); color: var(--warn); }
   .b-bad { background: var(--bad-soft); color: var(--bad); }
   .b-none { background: var(--border); color: var(--muted); }
-  /* Stadiu */
-  .work-item { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; padding: .5rem 0; border-bottom: 1px dashed var(--border); }
+
+  .work-item { display: flex; justify-content: space-between; gap: .6rem; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--border); }
   .work-item:last-child { border-bottom: none; }
-  /* Clădire pe etaje */
-  .building { display: flex; flex-direction: column; gap: 6px; }
-  .floor { position: relative; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--bg); }
-  .floor .fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, var(--accent), #4fae7c); opacity: .22; transition: width 1.1s ease; }
-  .floor.low .fill { background: linear-gradient(90deg, var(--warn), var(--bad)); opacity: .25; }
-  .floor .row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .7rem .9rem; flex-wrap: wrap; }
-  .floor .name { font-weight: 700; }
-  .floor .note { color: var(--muted); font-size: .85rem; flex: 1 1 100%; margin-top: .1rem; }
-  .floor .pct { font-weight: 700; font-variant-numeric: tabular-nums; }
-  .floor .roof { height: 0; border-left: 16px solid transparent; border-right: 16px solid transparent; }
-  .roof-cap { text-align: center; color: var(--muted); font-size: .8rem; padding-bottom: .3rem; }
-  /* Card AI */
-  .ai-card { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--accent-soft), var(--card) 60%); }
-  /* Jurnal foto săptămânal */
-  .week { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1rem; background: var(--card); }
-  .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .85rem 1.1rem; }
-  .week-head h3 { font-size: 1.05rem; }
-  .week-head .date { font-size: .82rem; color: var(--muted); font-weight: 400; margin-left: .4rem; }
-  .week-note { padding: 0 1.1rem 1rem; color: var(--muted); }
-  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .5rem; padding: 0 1.1rem 1.1rem; }
-  .gallery img { border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--accent-soft); }
-  .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1rem; text-align: center; border: 1px dashed var(--border); border-radius: 8px; }
-  .ai-week { margin: 0 1.1rem 1.1rem; padding: .8rem 1rem; background: var(--accent-soft); border: 1px solid var(--border); border-radius: 8px; font-size: .92rem; }
-  /* Cronologie */
-  .timeline { list-style: none; position: relative; padding-left: 1.5rem; }
-  .timeline::before { content: ""; position: absolute; left: .45rem; top: .3rem; bottom: .3rem; width: 2px; background: var(--border); }
-  .timeline li { position: relative; padding: 0 0 1.1rem .75rem; }
-  .timeline li::before { content: ""; position: absolute; left: -1.28rem; top: .42rem; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 2px solid var(--card); }
+
+  /* ---------- Clădire pe etaje ---------- */
+  .building { display: flex; flex-direction: column; gap: 8px; }
+  .roof-cap {
+    text-align: center; color: var(--muted); font-size: .78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+    padding: .3rem; margin: 0 auto .2rem; width: 60%;
+    border-bottom: none;
+    position: relative;
+  }
+  .roof-cap::before {
+    content:""; display:block; margin:0 auto .3rem;
+    width:0; height:0; border-left: 40px solid transparent; border-right:40px solid transparent;
+    border-bottom: 20px solid color-mix(in srgb, var(--accent) 25%, var(--card));
+  }
+  .floor { position: relative; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 1px 2px rgba(20,30,50,.04); }
+  .floor .fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, transparent), color-mix(in srgb, var(--accent2) 45%, transparent)); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+  .floor.low .fill { background: linear-gradient(90deg, color-mix(in srgb, var(--warn) 50%, transparent), color-mix(in srgb, var(--bad) 45%, transparent)); }
+  .floor .row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .85rem 1rem; flex-wrap: wrap; }
+  .floor .name { font-weight: 800; font-size: 1.02rem; }
+  .floor .note { color: var(--text); opacity:.85; font-size: .85rem; flex: 1 1 100%; margin-top: .15rem; }
+  .floor .pct { font-weight: 800; font-size: 1.15rem; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+  .floor.low .pct { color: var(--bad); }
+
+  /* ---------- Card AI ---------- */
+  .ai-card { position: relative; border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); background: linear-gradient(180deg, var(--accent-soft), var(--card) 55%); }
+  .ai-card::before { content:""; position:absolute; inset:0; border-radius: var(--radius); padding:1px; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity:.5; pointer-events:none; }
+
+  /* ---------- Jurnal foto ---------- */
+  .week { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.1rem; background: var(--card); box-shadow: var(--shadow); }
+  .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
+  .week-head h3 { font-size: 1.1rem; font-weight: 800; }
+  .week-head .date { font-size: .82rem; color: var(--muted); font-weight: 500; margin-left: .5rem; }
+  .week-note { padding: .9rem 1.2rem 0; color: var(--muted); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .55rem; padding: 1rem 1.2rem; }
+  .gallery a { display:block; border-radius: 12px; overflow:hidden; box-shadow: var(--shadow); transition: transform .15s ease; }
+  .gallery a:hover { transform: scale(1.02); }
+  .gallery img { aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--accent-soft); }
+  .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1.4rem; text-align: center; border: 2px dashed var(--border); border-radius: 12px; }
+  .ai-week { margin: 0 1.2rem 1.2rem; padding: .95rem 1.1rem; background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 25%, var(--border)); border-radius: 12px; font-size: .92rem; }
+
+  /* ---------- Cronologie ---------- */
+  .timeline { list-style: none; position: relative; padding-left: 1.7rem; }
+  .timeline::before { content: ""; position: absolute; left: .5rem; top: .4rem; bottom: .4rem; width: 2px; background: linear-gradient(var(--accent), var(--accent2)); opacity:.4; }
+  .timeline li { position: relative; padding: 0 0 1.3rem .85rem; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before { content: ""; position: absolute; left: -1.4rem; top: .45rem; width: 13px; height: 13px; border-radius: 50%; background: var(--muted); border: 3px solid var(--card); box-shadow: 0 0 0 1px var(--border); }
   .timeline li.done::before { background: var(--ok); }
   .timeline li.bad::before { background: var(--bad); }
-  .timeline li.current::before { background: var(--warn); }
-  .timeline .date { font-size: .82rem; color: var(--muted); display: block; }
-  .timeline .title { font-weight: 600; }
-  /* Revendicări */
+  .timeline li.current::before { background: var(--warn); box-shadow: 0 0 0 4px var(--warn-soft); }
+  .timeline .date { font-size: .8rem; color: var(--muted); display: block; font-weight:600; }
+  .timeline .title { font-weight: 700; }
+
+  /* ---------- Revendicări ---------- */
   .demands { counter-reset: d; list-style: none; }
-  .demands li { counter-increment: d; position: relative; padding: .45rem 0 .45rem 2.4rem; }
-  .demands li::before { content: counter(d); position: absolute; left: 0; top: .5rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
-  /* Distribuie */
+  .demands li { counter-increment: d; position: relative; padding: .6rem 0 .6rem 2.7rem; border-bottom:1px solid var(--border); }
+  .demands li:last-child { border-bottom:none; }
+  .demands li::before { content: counter(d); position: absolute; left: 0; top: .55rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: linear-gradient(180deg, var(--accent), var(--accent-ink)); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: .95rem; box-shadow: 0 4px 10px color-mix(in srgb, var(--accent) 35%, transparent); }
+
+  /* ---------- Distribuie ---------- */
   .share { display: flex; flex-wrap: wrap; gap: .6rem; }
   .share a, .share button { font: inherit; cursor: pointer; }
-  /* Actualizări */
-  .update { border-left: 3px solid var(--accent); padding-left: .9rem; margin-bottom: 1rem; }
-  .update .date { font-size: .82rem; color: var(--muted); }
-  .sources li { margin-bottom: .35rem; }
-  footer { margin: 3rem 0 2rem; text-align: center; color: var(--muted); font-size: .85rem; }
+
+  /* ---------- Actualizări ---------- */
+  .update { border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .9rem; margin-bottom: 1rem; }
+  .update:last-child { margin-bottom: 0; }
+  .update .date { font-size: .8rem; color: var(--muted); font-weight:600; }
+  .sources li { margin-bottom: .5rem; line-height:1.4; }
+
+  footer { margin: 3.5rem 0 2.5rem; text-align: center; color: var(--muted); font-size: .85rem; }
+  @media (max-width: 560px) {
+    header { padding: 2.6rem 0 5.4rem; }
+    .card { padding: 1.1rem; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="container">
-    <h1>Școala Gimnazială nr. 13 Botoșani<br>Progresul lucrărilor de reabilitare</h1>
-    <p>De aproape trei ani, elevii Școlii 13 învață în spații improvizate. Urmărim public, săptămână de săptămână, stadiul real al lucrărilor și termenele promise de autorități.</p>
+    <span class="eyebrow">🏫 Monitorizare civică · Botoșani</span>
+    <h1>Școala Gimnazială nr. 13<br>Progresul lucrărilor de reabilitare</h1>
+    <p class="lead">De aproape trei ani, elevii Școlii 13 învață în spații improvizate. Urmărim public, săptămână de săptămână, stadiul real al lucrărilor și termenele promise de autorități.</p>
+    <div class="hero-cta">
+      <a class="btn ghost-light" href="#petitie">✍️ Semnează petiția</a>
+      <a class="btn ghost-light" href="#santier">📸 Vezi șantierul</a>
+    </div>
   </div>
 </header>
 
 <div class="container">
 
+  <div class="stats-strip">
+    <div class="key-facts">
+      <div class="fact">
+        <span class="num" id="days-left">–</span>
+        <span class="label" id="days-label">zile până la termenul promis (1 septembrie 2026)</span>
+      </div>
+      <div class="fact">
+        <span class="num bad">4</span>
+        <span class="label">termene anunțate până acum pentru aceeași școală</span>
+      </div>
+      <div class="fact">
+        <span class="num">~14<span style="font-size:1rem"> mil. lei</span></span>
+        <span class="label">investiție din bani publici, prin PNRR</span>
+      </div>
+      <div class="fact">
+        <span class="num">100%</span>
+        <span class="label">promovabilitate obținută de elevi, deși învață improvizat</span>
+      </div>
+    </div>
+  </div>
+
   <div class="disclaimer">
-    ⚠️ Pagină independentă, realizată și întreținută voluntar de comunitatea părinților elevilor de la Școala Gimnazială nr. 13 Botoșani.
-    Nu este un site oficial al școlii, al Primăriei Botoșani sau al altei autorități. Informațiile provin din presă și din comunicări publice — sursele sunt la finalul paginii.
+    <span>⚠️</span>
+    <span>Pagină independentă, realizată voluntar de comunitatea părinților elevilor de la Școala Gimnazială nr. 13 Botoșani. Nu este un site oficial al școlii, al Primăriei Botoșani sau al altei autorități. Informațiile provin din presă și din comunicări publice — sursele sunt la finalul paginii.</span>
   </div>
 
   <!-- PETIȚIE -->
@@ -191,29 +315,6 @@
       </p>
       <a class="btn" id="sign-link" href="#" target="_blank" rel="noopener">✍️ Semnează petiția</a>
       <a class="btn secondary" id="sig-list-link" href="#" target="_blank" rel="noopener">Vezi semnăturile</a>
-    </div>
-  </section>
-
-  <!-- CIFRE CHEIE -->
-  <section id="contor">
-    <h2>Termenul promis: 1 septembrie 2026</h2>
-    <div class="key-facts">
-      <div class="card fact">
-        <span class="num" id="days-left">–</span>
-        <span class="label" id="days-label">zile până la termenul promis<br>(1 septembrie 2026)</span>
-      </div>
-      <div class="card fact">
-        <span class="num bad">4</span>
-        <span class="label">termene anunțate până acum<br>pentru aceeași școală</span>
-      </div>
-      <div class="card fact">
-        <span class="num">~14 mil. lei</span>
-        <span class="label">investiție din bani publici,<br>prin PNRR</span>
-      </div>
-      <div class="card fact">
-        <span class="num">100%</span>
-        <span class="label">promovabilitate obținută de elevi,<br>deși învață în spații improvizate</span>
-      </div>
     </div>
   </section>
 
