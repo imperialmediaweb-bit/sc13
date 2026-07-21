@@ -25,7 +25,7 @@ export function ParentReports() {
   if (!reports || reports.length === 0) return null;
 
   return (
-    <section id="de-la-parinti" className="scroll-mt-4">
+    <section id="de-la-parinti" className="mb-5 break-inside-avoid scroll-mt-4">
       <div className="mb-4">
         <div className="text-xs font-bold uppercase tracking-[0.16em] text-[hsl(var(--primary-2))]">Din comunitate</div>
         <h2 className="mt-1 text-balance font-display text-2xl font-extrabold tracking-tight sm:text-[1.7rem]">
