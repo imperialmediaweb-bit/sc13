@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Școala 13 Botoșani — Progresul lucrărilor</title>
+<meta name="description" content="Monitorizarea publică a stadiului lucrărilor de reabilitare de la Școala Gimnazială nr. 13 Botoșani. Poze săptămânale de pe șantier, istoricul termenelor și petiția părinților.">
+<meta property="og:title" content="Școala 13 Botoșani — Progresul lucrărilor">
+<meta property="og:description" content="Urmărim public stadiul real al lucrărilor de la Școala 13. Copiii merită să înceapă anul școlar în școala lor.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #1e2430;
+    --muted: #5b6472;
+    --accent: #1d6fb8;
+    --accent-soft: #e3eefa;
+    --ok: #2e8b57;
+    --ok-soft: #d9f2e4;
+    --warn: #c77700;
+    --warn-soft: #fdeeda;
+    --bad: #c0392b;
+    --bad-soft: #fadbd8;
+    --border: #e2e6ec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14181f;
+      --card: #1d232d;
+      --text: #e8ecf2;
+      --muted: #9aa4b2;
+      --accent: #5aa2e0;
+      --accent-soft: #22303f;
+      --ok-soft: #1c3327;
+      --warn-soft: #3a2f1c;
+      --bad-soft: #3a2422;
+      --border: #2c3542;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: var(--accent); }
+  .container { max-width: 920px; margin: 0 auto; padding: 1.25rem; }
+  header {
+    background: linear-gradient(135deg, var(--accent), #14507f);
+    color: #fff;
+    padding: 2.6rem 0 2.2rem;
+  }
+  header h1 { font-size: 1.7rem; margin-bottom: .4rem; line-height: 1.25; }
+  header p { opacity: .93; max-width: 46rem; }
+  .disclaimer {
+    background: var(--accent-soft);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .8rem 1rem;
+    margin: 1.25rem 0;
+    font-size: .9rem;
+    color: var(--muted);
+  }
+  section { margin: 2.2rem 0; }
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: .9rem;
+    padding-bottom: .4rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: .9rem;
+  }
+  /* Petiție */
+  .petition { background: var(--card); border: 2px solid var(--accent); }
+  .petition .count { font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .petition .goal { color: var(--muted); font-size: .95rem; }
+  .bar { background: var(--border); border-radius: 999px; height: 16px; overflow: hidden; margin: .7rem 0 .4rem; }
+  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), #4fae7c); border-radius: 999px; width: 0; transition: width 1s ease; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: .7rem 1.3rem;
+    border-radius: 8px;
+    margin-top: .7rem;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  /* Cifre cheie */
+  .key-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .9rem; }
+  .fact { text-align: center; padding: 1.2rem 1rem; }
+  .fact .num { font-size: 2rem; font-weight: 700; color: var(--accent); display: block; line-height: 1.2; }
+  .fact .num.bad { color: var(--bad); }
+  .fact .label { font-size: .86rem; color: var(--muted); }
+  /* Termene */
+  .deadline { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; padding: .55rem 0; border-bottom: 1px dashed var(--border); }
+  .deadline:last-child { border-bottom: none; }
+  .deadline .when { font-weight: 600; min-width: 10rem; }
+  .badge { display: inline-block; font-size: .74rem; font-weight: 700; padding: .12rem .55rem; border-radius: 999px; white-space: nowrap; }
+  .b-done { background: var(--ok-soft); color: var(--ok); }
+  .b-progress { background: var(--warn-soft); color: var(--warn); }
+  .b-bad { background: var(--bad-soft); color: var(--bad); }
+  .b-none { background: var(--border); color: var(--muted); }
+  /* Stadiu */
+  .work-item { display: flex; justify-content: space-between; gap: .6rem; align-items: baseline; padding: .5rem 0; border-bottom: 1px dashed var(--border); }
+  .work-item:last-child { border-bottom: none; }
+  /* Jurnal foto săptămânal */
+  .week { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1rem; background: var(--card); }
+  .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .85rem 1.1rem; }
+  .week-head h3 { font-size: 1.05rem; }
+  .week-head .date { font-size: .82rem; color: var(--muted); font-weight: 400; margin-left: .4rem; }
+  .week-note { padding: 0 1.1rem 1rem; color: var(--muted); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .5rem; padding: 0 1.1rem 1.1rem; }
+  .gallery img { border-radius: 8px; aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--accent-soft); }
+  .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1rem; text-align: center; border: 1px dashed var(--border); border-radius: 8px; }
+  /* Cronologie */
+  .timeline { list-style: none; position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ""; position: absolute; left: .45rem; top: .3rem; bottom: .3rem; width: 2px; background: var(--border); }
+  .timeline li { position: relative; padding: 0 0 1.1rem .75rem; }
+  .timeline li::before { content: ""; position: absolute; left: -1.28rem; top: .42rem; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 2px solid var(--card); }
+  .timeline li.done::before { background: var(--ok); }
+  .timeline li.bad::before { background: var(--bad); }
+  .timeline li.current::before { background: var(--warn); }
+  .timeline .date { font-size: .82rem; color: var(--muted); display: block; }
+  .timeline .title { font-weight: 600; }
+  /* Revendicări */
+  .demands { counter-reset: d; list-style: none; }
+  .demands li { counter-increment: d; position: relative; padding: .45rem 0 .45rem 2.4rem; }
+  .demands li::before { content: counter(d); position: absolute; left: 0; top: .5rem; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+  /* Distribuie */
+  .share { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .share a, .share button { font: inherit; cursor: pointer; }
+  /* Actualizări */
+  .update { border-left: 3px solid var(--accent); padding-left: .9rem; margin-bottom: 1rem; }
+  .update .date { font-size: .82rem; color: var(--muted); }
+  .sources li { margin-bottom: .35rem; }
+  footer { margin: 3rem 0 2rem; text-align: center; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>Școala Gimnazială nr. 13 Botoșani<br>Progresul lucrărilor de reabilitare</h1>
+    <p>De aproape trei ani, elevii Școlii 13 învață în spații improvizate. Urmărim public, săptămână de săptămână, stadiul real al lucrărilor și termenele promise de autorități.</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="disclaimer">
+    ⚠️ Pagină independentă, realizată și întreținută voluntar de comunitatea părinților elevilor de la Școala Gimnazială nr. 13 Botoșani.
+    Nu este un site oficial al școlii, al Primăriei Botoșani sau al altei autorități. Informațiile provin din presă și din comunicări publice — sursele sunt la finalul paginii.
+  </div>
+
+  <!-- PETIȚIE -->
+  <section id="petitie">
+    <h2>Petiția părinților</h2>
+    <div class="card petition">
+      <div style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap">
+        <span class="count" id="sig-count">–</span>
+        <span class="goal">semnături din <span id="sig-goal"></span> (obiectiv)</span>
+      </div>
+      <div class="bar"><span id="sig-bar"></span></div>
+      <p style="margin:.5rem 0 .2rem">
+        „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani, ca elevii să înceapă noul an școlar în școala lor!”
+      </p>
+      <a class="btn" id="sign-link" href="#" target="_blank" rel="noopener">✍️ Semnează petiția</a>
+      <a class="btn secondary" id="sig-list-link" href="#" target="_blank" rel="noopener">Vezi semnăturile</a>
+    </div>
+  </section>
+
+  <!-- CIFRE CHEIE -->
+  <section id="contor">
+    <h2>Termenul promis: 1 septembrie 2026</h2>
+    <div class="key-facts">
+      <div class="card fact">
+        <span class="num" id="days-left">–</span>
+        <span class="label" id="days-label">zile până la termenul promis<br>(1 septembrie 2026)</span>
+      </div>
+      <div class="card fact">
+        <span class="num bad">4</span>
+        <span class="label">termene anunțate până acum<br>pentru aceeași școală</span>
+      </div>
+      <div class="card fact">
+        <span class="num">~14 mil. lei</span>
+        <span class="label">investiție din bani publici,<br>prin PNRR</span>
+      </div>
+      <div class="card fact">
+        <span class="num">100%</span>
+        <span class="label">promovabilitate obținută de elevi,<br>deși învață în spații improvizate</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TERMENE -->
+  <section id="termene">
+    <h2>Istoricul termenelor promise</h2>
+    <div class="card" id="deadlines"></div>
+  </section>
+
+  <!-- ESTIMARE -->
+  <section id="estimare">
+    <h2>Va fi gata la timp?</h2>
+    <div class="card">
+      <div style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.3rem">
+        <span class="count" id="prog-pct" style="font-size:2rem"></span>
+        <span class="goal">progres estimat al lucrărilor</span>
+      </div>
+      <div class="bar"><span id="prog-bar"></span></div>
+      <p id="estimare-verdict" style="margin:.8rem 0 .3rem;font-weight:700"></p>
+      <p id="estimare-detalii" style="color:var(--muted);font-size:.92rem"></p>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:.7rem">
+        Estimare orientativă, calculată automat din ritmul de progres raportat (procentul actual față de cel de acum o săptămână). Nu înlocuiește un grafic oficial de execuție.
+      </p>
+    </div>
+  </section>
+
+  <!-- STADIU -->
+  <section id="stadiu">
+    <h2>Stadiul lucrărilor</h2>
+    <div class="card" id="works"></div>
+  </section>
+
+  <!-- JURNAL FOTO -->
+  <section id="santier">
+    <h2>Jurnal foto pe șantier — săptămână de săptămână</h2>
+    <p style="color:var(--muted);margin-bottom:1rem">
+      În fiecare săptămână adăugăm poze de pe șantier și notăm dacă s-a văzut vreun progres real față de săptămâna trecută.
+    </p>
+    <div id="weeks"></div>
+  </section>
+
+  <!-- CRONOLOGIE -->
+  <section id="cronologie">
+    <h2>Cronologie</h2>
+    <div class="card"><ul class="timeline" id="timeline"></ul></div>
+  </section>
+
+  <!-- REVENDICĂRI -->
+  <section id="revendicari">
+    <h2>Ce cerem</h2>
+    <div class="card">
+      <ol class="demands">
+        <li><strong>Finalizarea lucrărilor până la 1 septembrie 2026</strong> — termenul promis public — astfel încât elevii să înceapă anul școlar 2026–2027 în incinta școlii, nu în spații improvizate.</li>
+        <li><strong>Dreptul părinților de a verifica săptămânal stadiul lucrărilor</strong>, prin vizite pe șantier alături de reprezentanții Primăriei și ai constructorului.</li>
+        <li><strong>Informare publică, transparentă și constantă</strong> asupra stadiului real al lucrărilor și a eventualelor întârzieri.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- DISTRIBUIE -->
+  <section id="distribuie">
+    <h2>Ajută-ne să ajungă la cât mai mulți</h2>
+    <div class="card">
+      <p style="margin-bottom:.4rem;color:var(--muted)">Cu cât suntem mai mulți, cu atât presiunea e mai mare. Distribuie pagina:</p>
+      <div class="share">
+        <a class="btn" id="share-fb" href="#" target="_blank" rel="noopener">Facebook</a>
+        <a class="btn" id="share-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="btn secondary" id="share-copy" type="button">Copiază linkul</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTUALIZĂRI -->
+  <section id="actualizari">
+    <h2>Actualizări</h2>
+    <div class="card" id="updates"></div>
+  </section>
+
+  <!-- SURSE -->
+  <section id="surse">
+    <h2>Surse</h2>
+    <div class="card"><ul class="sources" id="sources"></ul></div>
+  </section>
+
+</div>
+
+<footer>
+  Pagină întreținută voluntar de comunitatea părinților · Corecturi și completări sunt binevenite.
+</footer>
+
+<script>
+/* =====================================================================
+   DATE — SINGURUL loc pe care trebuie să-l editați ca să actualizați pagina.
+   ===================================================================== */
+const DATE = {
+  petitieUrl: "https://www.petitieonline.com/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor",
+  semnaturi: 58,          // ← actualizați numărul de semnături
+  obiectivSemnaturi: 500, // ← obiectivul propus
+
+  // Termenul final promis (an, luna 0-11, zi) — 1 septembrie 2026
+  termenFinal: [2026, 8, 1],
+
+  // --- Estimare „va fi gata la timp?” ---
+  // progresGeneral: procentul total estimat al lucrărilor finalizate (0–100).
+  //   Actualizați-l după fiecare vizită pe șantier — din el se calculează
+  //   automat ritmul necesar și data probabilă de finalizare.
+  progresGeneral: 70,
+  progresSaptamanaTrecuta: 68, // procentul de acum o săptămână (pentru ritm real)
+
+  termene: [
+    { cand: "16 octombrie 2025", status: "bad",      text: "termenul contractual inițial de finalizare" },
+    { cand: "„Din toamnă” 2025", status: "bad",      text: "promisiunea publică a revenirii elevilor în școală" },
+    { cand: "Iunie 2026",        status: "bad",      text: "al treilea termen anunțat" },
+    { cand: "1 septembrie 2026", status: "progress", text: "termenul actual, promis public de administrația locală" },
+  ],
+
+  lucrari: [
+    { nume: "Fațada clădirii",                  status: "done",     eticheta: "Finalizată" },
+    { nume: "Tâmplăria exterioară (ferestre)",  status: "done",     eticheta: "Înlocuită complet" },
+    { nume: "Instalații electrice și sanitare", status: "done",     eticheta: "Montate" },
+    { nume: "Gresie și parchet",                status: "progress", eticheta: "În curs" },
+    { nume: "Recepția finală a lucrărilor",     status: "progress", eticheta: "În așteptare" },
+  ],
+
+  // Jurnal foto: cele mai noi săptămâni primele.
+  // progres: "da" | "putin" | "nu"
+  // poze: căi către imagini din assets/santier/saptamana-NN/ (gol = încă nu avem poze)
+  saptamani: [
+    {
+      titlu: "Săptămâna 1",
+      data: "de completat (ex: 21–27 iulie 2026)",
+      progres: "nu",
+      nota: "Prima săptămână de monitorizare. Adăugați aici pozele făcute pe șantier și notați ce s-a schimbat.",
+      poze: [] // ex: ["assets/santier/saptamana-01/1.jpg", "assets/santier/saptamana-01/2.jpg"]
+    },
+  ],
+
+  cronologie: [
+    { data: "~2023", status: "done", titlu: "Începerea reabilitării prin PNRR (~14 mil. lei)", detalii: "Elevii sunt mutați în spații improvizate — inclusiv în clădirea fundației Hand of Help, în foste dormitoare, magazii și la subsol, cu ore scurtate și fără laboratoare." },
+    { data: "16 octombrie 2025", status: "bad", titlu: "Termenul contractual inițial este depășit", detalii: "Constructorul (firmă din Vaslui) nu finalizează la termen. Primăria invocă întârzieri de 3–4 luni la tranșele de finanțare PNRR." },
+    { data: "Iunie 2026", status: "bad", titlu: "Al treilea termen promis trece fără finalizare", detalii: "" },
+    { data: "16 iulie 2026", status: "done", titlu: "Protestul părinților în fața Primăriei Botoșani", detalii: "Zeci de părinți (50–100, potrivit presei) cer un termen ferm și garanții. Primarul Cosmin Andrei fiind în delegație, sunt primiți de viceprimarul Bogdan Buhăianu, care reconfirmă termenul de 1 septembrie și promite vizite săptămânale de monitorizare pe șantier." },
+    { data: "Iulie 2026", status: "done", titlu: "Lansarea petiției online", detalii: "Comunitatea părinților lansează petiția „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani”." },
+    { data: "1 septembrie 2026", status: "current", titlu: "Termenul promis de finalizare — al patrulea", detalii: "Elevii ar trebui să înceapă anul școlar 2026–2027 în școala lor." },
+  ],
+
+  actualizari: [
+    { data: "16 iulie 2026", text: "Protest în fața Primăriei Botoșani. Viceprimarul Bogdan Buhăianu reconfirmă termenul de 1 septembrie 2026 și promite vizite săptămânale pe șantier." },
+  ],
+
+  surse: [
+    { url: "https://agerpres.ro/educatie-stiinta/2026/07/16/botosani-protest-al-parintilor-elevilor-unei-scoli-fata-de-ritmul-lent-al-lucrarilor-de-reabilitare---1576737", text: "AGERPRES — Protest al părinților față de ritmul lent al lucrărilor (16 iulie 2026)" },
+    { url: "https://www.edupedu.ro/parintii-elevilor-de-la-scoala-13-din-botosani-au-protestat-din-cauza-intarzierii-lucrarilor-de-reabilitare/", text: "Edupedu.ro — Părinții elevilor de la Școala 13 au protestat" },
+    { url: "https://www.botosaninews.ro/744496/eveniment/foto-video-protest-la-botosani-cu-zeci-de-parinti-nemultumiti-oamenii-si-au-spus-of-ul-in-fata-primariei/", text: "BotosaniNews.ro — Protest cu zeci de părinți nemulțumiți" },
+    { url: "https://www.botosaninews.ro/744519/administratie/video-viceprimarul-municipiului-botosani-explicatii-in-fata-protestatarilor-despre-intarzierea-finalizarii-lucrarilor-la-scoala-13-nu-a-depins-de-primaria-botosani/", text: "BotosaniNews.ro — Viceprimarul, explicații în fața protestatarilor" },
+    { url: "https://www.botosaneanul.ro/parintii-au-intrat-pe-santierul-scolii-nr-13-viceprimarul-promite-vizite-saptamanale-pentru-monitorizarea-lucrarilor", text: "Botoșăneanul — Părinții au intrat pe șantier; vizite săptămânale promise" },
+    { url: "https://vivafm.ro/stire/2025/07/14/modernizare-completa-la-scoala-gimnaziala-nr-13/", text: "VIVA FM — Stadiul lucrărilor (2025)" },
+    { url: "https://www.botosaneanul.ro/in-jur-de-100-de-parinti-ai-copiilor-de-la-scoala-13-protesteaza-la-primarie", text: "Botoșăneanul — În jur de 100 de părinți protestează la Primărie" },
+    { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Tensiuni la Primărie; viceprimarul: întârzieri din blocaje la plăți" },
+    { url: "https://www.botosaneanul.ro/tipete-la-primarie-parintii-primiti-de-viceprimar-vreti-sa-tipati-asta-dorim-nu-povesti", text: "Botoșăneanul — Părinții primiți de viceprimar la Primărie" },
+    { url: "https://telem.ro/scolile-din-botosani-raman-in-santier/", text: "TeleM Regional — Școlile din Botoșani rămân în șantier" },
+    { url: "https://www.botosaninews.ro/693544/administratie/video-primarul-cosmin-andrei-reactioneaza-dupa-aparitia-unui-articol-despre-intarzierile-la-lucrarile-de-la-scoala-13-botosani/", text: "BotosaniNews.ro — Primarul Cosmin Andrei reacționează la întârzieri" },
+  ],
+};
+/* ===================== sfârșitul secțiunii DATE ====================== */
+
+const $ = id => document.getElementById(id);
+
+// --- Petiție ---
+const pct = Math.min(100, Math.round(DATE.semnaturi / DATE.obiectivSemnaturi * 100));
+$("sig-count").textContent = DATE.semnaturi;
+$("sig-goal").textContent = DATE.obiectivSemnaturi;
+$("sign-link").href = DATE.petitieUrl;
+$("sig-list-link").href = DATE.petitieUrl.replace("/finalizati", "/signatures/finalizati") + "/";
+requestAnimationFrame(() => { $("sig-bar").style.width = pct + "%"; });
+
+// --- Contor zile ---
+(function () {
+  const [y, m, d] = DATE.termenFinal;
+  const days = Math.ceil((new Date(y, m, d) - new Date()) / 86400000);
+  const el = $("days-left");
+  if (days > 0) { el.textContent = days; }
+  else if (days === 0) { el.textContent = "AZI"; }
+  else {
+    el.textContent = Math.abs(days);
+    el.classList.add("bad");
+    $("days-label").innerHTML = "zile <strong>peste</strong> termenul promis<br>(1 septembrie 2026)";
+  }
+})();
+
+// --- Estimare „va fi gata la timp?” ---
+(function () {
+  const [y, m, d] = DATE.termenFinal;
+  const deadline = new Date(y, m, d);
+  const now = new Date();
+  const prog = DATE.progresGeneral;
+  const ritm = prog - DATE.progresSaptamanaTrecuta; // puncte % pe săptămână
+  const ramas = 100 - prog;
+  const zileRamase = Math.ceil((deadline - now) / 86400000);
+  const saptRamase = zileRamase / 7;
+
+  $("prog-pct").textContent = prog + "%";
+  requestAnimationFrame(() => { $("prog-bar").style.width = prog + "%"; });
+
+  const verdict = $("estimare-verdict");
+  const detalii = $("estimare-detalii");
+  const ritmNecesar = saptRamase > 0 ? (ramas / saptRamase) : Infinity;
+
+  if (prog >= 100) {
+    verdict.textContent = "✔ Lucrările sunt raportate ca finalizate.";
+    verdict.style.color = "var(--ok)";
+    detalii.textContent = "";
+    return;
+  }
+  if (ritm <= 0) {
+    verdict.textContent = "✘ În ritmul actual, lucrările NU se termină la timp.";
+    verdict.style.color = "var(--bad)";
+    detalii.textContent = "Nu s-a raportat progres față de săptămâna trecută (0% pe săptămână), deci nu se poate estima o dată de finalizare. Mai sunt " +
+      ramas + "% de făcut și " + zileRamase + " zile până la termen.";
+    return;
+  }
+
+  const saptNecesare = Math.ceil(ramas / ritm);
+  const finalEstimatMs = now.getTime() + saptNecesare * 7 * 86400000;
+  const finalEstimat = new Date(finalEstimatMs);
+  const dataStr = finalEstimat.toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
+  const laTimp = finalEstimatMs <= deadline.getTime();
+
+  verdict.textContent = laTimp
+    ? "✔ În ritmul actual, lucrările s-ar termina la timp."
+    : "✘ În ritmul actual, lucrările riscă să depășească termenul.";
+  verdict.style.color = laTimp ? "var(--ok)" : "var(--bad)";
+  detalii.innerHTML =
+    "Ritm raportat: <strong>" + ritm + "% pe săptămână</strong>. Mai sunt <strong>" + ramas +
+    "%</strong> de făcut, în aproximativ <strong>" + saptRamase.toFixed(1) + " săptămâni</strong> până la 1 septembrie. " +
+    "Ar fi nevoie de circa <strong>" + ritmNecesar.toFixed(1) + "% pe săptămână</strong>. " +
+    "Estimare de finalizare la ritmul actual: <strong>" + dataStr + "</strong>.";
+})();
+
+// --- Termene ---
+const badgeText = { done: "Finalizat", progress: "În așteptare", bad: "Depășit", none: "—" };
+$("deadlines").innerHTML = DATE.termene.map(t => `
+  <div class="deadline">
+    <span class="when">${t.cand}</span>
+    <span class="badge b-${t.status}">${badgeText[t.status]}</span>
+    <span>${t.text}</span>
+  </div>`).join("");
+
+// --- Lucrări ---
+$("works").innerHTML = DATE.lucrari.map(l => `
+  <div class="work-item"><span>${l.nume}</span><span class="badge b-${l.status}">${l.eticheta}</span></div>
+`).join("");
+
+// --- Jurnal foto ---
+const progresBadge = {
+  da:    ['b-done', '✔ Progres vizibil'],
+  putin: ['b-progress', '~ Progres mic'],
+  nu:    ['b-bad', '✘ Fără progres'],
+};
+$("weeks").innerHTML = DATE.saptamani.map(s => {
+  const [cls, lbl] = progresBadge[s.progres] || progresBadge.nu;
+  const poze = (s.poze && s.poze.length)
+    ? s.poze.map(p => `<a href="${p}" target="_blank" rel="noopener"><img src="${p}" alt="Șantier — ${s.titlu}" loading="lazy"></a>`).join("")
+    : `<div class="empty">Încă nu au fost adăugate poze pentru această săptămână.</div>`;
+  return `
+    <div class="week">
+      <div class="week-head">
+        <h3>${s.titlu}<span class="date">${s.data}</span></h3>
+        <span class="badge ${cls}">${lbl}</span>
+      </div>
+      ${s.nota ? `<p class="week-note">${s.nota}</p>` : ""}
+      <div class="gallery">${poze}</div>
+    </div>`;
+}).join("");
+
+// --- Cronologie ---
+$("timeline").innerHTML = DATE.cronologie.map(e => `
+  <li class="${e.status}">
+    <span class="date">${e.data}</span>
+    <span class="title">${e.titlu}</span>
+    ${e.detalii ? `<div>${e.detalii}</div>` : ""}
+  </li>`).join("");
+
+// --- Actualizări ---
+$("updates").innerHTML = DATE.actualizari.map(u => `
+  <div class="update"><div class="date">${u.data}</div><div>${u.text}</div></div>`).join("");
+
+// --- Surse ---
+$("sources").innerHTML = DATE.surse.map(s => `
+  <li><a href="${s.url}" target="_blank" rel="noopener">${s.text}</a></li>`).join("");
+
+// --- Distribuire ---
+(function () {
+  const url = location.href.split("#")[0];
+  const txt = "Susține finalizarea lucrărilor la Școala 13 Botoșani — semnează petiția:";
+  $("share-fb").href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(url);
+  $("share-wa").href = "https://wa.me/?text=" + encodeURIComponent(txt + " " + url);
+  $("share-copy").addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      $("share-copy").textContent = "Link copiat ✓";
+      setTimeout(() => { $("share-copy").textContent = "Copiază linkul"; }, 2000);
+    } catch (e) {
+      prompt("Copiază linkul:", url);
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
