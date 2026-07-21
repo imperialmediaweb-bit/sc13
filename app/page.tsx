@@ -11,6 +11,7 @@ import { Reveal } from "@/components/magicui/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
+import { ParentReports } from "@/components/parent-reports";
 import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
@@ -405,6 +406,9 @@ export default function Page() {
             </Card>
           </Reveal>
         </section>
+
+        {/* DE LA PĂRINȚI (rapoarte publicate) */}
+        <ParentReports />
 
         {/* CRONOLOGIE */}
         <section id="cronologie" className="mb-8 scroll-mt-4 lg:mb-0 lg:col-span-2">

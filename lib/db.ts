@@ -38,8 +38,9 @@ export function ensureTables(): Promise<void> {
            media       JSONB NOT NULL DEFAULT '[]'
          )`
       );
-      // pentru tabelele create înainte de adăugarea coloanei
+      // pentru tabelele create înainte de adăugarea coloanelor
       await p.query(`ALTER TABLE reports ADD COLUMN IF NOT EXISTS data_vizita TEXT`);
+      await p.query(`ALTER TABLE reports ADD COLUMN IF NOT EXISTS published BOOLEAN NOT NULL DEFAULT false`);
     })().catch((e) => {
       ready = null; // permite reîncercarea la următoarea cerere
       throw e;

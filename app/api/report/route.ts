@@ -1,9 +1,14 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "crypto";
-import { addReport, readReports } from "@/lib/reports";
+import { addReport, readReports, setPublished, deleteReport } from "@/lib/reports";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+
+function authorized(req: Request) {
+  const secret = process.env.NOTIFY_SECRET;
+  return Boolean(secret) && req.headers.get("x-notify-secret") === secret;
+}
 
 // Primește un raport de la un părinte (text obligatoriu, poze/video opționale).
 export async function POST(req: Request) {
@@ -33,12 +38,34 @@ export async function POST(req: Request) {
   }
 }
 
-// Citirea rapoartelor primite (pentru moderare) — protejat cu NOTIFY_SECRET.
+// Citirea tuturor rapoartelor (pentru moderare) — protejat cu NOTIFY_SECRET.
 export async function GET(req: Request) {
-  const secret = process.env.NOTIFY_SECRET;
-  const provided = req.headers.get("x-notify-secret");
-  if (!secret || provided !== secret) {
-    return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
-  }
+  if (!authorized(req)) return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
   return NextResponse.json({ reports: await readReports() });
+}
+
+// Publică / retrage un raport — protejat.
+export async function PATCH(req: Request) {
+  if (!authorized(req)) return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
+  try {
+    const { id, published } = await req.json();
+    if (!id) return NextResponse.json({ error: "Lipsește id" }, { status: 400 });
+    await setPublished(String(id), Boolean(published));
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Cerere invalidă" }, { status: 400 });
+  }
+}
+
+// Șterge un raport — protejat.
+export async function DELETE(req: Request) {
+  if (!authorized(req)) return NextResponse.json({ error: "Neautorizat" }, { status: 401 });
+  try {
+    const { id } = await req.json();
+    if (!id) return NextResponse.json({ error: "Lipsește id" }, { status: 400 });
+    await deleteReport(String(id));
+    return NextResponse.json({ ok: true });
+  } catch {
+    return NextResponse.json({ error: "Cerere invalidă" }, { status: 400 });
+  }
 }
