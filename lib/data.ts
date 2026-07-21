@@ -22,6 +22,7 @@ export const anScolarStart: [number, number, number] = [2026, 8, 8];
 export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Obiectiv", valoare: "Reabilitare și modernizare energetică" },
   { eticheta: "Elevi", valoare: "peste 540" },
+  { eticheta: "Clase (estimativ)", valoare: "~24" },
   { eticheta: "Beneficiar", valoare: "Primăria Municipiului Botoșani" },
   { eticheta: "Finanțare", valoare: "PNRR — aproximativ 14 milioane lei" },
   { eticheta: "Constructor", valoare: "Katar Conneg SRL (Vaslui)" },
