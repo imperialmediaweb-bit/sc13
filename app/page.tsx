@@ -239,6 +239,14 @@ export default function Page() {
                     Vezi semnăturile
                   </a>
                 </div>
+                {petitie.peHartie && (
+                  <div className="mt-4 flex items-start gap-2 rounded-lg border border-border border-l-[3px] border-l-primary bg-[hsl(var(--card-2))] px-4 py-3 text-sm">
+                    <span aria-hidden>✍️</span>
+                    <span>
+                      <strong>Și pe hârtie:</strong> {petitie.peHartie}
+                    </span>
+                  </div>
+                )}
               </CardContent>
               <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary to-[hsl(var(--primary-2))]" />
             </Card>
