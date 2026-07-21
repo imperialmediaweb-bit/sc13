@@ -30,13 +30,16 @@ export function ensureTables(): Promise<void> {
       );
       await p.query(
         `CREATE TABLE IF NOT EXISTS reports (
-           id         UUID PRIMARY KEY,
-           created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-           nume       TEXT,
-           mesaj      TEXT NOT NULL,
-           media      JSONB NOT NULL DEFAULT '[]'
+           id          UUID PRIMARY KEY,
+           created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+           data_vizita TEXT,
+           nume        TEXT,
+           mesaj       TEXT NOT NULL,
+           media       JSONB NOT NULL DEFAULT '[]'
          )`
       );
+      // pentru tabelele create înainte de adăugarea coloanei
+      await p.query(`ALTER TABLE reports ADD COLUMN IF NOT EXISTS data_vizita TEXT`);
     })().catch((e) => {
       ready = null; // permite reîncercarea la următoarea cerere
       throw e;

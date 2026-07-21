@@ -14,6 +14,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Scrie ce ai văzut pe șantier." }, { status: 400 });
     }
     const nume = String(body?.nume || "").trim().slice(0, 80) || "Anonim";
+    const dataVizita = String(body?.dataVizita || "").trim().slice(0, 40);
     const media = Array.isArray(body?.media)
       ? body.media.filter((u: unknown) => typeof u === "string").slice(0, 8)
       : [];
@@ -21,6 +22,7 @@ export async function POST(req: Request) {
     await addReport({
       id: randomUUID(),
       createdAt: new Date().toISOString(),
+      dataVizita,
       nume,
       mesaj: mesaj.slice(0, 4000),
       media,

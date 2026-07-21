@@ -15,6 +15,7 @@ async function uploadFile(file: File): Promise<string> {
 
 export function ReportForm() {
   const [nume, setNume] = React.useState("");
+  const [dataVizita, setDataVizita] = React.useState("");
   const [mesaj, setMesaj] = React.useState("");
   const [files, setFiles] = React.useState<File[]>([]);
   const [state, setState] = React.useState<"idle" | "sending" | "done" | "error">("idle");
@@ -42,11 +43,12 @@ export function ReportForm() {
       const res = await fetch("/api/report", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nume, mesaj, media }),
+        body: JSON.stringify({ nume, dataVizita, mesaj, media }),
       });
       if (!res.ok) throw new Error();
       setState("done");
       setNume("");
+      setDataVizita("");
       setMesaj("");
       setFiles([]);
     } catch {
@@ -77,14 +79,25 @@ export function ReportForm() {
 
   return (
     <form onSubmit={submit} className="space-y-3">
-      <div>
-        <label className="mb-1 block text-sm font-semibold">Numele tău (opțional)</label>
-        <input
-          value={nume}
-          onChange={(e) => setNume(e.target.value)}
-          placeholder="Lasă gol pentru „Anonim”"
-          className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
-        />
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <label className="mb-1 block text-sm font-semibold">Numele tău (opțional)</label>
+          <input
+            value={nume}
+            onChange={(e) => setNume(e.target.value)}
+            placeholder="Lasă gol pentru „Anonim”"
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-semibold">Data când ai fost la școală</label>
+          <input
+            type="date"
+            value={dataVizita}
+            onChange={(e) => setDataVizita(e.target.value)}
+            className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+          />
+        </div>
       </div>
 
       <div>
