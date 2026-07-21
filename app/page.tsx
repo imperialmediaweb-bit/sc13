@@ -12,6 +12,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
 import { ParentReports } from "@/components/parent-reports";
+import { SantierGallery } from "@/components/santier-gallery";
 import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
@@ -351,9 +352,10 @@ export default function Page() {
           <Reveal>
             <SectionHead kicker="Documentare" title="Jurnal de pe șantier" />
             <p className="mb-4 max-w-2xl text-muted-foreground">
-              În fiecare săptămână adăugăm poze și video de pe șantier și notăm dacă s-a văzut vreun progres
-              real față de săptămâna trecută.
+              Pozele și video-urile urcate în Cloudinary apar automat aici. Sub ele găsești analiza pe
+              săptămâni, cu observații despre progres.
             </p>
+            <SantierGallery />
             <div className="space-y-4">
               {saptamani.map((s, i) => (
                 <Card key={i} className="overflow-hidden">
