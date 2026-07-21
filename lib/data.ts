@@ -55,12 +55,12 @@ export const saptamani: {
   media: string[];
 }[] = [
   {
-    titlu: "Săptămâna 1 — parter",
-    data: "iulie 2026",
+    titlu: "16 iulie 2026 — parter",
+    data: "16 iulie 2026",
     progres: "putin",
-    nota: "Poze de la parter, în timpul unei vizite pe șantier.",
+    nota: "Poze din timpul vizitei la parter (16 iulie 2026).",
     analizaAI:
-      "Analiză din pozele de la o vizită la parter. <strong>Punctele bune:</strong> ferestrele sunt montate (noi, încă cu folia de protecție) și pereții sunt gletuiți/tencuiți în mare parte — holul e neted și alb. <strong>Ce lipsește:</strong> pardoseala e desfăcută în mai multe camere (moloz, șapă nefinalizată, fără gresie/parchet), instalația electrică e neterminată (cabluri atârnând, doze deschise, tavanul fără corpuri de iluminat), iar unele coloane au încă tencuială brută. Nu s-a făcut încă zugrăveala finală, nu sunt uși și nu sunt tavane. Concluzie: parterul e la stadiul de glet + tâmplărie, dar cu multă muncă rămasă la pardoseli, electrice, zugrăveală, uși și tavane — estimativ ~35% finalizat.",
+      "Analiză din pozele de la parter (16 iulie 2026). <strong>Ce e făcut:</strong> tâmplăria exterioară e montată — ferestre noi, negre, încă cu folia de protecție (se văd inclusiv profile Alumil); pereții sunt tencuiți și gletuiți în mare parte, holul lung arată neted și alb; șapa e turnată pe holuri. <strong>Ce lipsește (mult):</strong> în sălile de clasă pardoseala e încă desfăcută — moloz, șapă nefinalizată, fără gresie/parchet; instalația electrică e neterminată — cabluri care atârnă din pereți și din tavan, doze și tablouri deschise, jgheaburi de cabluri expuse pe tavanul holului, fără corpuri de iluminat; unele coloane și glafuri au încă tencuială brută; cutia de hidrant e veche, nefinisată; nu sunt montate uși și nu sunt făcute tavanele; lipsește zugrăveala finală. <strong>Concluzie:</strong> la parter s-a ajuns la stadiul de glet + tâmplărie, dar mai e muncă serioasă la pardoseli, instalații electrice, tavane, uși și zugrăveală — estimativ ~35% finalizat. Etajele superioare sunt mult mai avansate; parterul rămâne punctul critic pentru termenul de 1 septembrie.",
     // Adaugă aici link-uri Cloudinary (sau căi din /assets/...) după ce urci pozele/video.
     media: [],
   },
