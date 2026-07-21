@@ -4,6 +4,7 @@ import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { buttonVariants } from "@/components/ui/button";
+import { Reveal } from "@/components/magicui/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
@@ -42,14 +43,34 @@ const termenLabel: Record<string, string> = {
   none: "—",
 };
 
-/* Secțiune standard: titlu aliniat la stânga cu linie dedesubt — identic peste tot. */
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
+/* Secțiune standard: titlu + un card alb (bloc de conținut) — identic peste tot.
+   `plain` = fără cardul exterior (pentru secțiunile care își fac propriile carduri). */
+function Section({
+  id,
+  title,
+  children,
+  plain,
+}: {
+  id: string;
+  title: string;
+  children: React.ReactNode;
+  plain?: boolean;
+}) {
   return (
-    <section id={id} className="scroll-mt-24 border-b border-border py-10 last:border-b-0">
-      <h2 className="mb-6 border-l-4 border-primary pl-3 font-display text-xl font-bold sm:text-2xl">
-        {title}
-      </h2>
-      {children}
+    <section id={id} className="scroll-mt-24 pt-8">
+      <Reveal>
+        <h2 className="mb-4 flex items-center gap-2.5 font-display text-xl font-bold sm:text-2xl">
+          <span aria-hidden className="h-6 w-1.5 rounded-full bg-primary" />
+          {title}
+        </h2>
+        {plain ? (
+          children
+        ) : (
+          <div className="rounded-xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(20,25,40,.04),0_10px_28px_rgba(20,25,40,.06)] transition-shadow duration-300 hover:shadow-[0_2px_6px_rgba(20,25,40,.06),0_18px_44px_rgba(20,25,40,.10)] sm:p-6">
+            {children}
+          </div>
+        )}
+      </Reveal>
     </section>
   );
 }
@@ -171,12 +192,12 @@ export default function Page() {
       </header>
 
       {/* ===== Conținut ===== */}
-      <div className="mx-auto max-w-4xl px-5 [&>section:nth-child(even)]:-mx-5 [&>section:nth-child(even)]:rounded-none [&>section:nth-child(even)]:bg-[hsl(var(--card-2))] [&>section:nth-child(even)]:px-5">
+      <div className="mx-auto max-w-4xl px-5 pb-10">
         {/* PETIȚIE */}
         <Section id="petitie" title="Petiția părinților">
           <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
-            <div className="rounded-md border border-border bg-card p-5 text-center sm:w-56">
-              <div className="font-display text-4xl font-bold text-primary tnum">{sig}</div>
+            <div className="rounded-lg bg-[hsl(var(--card-2))] p-5 text-center sm:w-56">
+              <div className="font-display text-5xl font-bold text-primary tnum">{sig}</div>
               <div className="text-sm text-muted-foreground">semnături din {petitie.obiectiv}</div>
               <Progress value={semnPct} className="mt-3 h-2" />
             </div>
@@ -261,7 +282,7 @@ export default function Page() {
         </Section>
 
         {/* JURNAL */}
-        <Section id="jurnal" title="Jurnal foto de pe șantier">
+        <Section id="jurnal" title="Jurnal foto de pe șantier" plain>
           <p className="mb-5 text-sm text-muted-foreground">
             Poze și video de pe teren, adăugate pe măsură ce lucrările avansează, împreună cu analiza
             progresului.
@@ -269,7 +290,10 @@ export default function Page() {
           <SantierGallery />
           <div className="space-y-5">
             {saptamani.map((s, i) => (
-              <div key={i} className="overflow-hidden rounded-md border border-border">
+              <div
+                key={i}
+                className="overflow-hidden rounded-xl border border-border bg-card shadow-[0_1px_2px_rgba(20,25,40,.04),0_10px_28px_rgba(20,25,40,.06)]"
+              >
                 <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border bg-[hsl(var(--card-2))] px-4 py-3">
                   <h3 className="font-semibold">
                     {s.titlu}
@@ -299,12 +323,12 @@ export default function Page() {
         </Section>
 
         {/* RAPORTEAZĂ */}
-        <Section id="raporteaza" title="Raportează ce ai văzut la școală">
+        <Section id="raporteaza" title="Raportează ce ai văzut la școală" plain>
           <p className="mb-5 text-sm text-muted-foreground">
             Oricine poate transmite o observație — cu sau fără poze. Observațiile sunt verificate înainte de
             publicare.
           </p>
-          <div className="rounded-md border border-border p-5">
+          <div className="rounded-xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(20,25,40,.04),0_10px_28px_rgba(20,25,40,.06)] sm:p-6">
             <ReportForm />
           </div>
           <div className="mt-6">
@@ -370,33 +394,34 @@ export default function Page() {
         </Section>
 
         {/* CE CEREM */}
-        <Section id="revendicari" title="Ce cerem">
-          <ol className="space-y-3">
+        <Section id="revendicari" title="Ce cerem" plain>
+          <div className="grid gap-4 sm:grid-cols-3">
             {[
               {
-                t: "Finalizarea lucrărilor până la 1 septembrie 2026",
-                d: "termenul anunțat public — astfel încât elevii să înceapă anul școlar 2026–2027 în incinta școlii.",
+                t: "Finalizarea până la 1 septembrie 2026",
+                d: "termenul anunțat public, astfel încât elevii să înceapă anul școlar în incinta școlii.",
               },
               {
-                t: "Verificarea săptămânală a stadiului lucrărilor",
-                d: "prin vizite pe șantier ale părinților, alături de reprezentanții Primăriei și ai constructorului.",
+                t: "Verificare săptămânală",
+                d: "vizite pe șantier ale părinților, alături de reprezentanții Primăriei și ai constructorului.",
               },
               {
-                t: "Informare publică, transparentă și constantă",
-                d: "asupra stadiului real al lucrărilor și a eventualelor întârzieri.",
+                t: "Informare transparentă",
+                d: "comunicare publică și constantă a stadiului real și a eventualelor întârzieri.",
               },
             ].map((c, i) => (
-              <li key={i} className="flex gap-3 rounded-md border border-border p-4">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded bg-primary text-sm font-bold text-primary-foreground">
+              <div
+                key={i}
+                className="rounded-xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(20,25,40,.04),0_10px_28px_rgba(20,25,40,.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_4px_12px_rgba(20,25,40,.08),0_22px_50px_rgba(20,25,40,.12)]"
+              >
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-primary font-display text-base font-bold text-primary-foreground">
                   {i + 1}
-                </span>
-                <div>
-                  <span className="font-semibold">{c.t}</span>{" "}
-                  <span className="text-muted-foreground">— {c.d}</span>
                 </div>
-              </li>
+                <h3 className="font-semibold">{c.t}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{c.d}</p>
+              </div>
             ))}
-          </ol>
+          </div>
         </Section>
 
         {/* ACTUALIZĂRI */}
