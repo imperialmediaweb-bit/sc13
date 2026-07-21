@@ -107,57 +107,56 @@ export default function Page() {
 
   return (
     <main>
-      {/* ===== Bară de sus ===== */}
-      <div className="bg-[hsl(var(--primary-2))] text-white">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-2 text-xs">
-          <span className="font-semibold uppercase tracking-wide">Monitorizare civică · Botoșani</span>
+      {/* ===== Antet colorat ===== */}
+      <header
+        className="relative text-white"
+        style={{
+          backgroundImage:
+            "linear-gradient(135deg, hsl(214 68% 22%) 0%, hsl(211 62% 32%) 55%, hsl(200 70% 42%) 100%)",
+        }}
+      >
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-5 py-2.5 text-xs">
+          <span className="font-semibold uppercase tracking-wide text-white/85">Monitorizare civică · Botoșani</span>
           <ThemeToggle />
         </div>
-      </div>
-
-      {/* ===== Antet ===== */}
-      <header className="border-b-4 border-primary bg-card">
-        <div className="mx-auto max-w-4xl px-5 py-8">
-          <p className="text-sm font-semibold uppercase tracking-wide text-primary">
+        <div className="mx-auto max-w-4xl px-5 pb-9 pt-4">
+          <span className="inline-block rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-white ring-1 ring-white/25">
             Școala Gimnazială nr. 13 Botoșani
-          </p>
-          <h1 className="mt-1 font-display text-3xl font-bold tracking-tight sm:text-4xl">
+          </span>
+          <h1 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-[2.6rem] sm:leading-[1.1]">
             Stadiul lucrărilor de reabilitare
           </h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
+          <p className="mt-3 max-w-2xl text-white/80">
             Pagină de informare realizată de comunitatea părinților. Urmărim public stadiul lucrărilor,
             termenele anunțate și documentăm progresul cu poze de pe șantier.
           </p>
 
           {/* bandă de date esențiale */}
-          <div className="mt-6 grid grid-cols-2 divide-x divide-border overflow-hidden rounded-md border border-border bg-background text-center sm:grid-cols-4">
-            <div className="p-4">
-              <div className={cn("font-display text-2xl font-bold tnum", view?.overdue && "text-bad")}>
-                {view ? view.zile : "—"}
+          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { v: view ? String(view.zile) : "—", l: view?.overdue ? "zile peste termen" : "zile până la termen", warn: view?.overdue },
+              { v: "1 sept. 2026", l: "termenul anunțat" },
+              { v: PROGRES_GENERAL + "%", l: "progres general estimat" },
+              { v: "~14 mil.", l: "finanțare PNRR (lei)" },
+            ].map((c, i) => (
+              <div key={i} className="rounded-lg bg-white/12 p-4 text-center ring-1 ring-white/15 backdrop-blur-sm">
+                <div className={cn("font-display text-2xl font-bold tnum", c.warn ? "text-[#ffb4a8]" : "text-white")}>{c.v}</div>
+                <div className="mt-0.5 text-xs text-white/75">{c.l}</div>
               </div>
-              <div className="mt-0.5 text-xs text-muted-foreground">
-                {view?.overdue ? "zile peste termen" : "zile până la termen"}
-              </div>
-            </div>
-            <div className="p-4">
-              <div className="font-display text-2xl font-bold">1 sept. 2026</div>
-              <div className="mt-0.5 text-xs text-muted-foreground">termenul anunțat</div>
-            </div>
-            <div className="p-4">
-              <div className="font-display text-2xl font-bold tnum">{PROGRES_GENERAL}%</div>
-              <div className="mt-0.5 text-xs text-muted-foreground">progres general estimat</div>
-            </div>
-            <div className="p-4">
-              <div className="font-display text-2xl font-bold">~14 mil. lei</div>
-              <div className="mt-0.5 text-xs text-muted-foreground">finanțare PNRR</div>
-            </div>
+            ))}
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            <a href="#petitie" className={buttonVariants()}>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <a
+              href="#petitie"
+              className="inline-flex h-11 items-center justify-center rounded-md bg-white px-5 text-sm font-bold text-[hsl(214,68%,24%)] transition-colors hover:bg-white/90"
+            >
               Semnează petiția
             </a>
-            <a href="#jurnal" className={buttonVariants({ variant: "outline" })}>
+            <a
+              href="#jurnal"
+              className="inline-flex h-11 items-center justify-center rounded-md border border-white/40 px-5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+            >
               Jurnalul de pe șantier
             </a>
           </div>
@@ -165,7 +164,7 @@ export default function Page() {
       </header>
 
       {/* ===== Conținut ===== */}
-      <div className="mx-auto max-w-4xl px-5">
+      <div className="mx-auto max-w-4xl px-5 [&>section:nth-child(even)]:-mx-5 [&>section:nth-child(even)]:rounded-none [&>section:nth-child(even)]:bg-[hsl(var(--card-2))] [&>section:nth-child(even)]:px-5">
         {/* PETIȚIE */}
         <Section id="petitie" title="Petiția părinților">
           <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
@@ -433,11 +432,15 @@ export default function Page() {
         </Section>
       </div>
 
-      <footer className="mt-4 border-t border-border bg-[hsl(var(--card-2))]">
-        <div className="mx-auto max-w-4xl px-5 py-6 text-sm text-muted-foreground">
-          Pagină independentă, întreținută voluntar de comunitatea părinților elevilor de la Școala
-          Gimnazială nr. 13 Botoșani. Nu este un site oficial al școlii, al Primăriei Botoșani sau al altei
-          autorități. Informațiile provin din presă și din comunicări publice.
+      <footer
+        className="mt-4 text-white/80"
+        style={{ backgroundImage: "linear-gradient(135deg, hsl(214 68% 22%), hsl(211 62% 30%))" }}
+      >
+        <div className="mx-auto max-w-4xl px-5 py-7 text-sm">
+          <p className="mb-2 font-display text-base font-bold text-white">Școala Gimnazială nr. 13 Botoșani</p>
+          Pagină independentă, întreținută voluntar de comunitatea părinților. Nu este un site oficial al
+          școlii, al Primăriei Botoșani sau al altei autorități. Informațiile provin din presă și din
+          comunicări publice.
         </div>
       </footer>
     </main>
