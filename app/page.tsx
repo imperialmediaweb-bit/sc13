@@ -5,6 +5,20 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { buttonVariants } from "@/components/ui/button";
 import { Reveal } from "@/components/magicui/reveal";
+import {
+  PenLine,
+  Building2,
+  TrendingUp,
+  Camera,
+  MessageSquarePlus,
+  FileText,
+  Clock,
+  ListChecks,
+  Bell,
+  Share2,
+  Link2,
+  type LucideIcon,
+} from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
@@ -43,6 +57,20 @@ const termenLabel: Record<string, string> = {
   none: "—",
 };
 
+const SECTION_ICONS: Record<string, LucideIcon> = {
+  petitie: PenLine,
+  stadiu: Building2,
+  sanse: TrendingUp,
+  jurnal: Camera,
+  raporteaza: MessageSquarePlus,
+  proiect: FileText,
+  cronologie: Clock,
+  revendicari: ListChecks,
+  actualizari: Bell,
+  distribuie: Share2,
+  surse: Link2,
+};
+
 /* Secțiune standard: titlu + un card alb (bloc de conținut) — identic peste tot.
    `plain` = fără cardul exterior (pentru secțiunile care își fac propriile carduri). */
 function Section({
@@ -56,17 +84,22 @@ function Section({
   children: React.ReactNode;
   plain?: boolean;
 }) {
+  const Icon = SECTION_ICONS[id];
   return (
-    <section id={id} className="scroll-mt-24 pt-8">
+    <section id={id} className="scroll-mt-24 pt-12">
       <Reveal>
-        <h2 className="mb-4 flex items-center gap-2.5 font-display text-xl font-bold sm:text-2xl">
-          <span aria-hidden className="h-6 w-1.5 rounded-full bg-primary" />
+        <h2 className="mb-5 flex items-center gap-3 font-display text-2xl font-bold tracking-tight sm:text-[1.7rem]">
+          {Icon && (
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/12 text-primary ring-1 ring-primary/20">
+              <Icon className="h-5 w-5" />
+            </span>
+          )}
           {title}
         </h2>
         {plain ? (
           children
         ) : (
-          <div className="rounded-xl border border-border bg-card p-5 shadow-[0_1px_2px_rgba(20,25,40,.04),0_10px_28px_rgba(20,25,40,.06)] transition-shadow duration-300 hover:shadow-[0_2px_6px_rgba(20,25,40,.06),0_18px_44px_rgba(20,25,40,.10)] sm:p-6">
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-[0_1px_2px_rgba(20,25,40,.04),0_12px_32px_rgba(20,25,40,.07)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_2px_8px_rgba(20,25,40,.06),0_22px_50px_rgba(20,25,40,.11)] sm:p-7">
             {children}
           </div>
         )}
@@ -139,6 +172,7 @@ export default function Page() {
 
   const [sig, setSig] = React.useState(petitie.semnaturi);
   const [dbUpdates, setDbUpdates] = React.useState<{ id: string; data: string; text: string }[]>([]);
+  const [heroImg, setHeroImg] = React.useState<string | null>(null);
   React.useEffect(() => {
     fetch("/api/signatures")
       .then((r) => r.json())
@@ -148,6 +182,13 @@ export default function Page() {
       .then((r) => r.json())
       .then((d) => Array.isArray(d.updates) && setDbUpdates(d.updates))
       .catch(() => {});
+    fetch("/api/santier")
+      .then((r) => r.json())
+      .then((d) => {
+        const img = (d.items || []).find((it: { type: string; url: string }) => it.type === "image");
+        if (img) setHeroImg(img.url);
+      })
+      .catch(() => {});
   }, []);
 
   const semnPct = Math.min(100, Math.round((sig / petitie.obiectiv) * 100));
@@ -155,57 +196,73 @@ export default function Page() {
 
   return (
     <main>
-      {/* ===== Antet închis cu accent portocaliu ===== */}
+      {/* ===== HERO ===== */}
       <header className="relative overflow-hidden border-b-[3px] border-primary bg-[#14151a] text-white">
+        {/* poză de pe șantier în fundal */}
+        {heroImg && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={heroImg}
+            alt=""
+            aria-hidden
+            className="absolute inset-0 h-full w-full object-cover opacity-30 duration-1000 animate-in fade-in"
+          />
+        )}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
-          style={{ backgroundImage: "radial-gradient(70% 60% at 85% -10%, rgba(224,145,46,.28), transparent 70%)" }}
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, rgba(15,16,20,.72) 0%, rgba(15,16,20,.82) 60%, rgba(15,16,20,.95) 100%), radial-gradient(70% 55% at 80% -10%, rgba(224,145,46,.35), transparent 70%)",
+          }}
         />
-        <div className="relative mx-auto flex max-w-4xl items-center justify-between px-5 py-2.5 text-xs">
-          <span className="font-semibold uppercase tracking-wide text-[#d9a15a]">Monitorizare civică · Botoșani</span>
+
+        <div className="relative mx-auto flex max-w-5xl items-center justify-between px-5 py-3 text-xs">
+          <span className="font-semibold uppercase tracking-wide text-[#e6a34f]">Monitorizare civică · Botoșani</span>
           <ThemeToggle />
         </div>
-        <div className="relative mx-auto max-w-4xl px-5 pb-9 pt-4">
-          <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#e6a34f] ring-1 ring-white/15">
-            Școala Gimnazială nr. 13 Botoșani
+
+        <div className="relative mx-auto max-w-3xl px-5 pb-14 pt-8 text-center sm:pt-12">
+          <span className="inline-block rounded-full bg-primary/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-[#eba650] ring-1 ring-primary/40">
+            Școala Gimnazială nr. 13 · Botoșani
           </span>
-          <h1 className="mt-4 font-display text-3xl font-bold tracking-tight sm:text-[2.6rem] sm:leading-[1.1]">
-            Stadiul lucrărilor de reabilitare
+          <h1 className="mx-auto mt-5 max-w-2xl font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-[3.4rem]">
+            Stadiul lucrărilor,{" "}
+            <span className="text-primary">urmărit public</span>
           </h1>
-          <p className="mt-3 max-w-2xl text-white/80">
-            Pagină de informare realizată de comunitatea părinților. Urmărim public stadiul lucrărilor,
-            termenele anunțate și documentăm progresul cu poze de pe șantier.
+          <p className="mx-auto mt-4 max-w-xl text-pretty text-white/75 sm:text-lg">
+            De aproape trei ani, elevii Școlii 13 învață în spații temporare. Aici vezi, la zi, cât s-a lucrat și
+            când ar putea reveni copiii în școală.
           </p>
 
-          {/* bandă de date esențiale */}
-          <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            {[
-              { v: view ? String(view.zile) : "—", l: view?.overdue ? "zile peste termen" : "zile până la termen", warn: view?.overdue },
-              { v: "1 sept. 2026", l: "termenul anunțat" },
-              { v: PROGRES_GENERAL + "%", l: "progres general estimat" },
-              { v: "~14 mil.", l: "finanțare PNRR (lei)" },
-            ].map((c, i) => (
-              <div key={i} className="rounded-lg bg-white/12 p-4 text-center ring-1 ring-white/15 backdrop-blur-sm">
-                <div className={cn("font-display text-2xl font-bold tnum", c.warn ? "text-[#ffb4a8]" : "text-white")}>{c.v}</div>
-                <div className="mt-0.5 text-xs text-white/75">{c.l}</div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap justify-center gap-2.5">
             <a
               href="#petitie"
-              className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-5 text-sm font-bold text-primary-foreground transition-all hover:-translate-y-px hover:brightness-105"
+              className="inline-flex h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:brightness-105"
             >
               Semnează petiția
             </a>
             <a
               href="#jurnal"
-              className="inline-flex h-11 items-center justify-center rounded-md border border-white/40 px-5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+              className="inline-flex h-12 items-center justify-center rounded-lg border border-white/30 bg-white/5 px-6 text-sm font-bold text-white backdrop-blur-sm transition-colors hover:bg-white/15"
             >
-              Jurnalul de pe șantier
+              Vezi șantierul
             </a>
+          </div>
+
+          {/* bandă de date esențiale */}
+          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { v: view ? String(view.zile) : "—", l: view?.overdue ? "zile peste termen" : "zile până la termen", warn: view?.overdue },
+              { v: "1 sept. 2026", l: "termenul anunțat" },
+              { v: PROGRES_GENERAL + "%", l: "progres estimat" },
+              { v: view ? view.sanse + "%" : "—", l: "șanse la timp", warn: (view?.sanse ?? 50) < 40 },
+            ].map((c, i) => (
+              <div key={i} className="rounded-xl bg-white/10 p-4 text-center ring-1 ring-white/15 backdrop-blur-md">
+                <div className={cn("font-display text-2xl font-bold tnum", c.warn ? "text-[#ffb4a8]" : "text-white")}>{c.v}</div>
+                <div className="mt-0.5 text-xs text-white/70">{c.l}</div>
+              </div>
+            ))}
           </div>
         </div>
       </header>
