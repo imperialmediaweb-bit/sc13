@@ -29,8 +29,8 @@ export function ReportForm() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!mesaj.trim()) {
-      setErr("Scrie pe scurt ce ai văzut.");
+    if (!mesaj.trim() && files.length === 0) {
+      setErr("Scrie ceva sau adaugă cel puțin o poză.");
       return;
     }
     setState("sending");

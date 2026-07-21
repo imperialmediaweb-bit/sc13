@@ -13,6 +13,7 @@ import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
 import { ParentReports } from "@/components/parent-reports";
 import { SantierGallery } from "@/components/santier-gallery";
+import { SantierUpload } from "@/components/santier-upload";
 import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
@@ -360,9 +361,10 @@ export default function Page() {
           <Reveal>
             <SectionHead kicker="Documentare" title="Jurnal de pe șantier" />
             <p className="mb-4 max-w-2xl text-muted-foreground">
-              Pozele și video-urile urcate în Cloudinary apar automat aici. Sub ele găsești analiza pe
-              săptămâni, cu observații despre progres.
+              Poze și video de pe șantier, adăugate pe măsură ce lucrările avansează, cu analiza noastră
+              despre progresul de la o săptămână la alta.
             </p>
+            <SantierUpload />
             <SantierGallery />
             <div className="space-y-4">
               {saptamani.map((s, i) => (
@@ -379,15 +381,13 @@ export default function Page() {
                     </Badge>
                   </div>
                   {s.nota && <p className="px-5 pt-4 text-muted-foreground">{s.nota}</p>}
-                  <div className="grid grid-cols-2 gap-2 p-5 sm:grid-cols-3">
-                    {s.media.length ? (
-                      s.media.map((src, j) => <MediaItem key={j} src={src} alt={`${s.titlu} (${j + 1})`} />)
-                    ) : (
-                      <div className="col-span-full rounded-lg border-2 border-dashed border-border p-6 text-center text-sm text-muted-foreground">
-                        Încă nu au fost adăugate poze sau video pentru această săptămână.
-                      </div>
-                    )}
-                  </div>
+                  {s.media.length > 0 && (
+                    <div className="grid grid-cols-2 gap-2 p-5 sm:grid-cols-3">
+                      {s.media.map((src, j) => (
+                        <MediaItem key={j} src={src} alt={`${s.titlu} (${j + 1})`} />
+                      ))}
+                    </div>
+                  )}
                   {s.analizaAI && (
                     <div
                       className="mx-5 mb-5 rounded-lg border border-border border-l-[3px] border-l-primary bg-[hsl(var(--card-2))] px-4 py-3 text-sm text-muted-foreground [&_strong]:text-foreground"
