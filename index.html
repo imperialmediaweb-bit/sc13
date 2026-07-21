@@ -3,396 +3,427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Școala 13 Botoșani — Progresul lucrărilor</title>
-<meta name="description" content="Monitorizarea publică a stadiului lucrărilor de reabilitare de la Școala Gimnazială nr. 13 Botoșani. Poze săptămânale de pe șantier, istoricul termenelor și petiția părinților.">
-<meta property="og:title" content="Școala 13 Botoșani — Progresul lucrărilor">
+<title>Școala 13 Botoșani — Monitorul lucrărilor</title>
+<meta name="description" content="Monitorizarea publică a stadiului lucrărilor de reabilitare de la Școala Gimnazială nr. 13 Botoșani. Poze și video de pe șantier, istoricul termenelor și petiția părinților.">
+<meta property="og:title" content="Școala 13 Botoșani — Monitorul lucrărilor">
 <meta property="og:description" content="Urmărim public stadiul real al lucrărilor de la Școala 13. Copiii merită să înceapă anul școlar în școala lor.">
 <meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #eef1f6;
-    --bg2: #e4e9f1;
-    --card: #ffffff;
-    --text: #161c26;
-    --muted: #5d6675;
-    --accent: #1f6fb2;
-    --accent2: #2aa676;
-    --accent-ink: #0f4f86;
-    --accent-soft: #e7f0fb;
-    --ok: #1f8b5b;
-    --ok-soft: #dcf3e8;
-    --warn: #b9770a;
-    --warn-soft: #fbeed6;
-    --bad: #c33a2c;
-    --bad-soft: #fbe0dc;
-    --border: #e0e5ee;
-    --accent-rgb: 31,111,178;
-    --accent2-rgb: 42,166,118;
-    --warn-rgb: 185,119,10;
-    --bad-rgb: 195,58,44;
-    --shadow: 0 1px 2px rgba(20,30,50,.04), 0 8px 24px rgba(20,30,50,.06);
-    --shadow-lg: 0 2px 8px rgba(20,30,50,.06), 0 18px 48px rgba(20,30,50,.10);
-    --radius: 16px;
+    --paper: #e8e6df;
+    --card: #f6f5f1;
+    --card-2: #efeee8;
+    --ink: #191b1f;
+    --ink-2: #43464b;
+    --muted: #6c6f68;
+    --line: #d5d3cb;
+    --signal: #c1701a;
+    --signal-2: #9a5810;
+    --signal-rgb: 193,112,26;
+    --ok: #2f7d54; --ok-bg: #dcebe0; --ok-rgb: 47,125,84;
+    --bad: #bb3a2b; --bad-bg: #f3ddd8; --bad-rgb: 187,58,43;
+    --warn: #a9710f; --warn-bg: #f0e6cf; --warn-rgb: 169,113,15;
+    --radius: 12px;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f141b;
-      --bg2: #0b0f15;
-      --card: #171e28;
-      --text: #e9edf4;
-      --muted: #9aa5b4;
-      --accent: #58a6e6;
-      --accent2: #4cc38f;
-      --accent-ink: #cfe4f8;
-      --accent-soft: #1a2735;
-      --ok: #43c088;
-      --ok-soft: #16302321;
-      --ok-soft: #14261c;
-      --warn: #e0a63a;
-      --warn-soft: #33291699;
-      --warn-soft: #2e2513;
-      --bad: #ef6b5c;
-      --bad-soft: #331d1a;
-      --border: #262f3c;
-      --accent-rgb: 88,166,230;
-      --accent2-rgb: 76,195,143;
-      --warn-rgb: 224,166,58;
-      --bad-rgb: 239,107,92;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
-      --shadow-lg: 0 2px 8px rgba(0,0,0,.35), 0 20px 50px rgba(0,0,0,.45);
+      --paper: #131418;
+      --card: #1b1d23;
+      --card-2: #21242b;
+      --ink: #ecebe5;
+      --ink-2: #c2c1ba;
+      --muted: #8d8f88;
+      --line: #2b2e35;
+      --signal: #e0912e;
+      --signal-2: #edb055;
+      --signal-rgb: 224,145,46;
+      --ok: #55bd85; --ok-bg: #16281e; --ok-rgb: 85,189,133;
+      --bad: #e56c59; --bad-bg: #2c1a17; --bad-rgb: 229,108,89;
+      --warn: #d8a441; --warn-bg: #29220f; --warn-rgb: 216,164,65;
     }
   }
+  :root[data-theme="light"] {
+    --paper: #e8e6df; --card: #f6f5f1; --card-2: #efeee8; --ink: #191b1f; --ink-2: #43464b;
+    --muted: #6c6f68; --line: #d5d3cb; --signal: #c1701a; --signal-2: #9a5810; --signal-rgb: 193,112,26;
+    --ok: #2f7d54; --ok-bg: #dcebe0; --ok-rgb: 47,125,84;
+    --bad: #bb3a2b; --bad-bg: #f3ddd8; --bad-rgb: 187,58,43;
+    --warn: #a9710f; --warn-bg: #f0e6cf; --warn-rgb: 169,113,15;
+  }
+  :root[data-theme="dark"] {
+    --paper: #131418; --card: #1b1d23; --card-2: #21242b; --ink: #ecebe5; --ink-2: #c2c1ba;
+    --muted: #8d8f88; --line: #2b2e35; --signal: #e0912e; --signal-2: #edb055; --signal-rgb: 224,145,46;
+    --ok: #55bd85; --ok-bg: #16281e; --ok-rgb: 85,189,133;
+    --bad: #e56c59; --bad-bg: #2c1a17; --bad-rgb: 229,108,89;
+    --warn: #d8a441; --warn-bg: #29220f; --warn-rgb: 216,164,65;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    background: var(--bg);
-    background-image: radial-gradient(1200px 500px at 100% -10%, var(--bg2), transparent 60%);
-    color: var(--text);
-    line-height: 1.65;
+    font-family: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.62;
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
-  img { max-width: 100%; display: block; }
-  a { color: var(--accent); }
-  .container { max-width: 940px; margin: 0 auto; padding: 0 1.15rem; }
+  img, video { max-width: 100%; display: block; }
+  a { color: var(--signal-2); }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 1.15rem; }
+  .tnum { font-variant-numeric: tabular-nums; }
 
-  /* ---------- HERO ---------- */
-  header {
-    position: relative;
-    color: #fff;
-    background: linear-gradient(135deg, #1f6fb2 0%, #14507f 55%, #0f3f68 100%);
-    overflow: hidden;
-    padding: 3.4rem 0 6.2rem;
+  /* ---------------- HERO (identitate „monitor civic”, ton închis fix) ---------------- */
+  .hero {
+    background: #14151a;
+    color: #f0eee7;
+    border-bottom: 3px solid var(--signal);
   }
-  header::before {
-    content: "";
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-    background-size: 34px 34px;
-    mask-image: radial-gradient(circle at 80% 0%, #000, transparent 70%);
-    opacity: .7;
+  .hero .wrap { padding-top: 2.8rem; padding-bottom: 2.6rem; }
+  .kicker {
+    font-size: .74rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+    color: #d9a15a;
   }
-  header .container { position: relative; }
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: .45rem;
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.25);
-    color: #fff;
-    font-size: .74rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    padding: .32rem .7rem; border-radius: 999px;
-    backdrop-filter: blur(4px);
+  .hero h1 {
+    font-family: "Archivo", sans-serif; font-weight: 900;
+    font-size: clamp(2rem, 6.2vw, 3.3rem); line-height: 1.02; letter-spacing: -.025em;
+    text-wrap: balance; margin: .7rem 0 .2rem; color: #fff;
   }
-  header h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); line-height: 1.12; letter-spacing: -.02em; margin: .9rem 0 .55rem; font-weight: 800; }
-  header p.lead { opacity: .95; max-width: 42rem; font-size: 1.05rem; }
-  .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
+  .hero h1 em { font-style: normal; color: var(--signal); }
+  .hero .sub { color: #bdbcb4; max-width: 40rem; margin-top: .8rem; font-size: 1.05rem; }
 
-  /* Strip de statistici care se suprapune peste hero */
-  .stats-strip { margin-top: -4.4rem; position: relative; z-index: 2; }
-  .key-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
-  .fact {
-    text-align: center; padding: 1.4rem 1rem;
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow);
-  }
-  .fact .num { font-size: 2.1rem; font-weight: 800; color: var(--accent-ink); display: block; line-height: 1.1; letter-spacing: -.02em; }
-  .fact .num.bad { color: var(--bad); }
-  .fact .label { font-size: .84rem; color: var(--muted); margin-top: .25rem; display: block; }
-
-  .disclaimer {
-    display: flex; gap: .6rem;
-    background: var(--warn-soft);
-    border: 1px solid rgba(var(--warn-rgb),.4);
+  .countdown {
+    display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap;
+    margin: 1.7rem 0 0; padding: 1.1rem 1.3rem;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.14);
+    border-left: 4px solid var(--signal);
     border-radius: 12px;
-    padding: .85rem 1rem;
-    margin: 1.6rem 0 0;
-    font-size: .88rem;
-    color: var(--text);
+  }
+  .countdown .big {
+    font-family: "Archivo", sans-serif; font-weight: 900;
+    font-size: clamp(2.6rem, 9vw, 4rem); line-height: .9; color: var(--signal);
+    letter-spacing: -.03em;
+  }
+  .countdown .big.bad { color: #ef6b5c; }
+  .countdown .cd-txt { color: #cfcdc5; font-size: .98rem; }
+  .countdown .cd-txt strong { color: #fff; }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
+
+  /* ---------------- Ledger de cifre ---------------- */
+  .ledger {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    margin-top: -1.6rem; position: relative; z-index: 3; overflow: hidden;
+  }
+  .ledger .cell { padding: 1.15rem 1rem; text-align: center; border-right: 1px solid var(--line); }
+  .ledger .cell:last-child { border-right: none; }
+  .ledger .n { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.75rem; line-height: 1.05; letter-spacing: -.02em; }
+  .ledger .n.warnc { color: var(--bad); }
+  .ledger .l { font-size: .76rem; color: var(--muted); margin-top: .3rem; line-height: 1.3; }
+  @media (max-width: 620px) {
+    .ledger { grid-template-columns: repeat(2, 1fr); }
+    .ledger .cell:nth-child(2) { border-right: none; }
+    .ledger .cell:nth-child(1), .ledger .cell:nth-child(2) { border-bottom: 1px solid var(--line); }
   }
 
-  section { margin: 2.6rem 0; scroll-margin-top: 1rem; }
+  .note-strip {
+    display: flex; gap: .6rem; align-items: flex-start;
+    margin-top: 1.3rem; padding: .8rem 1rem;
+    border: 1px solid var(--line); border-left: 3px solid var(--muted);
+    border-radius: 10px; background: var(--card-2);
+    font-size: .86rem; color: var(--ink-2);
+  }
+
+  /* ---------------- Secțiuni ---------------- */
+  section { margin: 2.9rem 0; scroll-margin-top: 1rem; }
   h2 {
-    font-size: 1.35rem; font-weight: 800; letter-spacing: -.01em;
-    margin-bottom: 1rem; display: flex; align-items: center; gap: .55rem;
+    font-family: "Archivo", sans-serif; font-weight: 800;
+    font-size: clamp(1.4rem, 3.2vw, 1.75rem); line-height: 1.08; letter-spacing: -.015em;
+    text-wrap: balance; margin-bottom: 1.1rem;
   }
-  h2::before {
-    content: ""; width: .32rem; height: 1.25rem; border-radius: 999px;
-    background: linear-gradient(var(--accent), var(--accent2));
+  h2[data-kicker]::before {
+    content: attr(data-kicker); display: block;
+    font-family: "Public Sans", sans-serif; font-weight: 700;
+    font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--signal-2); margin-bottom: .45rem;
   }
-  h2.plain::before { display: none; }
+  .lead-p { color: var(--ink-2); margin-bottom: 1.1rem; max-width: 46rem; }
 
   .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.3rem 1.4rem;
-    margin-bottom: 1rem;
-    box-shadow: var(--shadow);
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 1.3rem 1.4rem; margin-bottom: 1rem;
   }
 
-  /* ---------- Butoane ---------- */
+  /* ---------------- Butoane ---------------- */
   .btn {
-    display: inline-flex; align-items: center; gap: .4rem;
-    background: linear-gradient(180deg, var(--accent), var(--accent-ink));
-    color: #fff; text-decoration: none; font-weight: 700; font-size: .96rem;
-    padding: .72rem 1.35rem; border-radius: 10px; border: none;
-    box-shadow: 0 6px 16px rgba(var(--accent-rgb),.35);
-    transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    display: inline-flex; align-items: center; gap: .45rem;
+    font-family: "Public Sans", sans-serif; font-weight: 700; font-size: .95rem;
+    background: var(--signal); color: #1c1204; text-decoration: none;
+    padding: .72rem 1.3rem; border-radius: 9px; border: 1px solid transparent; cursor: pointer;
+    transition: transform .12s ease, filter .12s ease;
   }
-  .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn:hover { filter: brightness(1.06); transform: translateY(-1px); }
   .btn:active { transform: translateY(0); }
-  .btn.secondary {
-    background: transparent; color: var(--accent);
-    border: 1.5px solid rgba(var(--accent-rgb),.55);
-    box-shadow: none;
-  }
-  .btn.ghost-light { background: rgba(255,255,255,.16); color:#fff; border:1px solid rgba(255,255,255,.35); box-shadow:none; }
-  .btn.ghost-light:hover { background: rgba(255,255,255,.26); }
+  .btn:focus-visible { outline: 3px solid rgba(var(--signal-rgb),.5); outline-offset: 2px; }
+  .btn.line { background: transparent; color: var(--ink); border-color: var(--line); }
+  .hero .btn.line { color: #fff; border-color: rgba(255,255,255,.35); }
+  .hero .btn.line:hover { background: rgba(255,255,255,.1); }
 
-  /* ---------- Petiție ---------- */
-  .petition { border: 1px solid var(--border); position: relative; overflow: hidden; }
-  .petition::after { content:""; position:absolute; top:0; left:0; right:0; height:4px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-  .petition .count { font-size: 3rem; font-weight: 800; color: var(--accent-ink); line-height: 1; letter-spacing: -.03em; }
+  /* ---------------- Petiție ---------------- */
+  .petition .count { font-family: "Archivo", sans-serif; font-weight: 900; font-size: 3rem; line-height: 1; color: var(--signal-2); letter-spacing: -.03em; }
   .petition .goal { color: var(--muted); font-size: .95rem; }
+  .quote { border-left: 3px solid var(--signal); padding-left: .9rem; font-style: italic; color: var(--ink-2); margin: .7rem 0 1rem; }
 
-  .bar { background: var(--border); border-radius: 999px; height: 14px; overflow: hidden; margin: .8rem 0 .5rem; box-shadow: inset 0 1px 2px rgba(0,0,0,.08); }
-  .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 999px; width: 0; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
+  .bar { background: var(--line); border-radius: 999px; height: 12px; overflow: hidden; margin: .85rem 0 .4rem; }
+  .bar > span { display: block; height: 100%; background: var(--signal); border-radius: 999px; width: 0; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
 
-  /* ---------- Termene ---------- */
-  .deadline { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; padding: .7rem 0; border-bottom: 1px solid var(--border); }
+  /* ---------------- Termene ---------------- */
+  .deadline { display: flex; align-items: center; gap: .75rem; flex-wrap: wrap; padding: .75rem 0; border-bottom: 1px solid var(--line); }
   .deadline:last-child { border-bottom: none; }
-  .deadline .when { font-weight: 700; min-width: 10rem; }
-  .badge { display: inline-flex; align-items:center; font-size: .72rem; font-weight: 800; letter-spacing:.02em; padding: .2rem .6rem; border-radius: 999px; white-space: nowrap; }
-  .b-done { background: var(--ok-soft); color: var(--ok); }
-  .b-progress { background: var(--warn-soft); color: var(--warn); }
-  .b-bad { background: var(--bad-soft); color: var(--bad); }
-  .b-none { background: var(--border); color: var(--muted); }
+  .deadline .when { font-weight: 700; min-width: 10.5rem; }
+  .badge { display: inline-flex; align-items: center; font-size: .7rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: .22rem .6rem; border-radius: 6px; white-space: nowrap; }
+  .b-done { background: var(--ok-bg); color: var(--ok); }
+  .b-progress { background: var(--warn-bg); color: var(--warn); }
+  .b-bad { background: var(--bad-bg); color: var(--bad); }
+  .b-none { background: var(--card-2); color: var(--muted); }
+  .deadline .desc { color: var(--ink-2); font-size: .92rem; }
 
-  .work-item { display: flex; justify-content: space-between; gap: .6rem; align-items: center; padding: .6rem 0; border-bottom: 1px solid var(--border); }
-  .work-item:last-child { border-bottom: none; }
+  /* ---------------- Estimare ---------------- */
+  .est-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .2rem; }
+  .est-head .pct { font-family: "Archivo", sans-serif; font-weight: 900; font-size: 2.3rem; line-height: 1; color: var(--ink); letter-spacing: -.02em; }
+  .verdict { font-weight: 700; margin: .9rem 0 .3rem; }
+  .fine { color: var(--muted); font-size: .8rem; margin-top: .8rem; }
 
-  /* ---------- Clădire pe etaje ---------- */
-  .building { display: flex; flex-direction: column; gap: 8px; }
-  .roof-cap {
-    text-align: center; color: var(--muted); font-size: .78rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
-    padding: .3rem; margin: 0 auto .2rem; width: 60%;
-    border-bottom: none;
-    position: relative;
-  }
-  .roof-cap::before {
-    content:""; display:block; margin:0 auto .3rem;
-    width:0; height:0; border-left: 40px solid transparent; border-right:40px solid transparent;
-    border-bottom: 20px solid var(--accent-soft);
-  }
-  .floor { position: relative; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; background: var(--card); box-shadow: 0 1px 2px rgba(20,30,50,.04); }
-  .floor .fill { position: absolute; inset: 0; width: 0; background: linear-gradient(90deg, rgba(var(--accent-rgb),.5), rgba(var(--accent2-rgb),.42)); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
-  .floor.low .fill { background: linear-gradient(90deg, rgba(var(--warn-rgb),.5), rgba(var(--bad-rgb),.42)); }
-  .floor .row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .85rem 1rem; flex-wrap: wrap; }
-  .floor .name { font-weight: 800; font-size: 1.02rem; }
-  .floor .note { color: var(--text); opacity:.85; font-size: .85rem; flex: 1 1 100%; margin-top: .15rem; }
-  .floor .pct { font-weight: 800; font-size: 1.15rem; font-variant-numeric: tabular-nums; color: var(--accent-ink); }
+  /* ---------------- Clădire pe etaje ---------------- */
+  .building { display: flex; flex-direction: column; gap: 7px; }
+  .roof-cap { text-align: center; color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding-bottom: .3rem; }
+  .floor { position: relative; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--card-2); }
+  .floor .fill { position: absolute; inset: 0; width: 0; background: rgba(var(--ok-rgb),.20); transition: width 1.2s cubic-bezier(.2,.8,.2,1); }
+  .floor.low .fill { background: rgba(var(--bad-rgb),.20); }
+  .floor .row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: .6rem; padding: .8rem 1rem; flex-wrap: wrap; }
+  .floor .name { font-weight: 700; }
+  .floor .note { color: var(--ink-2); font-size: .84rem; flex: 1 1 100%; margin-top: .15rem; }
+  .floor .pct { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--ok); }
   .floor.low .pct { color: var(--bad); }
 
-  /* ---------- Card AI ---------- */
-  .ai-card { position: relative; border: 1.5px solid rgba(var(--accent-rgb),.4); background: linear-gradient(180deg, var(--accent-soft), var(--card) 55%); }
+  /* ---------------- Card evaluare ---------------- */
+  .ai-card { border-left: 4px solid var(--signal); }
+  .ai-card .av { font-weight: 700; font-size: 1.05rem; margin-bottom: .5rem; }
+  .ai-card .ab { color: var(--ink-2); margin-bottom: .9rem; }
+  .ai-card ul { margin: .4rem 0 .3rem 1.2rem; }
+  .ai-card ul li { margin-bottom: .25rem; }
 
-  /* ---------- Jurnal foto ---------- */
-  .week { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.1rem; background: var(--card); box-shadow: var(--shadow); }
-  .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); }
-  .week-head h3 { font-size: 1.1rem; font-weight: 800; }
-  .week-head .date { font-size: .82rem; color: var(--muted); font-weight: 500; margin-left: .5rem; }
-  .week-note { padding: .9rem 1.2rem 0; color: var(--muted); }
-  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .55rem; padding: 1rem 1.2rem; }
-  .gallery a { position:relative; display:block; border-radius: 12px; overflow:hidden; box-shadow: var(--shadow); transition: transform .15s ease; }
-  .gallery a:hover { transform: scale(1.02); }
-  .gallery img { aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--accent-soft); display:block; }
-  .gallery .ph-ico { display:none; }
-  .gallery .ph.broken { box-shadow:none; }
-  .gallery .ph.broken img { display:none; }
-  .gallery .ph.broken .ph-ico { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.2rem; aspect-ratio:4/3; background:var(--accent-soft); border:2px dashed var(--border); border-radius:12px; color:var(--muted); font-size:1.6rem; }
-  .gallery .ph.broken .ph-ico small { font-size:.72rem; }
-  .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1.4rem; text-align: center; border: 2px dashed var(--border); border-radius: 12px; }
-  .ai-week { margin: 0 1.2rem 1.2rem; padding: .95rem 1.1rem; background: var(--accent-soft); border: 1px solid rgba(var(--accent-rgb),.3); border-radius: 12px; font-size: .92rem; }
+  /* ---------------- Jurnal foto/video ---------------- */
+  .week { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; margin-bottom: 1.1rem; background: var(--card); }
+  .week-head { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: 1rem 1.2rem; border-bottom: 1px solid var(--line); }
+  .week-head h3 { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 1.12rem; }
+  .week-head .date { font-size: .8rem; color: var(--muted); font-weight: 500; margin-left: .5rem; }
+  .week-note { padding: .9rem 1.2rem 0; color: var(--ink-2); }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: .6rem; padding: 1rem 1.2rem; }
+  .gallery .ph { position: relative; display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); transition: transform .15s ease; }
+  .gallery a.ph:hover { transform: scale(1.02); }
+  .gallery img, .gallery video { aspect-ratio: 4/3; object-fit: cover; width: 100%; background: var(--card-2); display: block; }
+  .gallery .ph-ico { display: none; }
+  .gallery .ph.broken { border-style: dashed; }
+  .gallery .ph.broken img, .gallery .ph.broken video { display: none; }
+  .gallery .ph.broken .ph-ico {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem;
+    aspect-ratio: 4/3; background: var(--card-2); color: var(--muted); font-size: 1.6rem;
+  }
+  .gallery .ph.broken .ph-ico small { font-size: .72rem; }
+  .gallery .empty { grid-column: 1/-1; color: var(--muted); font-size: .9rem; padding: 1.4rem; text-align: center; border: 2px dashed var(--line); border-radius: 10px; }
+  .ai-week { margin: 0 1.2rem 1.2rem; padding: .95rem 1.1rem; background: var(--card-2); border: 1px solid var(--line); border-left: 3px solid var(--signal); border-radius: 10px; font-size: .92rem; color: var(--ink-2); }
+  .ai-week strong { color: var(--ink); }
 
-  /* ---------- Cronologie ---------- */
+  /* ---------------- Cronologie ---------------- */
   .timeline { list-style: none; position: relative; padding-left: 1.7rem; }
-  .timeline::before { content: ""; position: absolute; left: .5rem; top: .4rem; bottom: .4rem; width: 2px; background: linear-gradient(var(--accent), var(--accent2)); opacity:.4; }
-  .timeline li { position: relative; padding: 0 0 1.3rem .85rem; }
+  .timeline::before { content: ""; position: absolute; left: .5rem; top: .4rem; bottom: .4rem; width: 2px; background: var(--line); }
+  .timeline li { position: relative; padding: 0 0 1.4rem .9rem; }
   .timeline li:last-child { padding-bottom: 0; }
-  .timeline li::before { content: ""; position: absolute; left: -1.4rem; top: .45rem; width: 13px; height: 13px; border-radius: 50%; background: var(--muted); border: 3px solid var(--card); box-shadow: 0 0 0 1px var(--border); }
+  .timeline li::before { content: ""; position: absolute; left: -1.42rem; top: .4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 3px solid var(--paper); }
   .timeline li.done::before { background: var(--ok); }
   .timeline li.bad::before { background: var(--bad); }
-  .timeline li.current::before { background: var(--warn); box-shadow: 0 0 0 4px var(--warn-soft); }
-  .timeline .date { font-size: .8rem; color: var(--muted); display: block; font-weight:600; }
+  .timeline li.current::before { background: var(--signal); box-shadow: 0 0 0 4px rgba(var(--signal-rgb),.2); }
+  .timeline .date { font-size: .78rem; color: var(--muted); display: block; font-weight: 600; letter-spacing: .02em; }
   .timeline .title { font-weight: 700; }
+  .timeline li > div { color: var(--ink-2); font-size: .93rem; margin-top: .15rem; }
 
-  /* ---------- Revendicări ---------- */
+  /* ---------------- Revendicări ---------------- */
   .demands { counter-reset: d; list-style: none; }
-  .demands li { counter-increment: d; position: relative; padding: .6rem 0 .6rem 2.7rem; border-bottom:1px solid var(--border); }
-  .demands li:last-child { border-bottom:none; }
-  .demands li::before { content: counter(d); position: absolute; left: 0; top: .55rem; width: 1.9rem; height: 1.9rem; border-radius: 50%; background: linear-gradient(180deg, var(--accent), var(--accent-ink)); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: .95rem; box-shadow: 0 4px 10px rgba(var(--accent-rgb),.35); }
+  .demands li { counter-increment: d; position: relative; padding: .7rem 0 .7rem 2.9rem; border-bottom: 1px solid var(--line); }
+  .demands li:last-child { border-bottom: none; }
+  .demands li::before {
+    content: counter(d); position: absolute; left: 0; top: .6rem;
+    width: 2rem; height: 2rem; border-radius: 7px;
+    background: var(--ink); color: var(--paper);
+    font-family: "Archivo", sans-serif; font-weight: 800;
+    display: flex; align-items: center; justify-content: center; font-size: 1rem;
+  }
 
-  /* ---------- Distribuie ---------- */
+  /* ---------------- Distribuie ---------------- */
   .share { display: flex; flex-wrap: wrap; gap: .6rem; }
-  .share a, .share button { font: inherit; cursor: pointer; }
 
-  /* ---------- Actualizări ---------- */
-  .update { border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .9rem; margin-bottom: 1rem; }
+  /* ---------------- Actualizări ---------------- */
+  .update { border-left: 3px solid var(--signal); padding: .1rem 0 .1rem .9rem; margin-bottom: 1rem; }
   .update:last-child { margin-bottom: 0; }
-  .update .date { font-size: .8rem; color: var(--muted); font-weight:600; }
-  .sources li { margin-bottom: .5rem; line-height:1.4; }
+  .update .date { font-size: .78rem; color: var(--muted); font-weight: 600; }
 
-  footer { margin: 3.5rem 0 2.5rem; text-align: center; color: var(--muted); font-size: .85rem; }
-  @media (max-width: 560px) {
-    header { padding: 2.6rem 0 5.4rem; }
-    .card { padding: 1.1rem; }
+  .sources { list-style: none; }
+  .sources li { margin-bottom: .55rem; padding-left: 1rem; position: relative; line-height: 1.4; }
+  .sources li::before { content: "→"; position: absolute; left: 0; color: var(--signal); }
+
+  footer { border-top: 1px solid var(--line); margin-top: 3rem; }
+  footer .wrap { padding: 1.6rem 1.15rem 2.4rem; text-align: center; color: var(--muted); font-size: .84rem; }
+
+  /* ---------------- Flourish-uri (stil Magic UI, în CSS pur) ---------------- */
+  /* Shimmer pe butoanele principale */
+  .btn:not(.line) { position: relative; overflow: hidden; }
+  .btn:not(.line)::after {
+    content: ""; position: absolute; top: 0; left: -160%; width: 55%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+    transform: skewX(-20deg); animation: shimmer 5s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0%, 55% { left: -160%; } 100% { left: 170%; } }
+
+  /* Glow discret pe countdown */
+  .countdown { animation: cdglow 3.6s ease-in-out infinite; }
+  @keyframes cdglow {
+    0%, 100% { box-shadow: 0 0 0 rgba(var(--signal-rgb),0); }
+    50% { box-shadow: 0 0 22px rgba(var(--signal-rgb),.28); }
+  }
+
+  /* Reveal la scroll */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto; animation: none !important; }
+    .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <span class="eyebrow">🏫 Monitorizare civică · Botoșani</span>
-    <h1>Școala Gimnazială nr. 13<br>Progresul lucrărilor de reabilitare</h1>
-    <p class="lead">De aproape trei ani, elevii Școlii 13 învață în spații improvizate. Urmărim public, săptămână de săptămână, stadiul real al lucrărilor și termenele promise de autorități.</p>
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Monitorizare civică · Școala Gimnazială nr. 13 · Botoșani</span>
+    <h1>Progresul lucrărilor, <em>sub ochii tuturor</em>.</h1>
+    <p class="sub">De aproape trei ani, elevii Școlii 13 învață în spații improvizate. Urmărim aici, public și săptămânal, stadiul real al șantierului și fiecare termen promis de autorități.</p>
+
+    <div class="countdown">
+      <span class="big tnum" id="days-left">–</span>
+      <span class="cd-txt" id="days-label">zile până la termenul promis: <strong>1 septembrie 2026</strong> — al patrulea termen anunțat pentru aceeași școală.</span>
+    </div>
+
     <div class="hero-cta">
-      <a class="btn ghost-light" href="#petitie">✍️ Semnează petiția</a>
-      <a class="btn ghost-light" href="#santier">📸 Vezi șantierul</a>
+      <a class="btn" href="#petitie">Semnează petiția</a>
+      <a class="btn line" href="#santier">Vezi șantierul</a>
     </div>
   </div>
 </header>
 
-<div class="container">
+<div class="wrap">
 
-  <div class="stats-strip">
-    <div class="key-facts">
-      <div class="fact">
-        <span class="num" id="days-left">–</span>
-        <span class="label" id="days-label">zile până la termenul promis (1 septembrie 2026)</span>
-      </div>
-      <div class="fact">
-        <span class="num bad">4</span>
-        <span class="label">termene anunțate până acum pentru aceeași școală</span>
-      </div>
-      <div class="fact">
-        <span class="num">~14<span style="font-size:1rem"> mil. lei</span></span>
-        <span class="label">investiție din bani publici, prin PNRR</span>
-      </div>
-      <div class="fact">
-        <span class="num">100%</span>
-        <span class="label">promovabilitate obținută de elevi, deși învață improvizat</span>
-      </div>
+  <div class="ledger">
+    <div class="cell">
+      <div class="n warnc tnum">4</div>
+      <div class="l">termene promise și depășite</div>
+    </div>
+    <div class="cell">
+      <div class="n tnum">~14<span style="font-size:.9rem"> mil.</span></div>
+      <div class="l">lei din bani publici, prin PNRR</div>
+    </div>
+    <div class="cell">
+      <div class="n tnum">100%</div>
+      <div class="l">promovabilitate, deși învață improvizat</div>
+    </div>
+    <div class="cell">
+      <div class="n tnum">~3</div>
+      <div class="l">ani în spații improvizate</div>
     </div>
   </div>
 
-  <div class="disclaimer">
-    <span>⚠️</span>
+  <div class="note-strip">
     <span>Pagină independentă, realizată voluntar de comunitatea părinților elevilor de la Școala Gimnazială nr. 13 Botoșani. Nu este un site oficial al școlii, al Primăriei Botoșani sau al altei autorități. Informațiile provin din presă și din comunicări publice — sursele sunt la finalul paginii.</span>
   </div>
 
   <!-- PETIȚIE -->
   <section id="petitie">
-    <h2>Petiția părinților</h2>
+    <h2 data-kicker="Acțiune">Petiția părinților</h2>
     <div class="card petition">
       <div style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap">
-        <span class="count" id="sig-count">–</span>
+        <span class="count tnum" id="sig-count">–</span>
         <span class="goal">semnături din <span id="sig-goal"></span> (obiectiv)</span>
       </div>
       <div class="bar"><span id="sig-bar"></span></div>
-      <p style="margin:.5rem 0 .2rem">
-        „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani, ca elevii să înceapă noul an școlar în școala lor!”
-      </p>
-      <a class="btn" id="sign-link" href="#" target="_blank" rel="noopener">✍️ Semnează petiția</a>
-      <a class="btn secondary" id="sig-list-link" href="#" target="_blank" rel="noopener">Vezi semnăturile</a>
+      <p class="quote">„Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani, ca elevii să înceapă noul an școlar în școala lor!”</p>
+      <div class="share">
+        <a class="btn" id="sign-link" href="#" target="_blank" rel="noopener">Semnează petiția</a>
+        <a class="btn line" id="sig-list-link" href="#" target="_blank" rel="noopener">Vezi semnăturile</a>
+      </div>
     </div>
   </section>
 
   <!-- TERMENE -->
   <section id="termene">
-    <h2>Istoricul termenelor promise</h2>
+    <h2 data-kicker="Promisiuni">Istoricul termenelor</h2>
     <div class="card" id="deadlines"></div>
   </section>
 
   <!-- ESTIMARE -->
   <section id="estimare">
-    <h2>Va fi gata la timp?</h2>
+    <h2 data-kicker="Proiecție">Va fi gata la timp?</h2>
     <div class="card">
-      <div style="display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-bottom:.3rem">
-        <span class="count" id="prog-pct" style="font-size:2rem"></span>
+      <div class="est-head">
+        <span class="pct tnum" id="prog-pct"></span>
         <span class="goal">progres estimat al lucrărilor</span>
       </div>
       <div class="bar"><span id="prog-bar"></span></div>
-      <p id="estimare-verdict" style="margin:.8rem 0 .3rem;font-weight:700"></p>
-      <p id="estimare-detalii" style="color:var(--muted);font-size:.92rem"></p>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:.7rem">
-        Estimare orientativă, calculată automat din ritmul de progres raportat (procentul actual față de cel de acum o săptămână). Nu înlocuiește un grafic oficial de execuție.
-      </p>
+      <p class="verdict" id="estimare-verdict"></p>
+      <p style="color:var(--ink-2);font-size:.93rem" id="estimare-detalii"></p>
+      <p class="fine">Estimare orientativă, calculată automat din ritmul de progres raportat (procentul actual față de cel de acum o săptămână). Nu înlocuiește un grafic oficial de execuție.</p>
     </div>
   </section>
 
   <!-- STADIU PE ETAJE -->
   <section id="stadiu">
-    <h2>Stadiul lucrărilor, pe etaje</h2>
+    <h2 data-kicker="Pe teren">Stadiul lucrărilor, pe etaje</h2>
     <div class="card">
       <div class="building" id="building"></div>
     </div>
   </section>
 
-  <!-- EVALUARE AI -->
+  <!-- EVALUARE -->
   <section id="evaluare-ai">
-    <h2>🤖 Evaluare automată a stadiului</h2>
+    <h2 data-kicker="Analiză automată">Evaluarea stadiului</h2>
     <div class="card ai-card">
-      <p id="ai-verdict" style="font-weight:700;font-size:1.05rem;margin-bottom:.5rem"></p>
-      <p id="ai-body" style="margin-bottom:.8rem"></p>
+      <p class="av" id="ai-verdict"></p>
+      <p class="ab" id="ai-body"></p>
       <strong style="font-size:.95rem">Ce a mai rămas de făcut:</strong>
-      <ul id="ai-remaining" style="margin:.4rem 0 .3rem 1.2rem"></ul>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:.7rem">
-        Evaluare generată automat din procentele pe etaje și din informațiile apărute în presă. Are rol orientativ, nu de expertiză tehnică.
-      </p>
+      <ul id="ai-remaining"></ul>
+      <p class="fine">Evaluare generată automat din procentele pe etaje și din informațiile apărute în presă. Are rol orientativ, nu de expertiză tehnică.</p>
     </div>
   </section>
 
-  <!-- JURNAL FOTO -->
+  <!-- JURNAL FOTO/VIDEO -->
   <section id="santier">
-    <h2>Jurnal foto pe șantier — săptămână de săptămână</h2>
-    <p style="color:var(--muted);margin-bottom:1rem">
-      În fiecare săptămână adăugăm poze de pe șantier și notăm dacă s-a văzut vreun progres real față de săptămâna trecută.
-    </p>
+    <h2 data-kicker="Documentare">Jurnal de pe șantier</h2>
+    <p class="lead-p">În fiecare săptămână adăugăm poze și video de pe șantier și notăm dacă s-a văzut vreun progres real față de săptămâna trecută.</p>
     <div id="weeks"></div>
   </section>
 
   <!-- CRONOLOGIE -->
   <section id="cronologie">
-    <h2>Cronologie</h2>
+    <h2 data-kicker="Istoric">Cronologie</h2>
     <div class="card"><ul class="timeline" id="timeline"></ul></div>
   </section>
 
   <!-- REVENDICĂRI -->
   <section id="revendicari">
-    <h2>Ce cerem</h2>
+    <h2 data-kicker="Cereri">Ce cerem</h2>
     <div class="card">
       <ol class="demands">
         <li><strong>Finalizarea lucrărilor până la 1 septembrie 2026</strong> — termenul promis public — astfel încât elevii să înceapă anul școlar 2026–2027 în incinta școlii, nu în spații improvizate.</li>
@@ -404,33 +435,33 @@
 
   <!-- DISTRIBUIE -->
   <section id="distribuie">
-    <h2>Ajută-ne să ajungă la cât mai mulți</h2>
+    <h2 data-kicker="Amplifică">Trimite mai departe</h2>
     <div class="card">
-      <p style="margin-bottom:.4rem;color:var(--muted)">Cu cât suntem mai mulți, cu atât presiunea e mai mare. Distribuie pagina:</p>
+      <p class="lead-p" style="margin-bottom:.7rem">Cu cât suntem mai mulți, cu atât presiunea e mai mare. Distribuie pagina:</p>
       <div class="share">
         <a class="btn" id="share-fb" href="#" target="_blank" rel="noopener">Facebook</a>
         <a class="btn" id="share-wa" href="#" target="_blank" rel="noopener">WhatsApp</a>
-        <button class="btn secondary" id="share-copy" type="button">Copiază linkul</button>
+        <button class="btn line" id="share-copy" type="button">Copiază linkul</button>
       </div>
     </div>
   </section>
 
   <!-- ACTUALIZĂRI -->
   <section id="actualizari">
-    <h2>Actualizări</h2>
+    <h2 data-kicker="La zi">Actualizări</h2>
     <div class="card" id="updates"></div>
   </section>
 
   <!-- SURSE -->
   <section id="surse">
-    <h2>Surse</h2>
+    <h2 data-kicker="Referințe">Surse</h2>
     <div class="card"><ul class="sources" id="sources"></ul></div>
   </section>
 
 </div>
 
 <footer>
-  Pagină întreținută voluntar de comunitatea părinților · Corecturi și completări sunt binevenite.
+  <div class="wrap">Pagină întreținută voluntar de comunitatea părinților · Corecturi și completări sunt binevenite.</div>
 </footer>
 
 <script>
@@ -473,17 +504,9 @@ const DATE = {
     { cand: "1 septembrie 2026", status: "progress", text: "termenul actual, promis public de administrația locală" },
   ],
 
-  lucrari: [
-    { nume: "Fațada clădirii",                  status: "done",     eticheta: "Finalizată" },
-    { nume: "Tâmplăria exterioară (ferestre)",  status: "done",     eticheta: "Înlocuită complet" },
-    { nume: "Instalații electrice și sanitare", status: "done",     eticheta: "Montate" },
-    { nume: "Gresie și parchet",                status: "progress", eticheta: "În curs" },
-    { nume: "Recepția finală a lucrărilor",     status: "progress", eticheta: "În așteptare" },
-  ],
-
-  // Jurnal foto: cele mai noi săptămâni primele.
+  // Jurnal: cele mai noi săptămâni primele.
   // progres: "da" | "putin" | "nu"
-  // poze: căi către imagini din assets/santier/saptamana-NN/ (gol = încă nu avem poze)
+  // media: poze SAU video din assets/santier/saptamana-NN/ (fișiere .jpg/.png = poze, .mp4/.webm/.mov = video)
   saptamani: [
     {
       titlu: "Săptămâna 1 — parter",
@@ -491,7 +514,7 @@ const DATE = {
       progres: "putin",
       nota: "Poze de la parter, în timpul unei vizite pe șantier.",
       analizaAI: "Imaginile sunt de la parter. <strong>Punctele bune:</strong> ferestrele sunt montate (noi, încă cu folia de protecție) și pereții sunt gletuiți/tencuiți în mare parte — holul e neted și alb. <strong>Ce lipsește:</strong> pardoseala e desfăcută în mai multe camere (moloz, șapă nefinalizată, fără gresie/parchet), instalația electrică e neterminată (cabluri atârnând, doze deschise, tavanul fără corpuri de iluminat), iar unele coloane au încă tencuială brută. Nu s-a făcut încă zugrăveala finală, nu sunt uși și nu sunt tavane. Concluzie: parterul e la stadiul de glet + tâmplărie, dar cu multă muncă rămasă la pardoseli, electrice, zugrăveală, uși și tavane — estimativ ~35% finalizat.",
-      poze: [
+      media: [
         "assets/santier/saptamana-01/1.jpg",
         "assets/santier/saptamana-01/2.jpg",
         "assets/santier/saptamana-01/3.jpg",
@@ -524,7 +547,6 @@ const DATE = {
     { url: "https://vivafm.ro/stire/2025/07/14/modernizare-completa-la-scoala-gimnaziala-nr-13/", text: "VIVA FM — Stadiul lucrărilor (2025)" },
     { url: "https://www.botosaneanul.ro/in-jur-de-100-de-parinti-ai-copiilor-de-la-scoala-13-protesteaza-la-primarie", text: "Botoșăneanul — În jur de 100 de părinți protestează la Primărie" },
     { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Tensiuni la Primărie; viceprimarul: întârzieri din blocaje la plăți" },
-    { url: "https://www.botosaneanul.ro/tipete-la-primarie-parintii-primiti-de-viceprimar-vreti-sa-tipati-asta-dorim-nu-povesti", text: "Botoșăneanul — Părinții primiți de viceprimar la Primărie" },
     { url: "https://telem.ro/scolile-din-botosani-raman-in-santier/", text: "TeleM Regional — Școlile din Botoșani rămân în șantier" },
     { url: "https://www.botosaninews.ro/693544/administratie/video-primarul-cosmin-andrei-reactioneaza-dupa-aparitia-unui-articol-despre-intarzierile-la-lucrarile-de-la-scoala-13-botosani/", text: "BotosaniNews.ro — Primarul Cosmin Andrei reacționează la întârzieri" },
   ],
@@ -532,6 +554,23 @@ const DATE = {
 /* ===================== sfârșitul secțiunii DATE ====================== */
 
 const $ = id => document.getElementById(id);
+const isVideo = p => /\.(mp4|webm|mov|m4v|ogg)$/i.test(p);
+const reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Number ticker (stil Magic UI) — animă un număr de la 0 la target
+function countUp(el, target, { suffix = "", duration = 1100 } = {}) {
+  if (!el) return;
+  if (reduceMotion) { el.textContent = target + suffix; return; }
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min(1, (now - start) / duration);
+    const eased = 1 - Math.pow(1 - t, 3); // ease-out cubic
+    el.textContent = Math.round(target * eased) + suffix;
+    if (t < 1) requestAnimationFrame(step);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(step);
+}
 
 // Progres general = media procentelor pe etaje
 const PROGRES_GENERAL = Math.round(
@@ -540,23 +579,23 @@ const PROGRES_GENERAL = Math.round(
 
 // --- Petiție ---
 const pct = Math.min(100, Math.round(DATE.semnaturi / DATE.obiectivSemnaturi * 100));
-$("sig-count").textContent = DATE.semnaturi;
+countUp($("sig-count"), DATE.semnaturi);
 $("sig-goal").textContent = DATE.obiectivSemnaturi;
 $("sign-link").href = DATE.petitieUrl;
 $("sig-list-link").href = DATE.petitieUrl.replace("/finalizati", "/signatures/finalizati") + "/";
 requestAnimationFrame(() => { $("sig-bar").style.width = pct + "%"; });
 
-// --- Contor zile ---
+// --- Contor zile (în hero) ---
 (function () {
   const [y, m, d] = DATE.termenFinal;
   const days = Math.ceil((new Date(y, m, d) - new Date()) / 86400000);
   const el = $("days-left");
-  if (days > 0) { el.textContent = days; }
+  if (days > 0) { countUp(el, days); }
   else if (days === 0) { el.textContent = "AZI"; }
   else {
     el.textContent = Math.abs(days);
     el.classList.add("bad");
-    $("days-label").innerHTML = "zile <strong>peste</strong> termenul promis<br>(1 septembrie 2026)";
+    $("days-label").innerHTML = "zile <strong>peste</strong> termenul promis (1 septembrie 2026) — al patrulea termen depășit.";
   }
 })();
 
@@ -571,7 +610,7 @@ requestAnimationFrame(() => { $("sig-bar").style.width = pct + "%"; });
   const zileRamase = Math.ceil((deadline - now) / 86400000);
   const saptRamase = zileRamase / 7;
 
-  $("prog-pct").textContent = prog + "%";
+  countUp($("prog-pct"), prog, { suffix: "%" });
   requestAnimationFrame(() => { $("prog-bar").style.width = prog + "%"; });
 
   const verdict = $("estimare-verdict");
@@ -615,7 +654,7 @@ $("deadlines").innerHTML = DATE.termene.map(t => `
   <div class="deadline">
     <span class="when">${t.cand}</span>
     <span class="badge b-${t.status}">${badgeText[t.status]}</span>
-    <span>${t.text}</span>
+    <span class="desc">${t.text}</span>
   </div>`).join("");
 
 // --- Clădirea pe etaje ---
@@ -626,7 +665,7 @@ $("building").innerHTML =
       <div class="fill" data-w="${e.procent}"></div>
       <div class="row">
         <span class="name">${e.nume}</span>
-        <span class="pct">${e.procent}%</span>
+        <span class="pct tnum">${e.procent}%</span>
         ${e.nota ? `<span class="note">${e.nota}</span>` : ""}
       </div>
     </div>`).join("");
@@ -634,7 +673,7 @@ requestAnimationFrame(() => {
   document.querySelectorAll("#building .fill").forEach(f => { f.style.width = f.dataset.w + "%"; });
 });
 
-// --- Evaluare automată (AI) a stadiului ---
+// --- Evaluare automată a stadiului ---
 (function () {
   const etaje = DATE.etaje;
   const gata = etaje.filter(e => e.procent >= 98);
@@ -661,17 +700,21 @@ requestAnimationFrame(() => {
   $("ai-remaining").innerHTML = DATE.ramasDeFacut.map(r => `<li>${r}</li>`).join("");
 })();
 
-// --- Jurnal foto ---
+// --- Jurnal foto/video ---
 const progresBadge = {
-  da:    ['b-done', '✔ Progres vizibil'],
-  putin: ['b-progress', '~ Progres mic'],
-  nu:    ['b-bad', '✘ Fără progres'],
+  da:    ['b-done', 'Progres vizibil'],
+  putin: ['b-progress', 'Progres mic'],
+  nu:    ['b-bad', 'Fără progres'],
 };
 $("weeks").innerHTML = DATE.saptamani.map(s => {
   const [cls, lbl] = progresBadge[s.progres] || progresBadge.nu;
-  const poze = (s.poze && s.poze.length)
-    ? s.poze.map((p, i) => `<a class="ph" href="${p}" target="_blank" rel="noopener"><img src="${p}" alt="Șantier — ${s.titlu} (${i + 1})" loading="lazy" onerror="this.closest('.ph').classList.add('broken')"><span class="ph-ico">📷<small>poză în curând</small></span></a>`).join("")
-    : `<div class="empty">📷 Încă nu au fost adăugate poze pentru această săptămână.</div>`;
+  const items = s.media || s.poze || [];
+  const media = items.length
+    ? items.map((p, i) => isVideo(p)
+        ? `<div class="ph"><video src="${p}" controls preload="metadata" onerror="this.closest('.ph').classList.add('broken')"></video><span class="ph-ico">🎬<small>video în curând</small></span></div>`
+        : `<a class="ph" href="${p}" target="_blank" rel="noopener"><img src="${p}" alt="Șantier — ${s.titlu} (${i + 1})" loading="lazy" onerror="this.closest('.ph').classList.add('broken')"><span class="ph-ico">📷<small>media în curând</small></span></a>`
+      ).join("")
+    : `<div class="empty">Încă nu au fost adăugate poze sau video pentru această săptămână.</div>`;
   return `
     <div class="week">
       <div class="week-head">
@@ -679,8 +722,8 @@ $("weeks").innerHTML = DATE.saptamani.map(s => {
         <span class="badge ${cls}">${lbl}</span>
       </div>
       ${s.nota ? `<p class="week-note">${s.nota}</p>` : ""}
-      <div class="gallery">${poze}</div>
-      ${s.analizaAI ? `<div class="ai-week"><strong>🤖 Analiza pozelor:</strong> ${s.analizaAI}</div>` : ""}
+      <div class="gallery">${media}</div>
+      ${s.analizaAI ? `<div class="ai-week"><strong>Analiză (din poze/video):</strong> ${s.analizaAI}</div>` : ""}
     </div>`;
 }).join("");
 
@@ -715,6 +758,17 @@ $("sources").innerHTML = DATE.surse.map(s => `
       prompt("Copiază linkul:", url);
     }
   });
+})();
+
+// --- Reveal la scroll (stil Magic UI) ---
+(function () {
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+  const els = document.querySelectorAll("section, .ledger");
+  els.forEach(el => el.classList.add("reveal"));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  els.forEach(el => io.observe(el));
 })();
 </script>
 
