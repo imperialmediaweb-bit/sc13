@@ -37,7 +37,8 @@ export const muncitori = 3;
 export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = [
   { cheie: "tamplarie", nume: "Tâmplărie (ferestre)", pondere: 10 },
   { cheie: "glet", nume: "Tencuială + glet pereți", pondere: 20 },
-  { cheie: "instalatii", nume: "Instalații electrice/sanitare", pondere: 15 },
+  { cheie: "instalatii_el", nume: "Instalații electrice", pondere: 8 },
+  { cheie: "instalatii_san", nume: "Instalații sanitare", pondere: 7 },
   { cheie: "pardoseli", nume: "Șapă + gresie/parchet", pondere: 20 },
   { cheie: "tavane", nume: "Tavane", pondere: 10 },
   { cheie: "zugraveala", nume: "Zugrăveală", pondere: 15 },
@@ -64,7 +65,7 @@ export const etaje: Etaj[] = [
     mp: 1200,
     etapeGata: ["tamplarie"],
     etapePartial: ["glet", "pardoseli"],
-    nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
+    nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații electrice și sanitare, tavane și zugrăveală neîncepute.",
   },
 ];
 
