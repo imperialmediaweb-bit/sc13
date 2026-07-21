@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Smartphone, Share, CheckCircle2 } from "lucide-react";
 import { NotifyButton } from "@/components/notify-button";
+import { subscribeToPush } from "@/lib/push";
 
 type BIPEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
 
@@ -36,6 +37,8 @@ export function AppCTA() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ event: "install" }),
       }).catch(() => {});
+      // cere permisiunea de notificări odată cu instalarea
+      subscribeToPush().catch(() => {});
     };
     window.addEventListener("appinstalled", onInstalled);
 
@@ -49,8 +52,12 @@ export function AppCTA() {
   const install = async () => {
     if (!deferred) return;
     await deferred.prompt();
-    await deferred.userChoice;
+    const choice = await deferred.userChoice;
     setDeferred(null);
+    // dacă a acceptat instalarea, cerem și permisiunea de notificări (odată cu instalarea)
+    if (choice?.outcome === "accepted") {
+      subscribeToPush().catch(() => {});
+    }
   };
 
   return (

@@ -30,6 +30,7 @@ import {
   petitie,
   proiect,
   termenFinal,
+  anScolarStart,
   etaje,
   progresSaptamanaTrecuta,
   ramasDeFacut,
@@ -122,6 +123,8 @@ export default function Page() {
   React.useEffect(() => {
     const [y, m, d] = termenFinal;
     const deadline = new Date(y, m, d).getTime();
+    const [sy, sm, sd] = anScolarStart;
+    const startScoala = new Date(sy, sm, sd).getTime();
     const now = Date.now();
     const zile = Math.ceil((deadline - now) / 86400000);
 
@@ -157,9 +160,10 @@ export default function Page() {
       const finalMs = now + saptNecesare * 7 * 86400000;
       const laTimp = finalMs <= deadline;
       dataFinal = fmt(finalMs);
-      // șanse orientative: 50% dacă exact la termen, +/- în funcție de zile diferență și de progres
-      const diffZile = Math.round((deadline - finalMs) / 86400000);
-      sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 3.5 + (prog - 80) * 0.4)));
+      // șanse ca elevii să înceapă la timp = raportat la începutul anului școlar (8 sept),
+      // nu la termenul de finalizare (1 sept). 50% dacă finalizarea pică fix pe 8 sept.
+      const diffZile = Math.round((startScoala - finalMs) / 86400000);
+      sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 4 + (prog - 80) * 0.4)));
       estVerdict = laTimp
         ? "La ritmul actual, lucrările s-ar încadra în termenul anunțat."
         : "La ritmul actual, finalizarea ar depăși termenul anunțat.";
@@ -378,8 +382,8 @@ export default function Page() {
             </div>
             <div>
               <p className="text-lg font-semibold">
-                Șanse ca elevii să înceapă anul școlar la <strong>1 septembrie 2026</strong> în școala
-                reabilitată.
+                Șanse ca elevii să înceapă anul școlar în școala reabilitată. Anul școlar începe pe{" "}
+                <strong>8 septembrie 2026</strong> (termenul promis de finalizare este 1 septembrie).
               </p>
               <div className="mt-4 rounded-lg border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

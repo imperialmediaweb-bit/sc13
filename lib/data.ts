@@ -13,8 +13,10 @@ export const petitie = {
     "Petiția se mai poate semna până mâine. Pe hârtie, între orele 16:00 și 20:00, părinții vă așteaptă la foișorul de lângă locul de joacă din Parcul Curcubeu.",
 };
 
-// Termenul final promis (an, luna 0-11, zi) — 1 septembrie 2026
+// Termenul promis de finalizare a lucrărilor (an, luna 0-11, zi) — 1 septembrie 2026
 export const termenFinal: [number, number, number] = [2026, 8, 1];
+// Începutul anului școlar — 8 septembrie 2026 (data reală până la care elevii trebuie să poată intra)
+export const anScolarStart: [number, number, number] = [2026, 8, 8];
 
 // Detalii proiect (informații publice, din presă și comunicate)
 export const proiect: { eticheta: string; valoare: string }[] = [
