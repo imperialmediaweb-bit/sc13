@@ -101,24 +101,29 @@ export default function Page() {
     let sanse = 50;
     let dataFinal = "—";
 
+    const fmt = (ms: number) =>
+      new Date(ms).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
+
     if (prog >= 100) {
       estVerdict = "Lucrările sunt raportate ca finalizate.";
       estColor = "hsl(var(--ok))";
       sanse = 100;
+      dataFinal = "acum";
     } else if (ritm <= 0) {
-      estVerdict = "La ritmul actual raportat, nu se poate estima o dată de finalizare.";
+      // progres stagnat: presupunem un ritm minim, pesimist — data se împinge tot mai târziu
+      const ritmMinim = 1; // % pe săptămână
+      const saptNecesare = Math.ceil(ramas / ritmMinim);
+      const finalMs = now + saptNecesare * 7 * 86400000;
+      dataFinal = fmt(finalMs);
+      estVerdict = "Progresul a stagnat față de săptămâna anterioară.";
       estColor = "hsl(var(--bad))";
-      estDetail = `Nu s-a raportat progres față de săptămâna anterioară. Rest de executat: ${ramas}%. Zile până la termen: ${zile}.`;
-      sanse = 12;
+      estDetail = `Dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă, la ritm minim: ${dataFinal}.`;
+      sanse = 8;
     } else {
       const saptNecesare = Math.ceil(ramas / ritm);
       const finalMs = now + saptNecesare * 7 * 86400000;
       const laTimp = finalMs <= deadline;
-      dataFinal = new Date(finalMs).toLocaleDateString("ro-RO", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      });
+      dataFinal = fmt(finalMs);
       // șanse orientative: 50% dacă exact la termen, +/- în funcție de zile diferență și de progres
       const diffZile = Math.round((deadline - finalMs) / 86400000);
       sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 3.5 + (prog - 80) * 0.4)));
