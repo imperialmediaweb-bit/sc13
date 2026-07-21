@@ -352,7 +352,7 @@ export default function Page() {
                     <tr key={i} className="border-t border-border align-top">
                       <td className="px-4 py-3">
                         <div className="font-semibold">{e.nume}</div>
-                        {e.mp && <div className="text-xs text-muted-foreground tnum">~{e.mp} mp</div>}
+                        {e.mp && <div className="text-xs text-muted-foreground tnum">~{e.mp} mp la sol</div>}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
@@ -390,8 +390,9 @@ export default function Page() {
             </table>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Suprafață estimată: ~{etaje.reduce((s, e) => s + (e.mp || 0), 0)} mp în total (estimativ). Procentul
-            fiecărui nivel este dat de etapele văzute în pozele de pe șantier.
+            Amprentă la sol ~400 mp pe nivel (estimativ). Suprafața efectiv finisată e mult mai mare — se lucrează
+            și pe pereți și tavane, nu doar pe podea. De aceea mp e doar orientativ: procentul fiecărui nivel îl dau
+            etapele văzute în pozele de pe șantier, nu suprafața.
           </p>
 
           <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">

@@ -56,12 +56,12 @@ export type Etaj = {
 // Stadiul pe etaje (de sus în jos). Procentul se ia din etapele văzute în poze
 // (fallback pe `procent`). `mp` sunt estimați și ponderează progresul general.
 export const etaje: Etaj[] = [
-  { nume: "Etajul 3", mp: 450, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 2", mp: 450, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 1", mp: 450, procent: 90, nota: "Aproape gata, finisaje finale." },
+  { nume: "Etajul 3", mp: 400, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 2", mp: 400, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 1", mp: 400, procent: 90, nota: "Aproape gata, finisaje finale." },
   {
     nume: "Parter",
-    mp: 480,
+    mp: 400,
     etapeGata: ["tamplarie"],
     etapePartial: ["glet", "pardoseli"],
     nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
