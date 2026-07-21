@@ -82,6 +82,8 @@ export default function Page() {
     estVerdict: string;
     estColor: string;
     estDetail: string;
+    sanse: number;
+    dataFinal: string;
   }>(null);
 
   React.useEffect(() => {
@@ -96,31 +98,38 @@ export default function Page() {
     let estVerdict = "";
     let estColor = "hsl(var(--foreground))";
     let estDetail = "";
+    let sanse = 50;
+    let dataFinal = "—";
 
     if (prog >= 100) {
       estVerdict = "Lucrările sunt raportate ca finalizate.";
       estColor = "hsl(var(--ok))";
+      sanse = 100;
     } else if (ritm <= 0) {
       estVerdict = "La ritmul actual raportat, nu se poate estima o dată de finalizare.";
       estColor = "hsl(var(--bad))";
       estDetail = `Nu s-a raportat progres față de săptămâna anterioară. Rest de executat: ${ramas}%. Zile până la termen: ${zile}.`;
+      sanse = 12;
     } else {
       const saptNecesare = Math.ceil(ramas / ritm);
       const finalMs = now + saptNecesare * 7 * 86400000;
       const laTimp = finalMs <= deadline;
-      const dataStr = new Date(finalMs).toLocaleDateString("ro-RO", {
+      dataFinal = new Date(finalMs).toLocaleDateString("ro-RO", {
         day: "numeric",
         month: "long",
         year: "numeric",
       });
+      // șanse orientative: 50% dacă exact la termen, +/- în funcție de zile diferență și de progres
+      const diffZile = Math.round((deadline - finalMs) / 86400000);
+      sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 3.5 + (prog - 80) * 0.4)));
       estVerdict = laTimp
         ? "La ritmul actual, lucrările s-ar încadra în termenul anunțat."
         : "La ritmul actual, finalizarea ar depăși termenul anunțat.";
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
-      estDetail = `Ritm raportat: ${ritm}% pe săptămână · Rest de executat: ${ramas}% · Dată estimată de finalizare: ${dataStr}.`;
+      estDetail = `Ritm raportat: ${ritm}% pe săptămână · Rest de executat: ${ramas}% · Dată realistă estimată de finalizare: ${dataFinal}.`;
     }
 
-    setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail });
+    setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
   }, []);
 
   const [sig, setSig] = React.useState(petitie.semnaturi);
@@ -283,6 +292,47 @@ export default function Page() {
                 <li key={i}>{r}</li>
               ))}
             </ul>
+          </div>
+        </Section>
+
+        {/* ȘANSE */}
+        <Section id="sanse" title="Șanse să înceapă anul școlar la timp">
+          <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-center">
+            <div className="rounded-lg bg-[hsl(var(--card-2))] p-6 text-center sm:w-56">
+              <div
+                className="font-display text-6xl font-bold tnum"
+                style={{
+                  color:
+                    (view?.sanse ?? 50) >= 70
+                      ? "hsl(var(--ok))"
+                      : (view?.sanse ?? 50) >= 40
+                      ? "hsl(var(--warn))"
+                      : "hsl(var(--bad))",
+                }}
+              >
+                {view ? view.sanse + "%" : "—"}
+              </div>
+              <div className="mt-1 text-sm text-muted-foreground">șanse estimate</div>
+            </div>
+            <div>
+              <p className="text-lg font-semibold">
+                Șanse ca elevii să înceapă anul școlar la <strong>1 septembrie 2026</strong> în școala
+                reabilitată.
+              </p>
+              <div className="mt-4 rounded-lg border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Data realistă estimată de finalizare
+                </div>
+                <div className="font-display text-2xl font-bold">{view?.dataFinal ?? "—"}</div>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Adică elevii ar putea reveni în școală în jurul acestei date, la ritmul actual de lucru.
+                </p>
+              </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Estimare orientativă, calculată automat pe baza procentelor de progres (din pozele de pe
+                șantier) și a ritmului de la o săptămână la alta. Nu este o cifră oficială.
+              </p>
+            </div>
           </div>
         </Section>
 
