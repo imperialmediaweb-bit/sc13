@@ -241,11 +241,11 @@ export default function Page() {
                   </a>
                 </div>
                 {petitie.peHartie && (
-                  <div className="mt-4 flex items-start gap-2 rounded-lg border border-border border-l-[3px] border-l-primary bg-[hsl(var(--card-2))] px-4 py-3 text-sm">
-                    <span aria-hidden>✍️</span>
-                    <span>
-                      <strong>Și pe hârtie:</strong> {petitie.peHartie}
-                    </span>
+                  <div className="mt-4 rounded-lg border-2 border-primary/50 bg-primary/[0.07] px-4 py-3">
+                    <div className="mb-1 flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[hsl(var(--primary-2))]">
+                      <span aria-hidden>📌</span> Important — semnare pe hârtie
+                    </div>
+                    <p className="text-sm font-medium">{petitie.peHartie}</p>
                   </div>
                 )}
               </CardContent>
