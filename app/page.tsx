@@ -11,7 +11,7 @@ import { Reveal } from "@/components/magicui/reveal";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MediaItem } from "@/components/media-item";
 import { ReportForm } from "@/components/report-form";
-import { NotifyButton } from "@/components/notify-button";
+import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
   petitie,
@@ -202,6 +202,8 @@ export default function Page() {
             Informațiile provin din presă și din comunicări publice — sursele sunt la finalul paginii.
           </span>
         </div>
+
+        <AppCTA />
 
         <div className="mt-8 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-6 lg:gap-y-8">
 
@@ -494,7 +496,6 @@ export default function Page() {
             <SectionHead kicker="La zi" title="Actualizări" />
             <Card>
               <CardContent className="space-y-4">
-                <NotifyButton />
                 {actualizari.map((u, i) => (
                   <div key={i} className="border-l-[3px] border-primary pl-4">
                     <div className="text-xs font-semibold text-muted-foreground">{u.data}</div>

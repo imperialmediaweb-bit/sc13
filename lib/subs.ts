@@ -1,38 +1,22 @@
-import { promises as fs } from "fs";
-import path from "path";
 import type { PushSubscription } from "web-push";
-
-// Fișierul cu abonamentele. Pe Railway, pentru persistență la redeploy,
-// setați SUBS_FILE către un volum montat (ex. /data/subs.json).
-const FILE = process.env.SUBS_FILE || path.join(process.cwd(), ".data", "subs.json");
-
-async function readAll(): Promise<PushSubscription[]> {
-  try {
-    const raw = await fs.readFile(FILE, "utf8");
-    return JSON.parse(raw) as PushSubscription[];
-  } catch {
-    return [];
-  }
-}
-
-async function writeAll(subs: PushSubscription[]): Promise<void> {
-  await fs.mkdir(path.dirname(FILE), { recursive: true });
-  await fs.writeFile(FILE, JSON.stringify(subs), "utf8");
-}
+import { getPool, ensureTables } from "@/lib/db";
 
 export async function addSub(sub: PushSubscription): Promise<void> {
-  const subs = await readAll();
-  if (!subs.some((s) => s.endpoint === sub.endpoint)) {
-    subs.push(sub);
-    await writeAll(subs);
-  }
+  await ensureTables();
+  await getPool().query(
+    `INSERT INTO push_subs (endpoint, data) VALUES ($1, $2)
+     ON CONFLICT (endpoint) DO UPDATE SET data = EXCLUDED.data`,
+    [sub.endpoint, JSON.stringify(sub)]
+  );
 }
 
 export async function removeSub(endpoint: string): Promise<void> {
-  const subs = await readAll();
-  await writeAll(subs.filter((s) => s.endpoint !== endpoint));
+  await ensureTables();
+  await getPool().query(`DELETE FROM push_subs WHERE endpoint = $1`, [endpoint]);
 }
 
 export async function allSubs(): Promise<PushSubscription[]> {
-  return readAll();
+  await ensureTables();
+  const { rows } = await getPool().query(`SELECT data FROM push_subs`);
+  return rows.map((r) => r.data as PushSubscription);
 }

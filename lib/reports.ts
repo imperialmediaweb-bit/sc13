@@ -1,5 +1,4 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { getPool, ensureTables } from "@/lib/db";
 
 export type Report = {
   id: string;
@@ -9,20 +8,25 @@ export type Report = {
   media: string[];
 };
 
-// Pentru persistență la redeploy pe Railway, setați REPORTS_FILE către un volum.
-const FILE = process.env.REPORTS_FILE || path.join(process.cwd(), ".data", "reports.json");
-
-export async function readReports(): Promise<Report[]> {
-  try {
-    return JSON.parse(await fs.readFile(FILE, "utf8")) as Report[];
-  } catch {
-    return [];
-  }
+export async function addReport(r: Report): Promise<void> {
+  await ensureTables();
+  await getPool().query(
+    `INSERT INTO reports (id, created_at, nume, mesaj, media)
+     VALUES ($1, $2, $3, $4, $5)`,
+    [r.id, r.createdAt, r.nume, r.mesaj, JSON.stringify(r.media)]
+  );
 }
 
-export async function addReport(r: Report): Promise<void> {
-  const all = await readReports();
-  all.unshift(r);
-  await fs.mkdir(path.dirname(FILE), { recursive: true });
-  await fs.writeFile(FILE, JSON.stringify(all, null, 2), "utf8");
+export async function readReports(): Promise<Report[]> {
+  await ensureTables();
+  const { rows } = await getPool().query(
+    `SELECT id, created_at, nume, mesaj, media FROM reports ORDER BY created_at DESC`
+  );
+  return rows.map((r) => ({
+    id: r.id,
+    createdAt: new Date(r.created_at).toISOString(),
+    nume: r.nume,
+    mesaj: r.mesaj,
+    media: r.media as string[],
+  }));
 }

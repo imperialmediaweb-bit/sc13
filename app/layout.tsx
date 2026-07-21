@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, Public_Sans } from "next/font/google";
-import { InstallPrompt } from "@/components/install-prompt";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -55,10 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="font-sans antialiased">
-        {children}
-        <InstallPrompt />
-      </body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

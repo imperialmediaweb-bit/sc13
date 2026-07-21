@@ -4,20 +4,13 @@ import * as React from "react";
 import { Send, Upload, CheckCircle2, Loader2, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const CLOUD = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-const PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
-
-async function uploadToCloudinary(file: File): Promise<string> {
+async function uploadFile(file: File): Promise<string> {
   const fd = new FormData();
   fd.append("file", file);
-  fd.append("upload_preset", PRESET as string);
-  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/auto/upload`, {
-    method: "POST",
-    body: fd,
-  });
+  const res = await fetch("/api/upload", { method: "POST", body: fd });
   if (!res.ok) throw new Error("upload");
   const data = await res.json();
-  return data.secure_url as string;
+  return data.url as string;
 }
 
 export function ReportForm() {
@@ -26,7 +19,7 @@ export function ReportForm() {
   const [files, setFiles] = React.useState<File[]>([]);
   const [state, setState] = React.useState<"idle" | "sending" | "done" | "error">("idle");
   const [err, setErr] = React.useState("");
-  const canUpload = Boolean(CLOUD && PRESET);
+  const canUpload = true;
 
   const onPick = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) setFiles((prev) => [...prev, ...Array.from(e.target.files!)].slice(0, 8));
@@ -43,8 +36,8 @@ export function ReportForm() {
     setErr("");
     try {
       let media: string[] = [];
-      if (canUpload && files.length) {
-        media = await Promise.all(files.map(uploadToCloudinary));
+      if (files.length) {
+        media = await Promise.all(files.map(uploadFile));
       }
       const res = await fetch("/api/report", {
         method: "POST",
