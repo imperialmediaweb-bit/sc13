@@ -352,7 +352,7 @@ export default function Page() {
                     <tr key={i} className="border-t border-border align-top">
                       <td className="px-4 py-3">
                         <div className="font-semibold">{e.nume}</div>
-                        {e.mp && <div className="text-xs text-muted-foreground tnum">~{e.mp} mp la sol</div>}
+                        {e.mp && <div className="text-xs text-muted-foreground tnum">~{e.mp} mp de finisat</div>}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
@@ -390,9 +390,10 @@ export default function Page() {
             </table>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Amprentă la sol ~400 mp pe nivel (estimativ). Suprafața efectiv finisată e mult mai mare — se lucrează
-            și pe pereți și tavane, nu doar pe podea. De aceea mp e doar orientativ: procentul fiecărui nivel îl dau
-            etapele văzute în pozele de pe șantier, nu suprafața.
+            „mp de finisat" = toată suprafața lucrată (podea + pereți + tavan), nu doar amprenta la sol. O sală de
+            clasă (~50 mp podea) înseamnă ~170 mp de finisat cu tot cu pereți și tavan; pe nivel ~1.200 mp, în total
+            ~{etaje.reduce((s, e) => s + (e.mp || 0), 0)} mp (estimativ). mp e orientativ — procentul fiecărui nivel
+            îl dau etapele văzute în pozele de pe șantier.
           </p>
 
           <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">

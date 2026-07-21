@@ -47,7 +47,7 @@ export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = 
 export type Etaj = {
   nume: string;
   nota?: string;
-  mp?: number; // suprafață estimată (pentru ponderare + afișare)
+  mp?: number; // suprafață de finisat estimată (podea + pereți + tavan), pentru ponderare + afișare
   etapeGata?: string[]; // etape finalizate (din poze)
   etapePartial?: string[]; // etape în curs (jumătate de credit)
   procent?: number; // fallback dacă nu sunt etape
@@ -56,12 +56,12 @@ export type Etaj = {
 // Stadiul pe etaje (de sus în jos). Procentul se ia din etapele văzute în poze
 // (fallback pe `procent`). `mp` sunt estimați și ponderează progresul general.
 export const etaje: Etaj[] = [
-  { nume: "Etajul 3", mp: 400, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 2", mp: 400, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 1", mp: 400, procent: 90, nota: "Aproape gata, finisaje finale." },
+  { nume: "Etajul 3", mp: 1200, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 2", mp: 1200, procent: 99, nota: "Practic finalizat." },
+  { nume: "Etajul 1", mp: 1200, procent: 90, nota: "Aproape gata, finisaje finale." },
   {
     nume: "Parter",
-    mp: 400,
+    mp: 1200,
     etapeGata: ["tamplarie"],
     etapePartial: ["glet", "pardoseli"],
     nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații, tavane și zugrăveală neîncepute.",
