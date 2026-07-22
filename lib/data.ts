@@ -165,7 +165,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "22 iulie 2026",
-    text: "Petiția a fost depusă oficial la Primăria Municipiului Botoșani și la Consiliul Local, înregistrată cu numerele 19849 și 19850. Așteptăm răspunsul instituției în termenul legal.",
+    text: "Petiția semnată pe hârtie de părinți a fost depusă oficial la Primăria Municipiului Botoșani și la Consiliul Local, înregistrată cu numerele 19849 și 19850. Petiția online rămâne deschisă pentru susținere. Așteptăm răspunsul instituției în termenul legal.",
   },
   {
     data: "16 iulie 2026",

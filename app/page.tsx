@@ -327,10 +327,12 @@ export default function Page() {
                 <div className="mt-4 flex items-start gap-2.5 rounded-md border border-ok/40 bg-ok-soft px-4 py-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-ok" />
                   <p className="text-sm">
-                    <strong className="text-ok">Depusă la Primărie pe {petitieDepusa.data}.</strong>{" "}
+                    <strong className="text-ok">
+                      Petiția semnată pe hârtie a fost depusă la Primărie pe {petitieDepusa.data}.
+                    </strong>{" "}
                     Înregistrată la {petitieDepusa.institutie}, cu numerele{" "}
-                    <span className="font-semibold tnum">{petitieDepusa.numere.join(" și ")}</span>. Așteptăm
-                    răspunsul instituției în termenul legal.
+                    <span className="font-semibold tnum">{petitieDepusa.numere.join(" și ")}</span>. Petiția online
+                    rămâne deschisă pentru susținere; așteptăm răspunsul instituției în termenul legal.
                   </p>
                 </div>
               )}
