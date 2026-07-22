@@ -165,6 +165,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "22 iulie 2026",
+    text: "Presa locală a preluat subiectul: Botoșani Expres și BotosaniNews scriu despre depunerea petiției la Primărie și despre această platformă pe care poate fi urmărit stadiul lucrărilor.",
+  },
+  {
+    data: "22 iulie 2026",
     text: "Petiția semnată pe hârtie de părinți a fost depusă oficial la Primăria Municipiului Botoșani și la Consiliul Local, înregistrată cu numerele 19849 și 19850. Petiția online rămâne deschisă pentru susținere. Așteptăm răspunsul instituției în termenul legal.",
   },
   {
@@ -174,6 +178,8 @@ export const actualizari = [
 ];
 
 export const surse = [
+  { url: "https://botosaniexpres.ro/local/peti-ia-p-rin-ilor-de-la-coala-gimnazial-nr-13-depus-oficial-la-prim-rie-stadiul-lucr-rilor-poate-fi-urm-rit-acum-pe-o-platform-online", text: "Botoșani Expres — Petiția depusă oficial la Primărie; stadiul lucrărilor poate fi urmărit pe o platformă online (22 iulie 2026)" },
+  { url: "https://www.botosaninews.ro/745309/administratie/petitie-online-a-parintilor-pentru-finalizarea-lucrarilor-la-scoala-nr-13-din-botosani-de-aproape-3-ani-copiii-invata-in-spatii-temporare/", text: "BotosaniNews.ro — Petiție online a părinților pentru finalizarea lucrărilor; de aproape 3 ani copiii învață în spații temporare (22 iulie 2026)" },
   { url: "https://agerpres.ro/educatie-stiinta/2026/07/16/botosani-protest-al-parintilor-elevilor-unei-scoli-fata-de-ritmul-lent-al-lucrarilor-de-reabilitare---1576737", text: "AGERPRES — Protest al părinților față de ritmul lent al lucrărilor (16 iulie 2026)" },
   { url: "https://www.edupedu.ro/parintii-elevilor-de-la-scoala-13-din-botosani-au-protestat-din-cauza-intarzierii-lucrarilor-de-reabilitare/", text: "Edupedu.ro — Părinții elevilor de la Școala 13 au protestat" },
   { url: "https://www.botosaninews.ro/744543/administratie/foto-video-lucrarile-la-scoala-nr-13-din-botosani-sunt-in-toi-vezi-stadiul-acestora/", text: "BotosaniNews.ro — FOTO/VIDEO Lucrările la Școala 13 sunt în toi. Vezi stadiul" },
