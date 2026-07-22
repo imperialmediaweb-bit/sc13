@@ -323,6 +323,19 @@ export default function Page() {
               )}
             </div>
           </div>
+
+          {/* Petiția oficială — semnare direct în pagină */}
+          <div className="mt-6">
+            <p className="mb-2 text-sm font-semibold">Semnează direct aici:</p>
+            <div className="overflow-hidden rounded-lg border border-border">
+              <iframe
+                src="https://www.petitieonline.com/embed/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor"
+                title="Semnează petiția: Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani"
+                className="h-[600px] w-full"
+                loading="lazy"
+              />
+            </div>
+          </div>
         </Section>
 
         {/* STADIU */}

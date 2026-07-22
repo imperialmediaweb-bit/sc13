@@ -8,6 +8,7 @@ const csp = [
   "form-action 'self'",
   "img-src 'self' data: blob: https://res.cloudinary.com",
   "media-src 'self' https://res.cloudinary.com",
+  "frame-src 'self' https://www.petitieonline.com https://petitieonline.com",
   "script-src 'self' 'unsafe-inline'",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' data: https://fonts.gstatic.com",
