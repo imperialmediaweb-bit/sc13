@@ -3,6 +3,7 @@ import { randomUUID } from "crypto";
 import { addUpdate, listUpdates, deleteUpdate } from "@/lib/updates";
 import { correctGrammar } from "@/lib/correct";
 import { authorized } from "@/lib/auth";
+import { notifyAll } from "@/lib/notify";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -28,7 +29,21 @@ export async function POST(req: Request) {
     // corectare gramaticală automată (dacă e configurat ANTHROPIC_API_KEY)
     const text = await correctGrammar(raw.slice(0, 2000));
     await addUpdate({ id: randomUUID(), createdAt: new Date().toISOString(), data, text });
-    return NextResponse.json({ ok: true, text });
+
+    // Trimite automat notificare abonaților (dacă nu s-a cerut explicit să nu).
+    let notified = { ok: false, sent: 0, removed: 0, total: 0 };
+    if (body?.notify !== false) {
+      try {
+        notified = await notifyAll({
+          title: "Școala 13 — actualizare nouă",
+          body: text.length > 120 ? text.slice(0, 117) + "…" : text,
+          url: "/#actualizari",
+        });
+      } catch {
+        // publicarea reușește chiar dacă notificarea eșuează
+      }
+    }
+    return NextResponse.json({ ok: true, text, notified });
   } catch {
     return NextResponse.json({ error: "Cerere invalidă" }, { status: 400 });
   }

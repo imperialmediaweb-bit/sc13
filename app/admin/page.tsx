@@ -82,7 +82,12 @@ export default function Admin() {
     if (res.ok) {
       setUpdText("");
       setUpdDate("");
-      setUpdMsg("Publicat" + (data.text && data.text !== updText ? " (corectat gramatical)." : "."));
+      const corectat = data.text && data.text !== updText ? " (corectat gramatical)" : "";
+      const n = data?.notified;
+      const notif = n?.ok
+        ? ` Notificare trimisă la ${n.sent} din ${n.total} abonați.`
+        : " (notificările nu sunt configurate pe server)";
+      setUpdMsg("Publicat" + corectat + "." + notif);
     } else {
       setUpdMsg("Eroare la publicare.");
     }
@@ -183,8 +188,8 @@ export default function Admin() {
       <section className="rounded-lg border border-border bg-card p-4">
         <h2 className="mb-2 font-bold">Publică o actualizare</h2>
         <p className="mb-2 text-sm text-muted-foreground">
-          Apare imediat la „Actualizări” pe pagină. Textul este corectat gramatical automat înainte de
-          publicare.
+          Apare imediat la „Actualizări” pe pagină. Textul este corectat gramatical automat, iar la publicare
+          pleacă automat o notificare către toți cei abonați.
         </p>
         <form onSubmit={addUpdate} className="space-y-2">
           <input
