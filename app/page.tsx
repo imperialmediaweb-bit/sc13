@@ -191,14 +191,9 @@ export default function Page() {
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
   }, []);
 
-  const [sig, setSig] = React.useState(petitie.semnaturi);
   const [dbUpdates, setDbUpdates] = React.useState<{ id: string; data: string; text: string }[]>([]);
   const [heroImg, setHeroImg] = React.useState<string | null>(null);
   React.useEffect(() => {
-    fetch("/api/signatures")
-      .then((r) => r.json())
-      .then((d) => typeof d.count === "number" && setSig(d.count))
-      .catch(() => {});
     fetch("/api/updates")
       .then((r) => r.json())
       .then((d) => Array.isArray(d.updates) && setDbUpdates(d.updates))
@@ -212,7 +207,6 @@ export default function Page() {
       .catch(() => {});
   }, []);
 
-  const semnPct = Math.min(100, Math.round((sig / petitie.obiectiv) * 100));
   const semnListUrl = petitie.url.replace("/finalizati", "/signatures/finalizati") + "/";
 
   return (
@@ -292,56 +286,44 @@ export default function Page() {
       <div className="mx-auto max-w-4xl px-5 pb-10">
         {/* PETIȚIE */}
         <Section id="petitie" title="Petiția părinților">
-          <div className="grid gap-6 sm:grid-cols-[auto_1fr] sm:items-start">
-            <div className="rounded-lg bg-[hsl(var(--card-2))] p-5 text-center sm:w-56">
-              <div className="font-display text-5xl font-bold text-primary tnum">{sig}</div>
-              <div className="text-sm text-muted-foreground">semnături din {petitie.obiectiv}</div>
-              <Progress value={semnPct} className="mt-3 h-2" />
-            </div>
-            <div>
-              <p className="italic text-muted-foreground">
-                „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani, ca elevii să înceapă noul an
-                școlar în școala lor!”
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                <a href={petitie.url} target="_blank" rel="noopener noreferrer" className={buttonVariants()}>
-                  Semnează online
-                </a>
-                <a
-                  href={semnListUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
-                >
-                  Vezi semnăturile
-                </a>
+          <div className="space-y-5">
+            <p className="border-l-4 border-primary pl-4 text-lg font-medium italic text-foreground">
+              „Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani, ca elevii să înceapă noul an
+              școlar în școala lor!”
+            </p>
+
+            {petitieDepusa && (
+              <div className="flex items-start gap-2.5 rounded-md border border-ok/40 bg-ok-soft px-4 py-3">
+                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-ok" />
+                <p className="text-sm">
+                  <strong className="text-ok">
+                    Petiția semnată pe hârtie a fost depusă la Primărie pe {petitieDepusa.data}.
+                  </strong>{" "}
+                  Înregistrată la {petitieDepusa.institutie}, cu numerele{" "}
+                  <span className="font-semibold tnum">{petitieDepusa.numere.join(" și ")}</span>. Petiția online
+                  rămâne deschisă pentru susținere; așteptăm răspunsul instituției în termenul legal.
+                </p>
               </div>
-              {petitie.peHartie && (
-                <div className="mt-4 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] px-4 py-3">
-                  <p className="text-sm">
-                    <strong>Semnare pe hârtie:</strong> {petitie.peHartie}
-                  </p>
-                </div>
-              )}
-              {petitieDepusa && (
-                <div className="mt-4 flex items-start gap-2.5 rounded-md border border-ok/40 bg-ok-soft px-4 py-3">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-ok" />
-                  <p className="text-sm">
-                    <strong className="text-ok">
-                      Petiția semnată pe hârtie a fost depusă la Primărie pe {petitieDepusa.data}.
-                    </strong>{" "}
-                    Înregistrată la {petitieDepusa.institutie}, cu numerele{" "}
-                    <span className="font-semibold tnum">{petitieDepusa.numere.join(" și ")}</span>. Petiția online
-                    rămâne deschisă pentru susținere; așteptăm răspunsul instituției în termenul legal.
-                  </p>
-                </div>
-              )}
+            )}
+
+            <div className="flex flex-wrap gap-2">
+              <a href={petitie.url} target="_blank" rel="noopener noreferrer" className={buttonVariants()}>
+                Semnează online
+              </a>
+              <a
+                href={semnListUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={buttonVariants({ variant: "outline" })}
+              >
+                Vezi semnăturile
+              </a>
             </div>
           </div>
 
-          {/* Petiția oficială — semnare direct în pagină */}
-          <div className="mt-6">
-            <p className="mb-2 text-sm font-semibold">Semnează direct aici:</p>
+          {/* Petiția oficială — semnare direct în pagină (numărul live e aici) */}
+          <div className="mt-5">
+            <p className="mb-2 text-sm font-semibold">Semnează direct aici (număr de semnături în timp real):</p>
             <div className="overflow-hidden rounded-lg border border-border">
               <iframe
                 src="https://www.petitieonline.com/embed/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor"
