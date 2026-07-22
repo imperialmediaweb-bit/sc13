@@ -6,11 +6,17 @@ export type Status = "done" | "progress" | "bad" | "current" | "none";
 
 export const petitie = {
   url: "https://www.petitieonline.com/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor",
-  semnaturi: 168, // ← număr de rezervă (folosit dacă citirea automată nu reușește)
+  semnaturi: 243, // ← număr de rezervă (folosit dacă citirea automată nu reușește)
   obiectiv: 500, // ← obiectivul propus
   // Semnare pe hârtie (lăsați gol dacă nu e cazul)
-  peHartie:
-    "Petiția se mai poate semna până mâine. Pe hârtie, între orele 16:00 și 20:00, părinții vă așteaptă la foișorul de lângă locul de joacă din Parcul Curcubeu.",
+  peHartie: "",
+};
+
+// Petiția depusă oficial la Primărie (lăsați null dacă nu e cazul)
+export const petitieDepusa = {
+  data: "22 iulie 2026",
+  institutie: "Primăria Municipiului Botoșani și Consiliul Local Botoșani",
+  numere: ["19849", "19850"], // numere de înregistrare (petiția + adresa)
 };
 
 // Termenul promis de finalizare a lucrărilor (an, luna 0-11, zi) — 1 septembrie 2026
@@ -158,8 +164,8 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 
 export const actualizari = [
   {
-    data: "21 iulie 2026",
-    text: "Mâine depunem petiția la Primăria Municipiului Botoșani.",
+    data: "22 iulie 2026",
+    text: "Petiția a fost depusă oficial la Primăria Municipiului Botoșani și la Consiliul Local, înregistrată cu numerele 19849 și 19850. Așteptăm răspunsul instituției în termenul legal.",
   },
   {
     data: "16 iulie 2026",

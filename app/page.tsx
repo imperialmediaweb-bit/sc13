@@ -17,6 +17,7 @@ import {
   Bell,
   Share2,
   Link2,
+  CheckCircle2,
   type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -28,6 +29,7 @@ import { AppCTA } from "@/components/app-cta";
 import { cn } from "@/lib/utils";
 import {
   petitie,
+  petitieDepusa,
   proiect,
   termenFinal,
   anScolarStart,
@@ -318,6 +320,17 @@ export default function Page() {
                 <div className="mt-4 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] px-4 py-3">
                   <p className="text-sm">
                     <strong>Semnare pe hârtie:</strong> {petitie.peHartie}
+                  </p>
+                </div>
+              )}
+              {petitieDepusa && (
+                <div className="mt-4 flex items-start gap-2.5 rounded-md border border-ok/40 bg-ok-soft px-4 py-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-ok" />
+                  <p className="text-sm">
+                    <strong className="text-ok">Depusă la Primărie pe {petitieDepusa.data}.</strong>{" "}
+                    Înregistrată la {petitieDepusa.institutie}, cu numerele{" "}
+                    <span className="font-semibold tnum">{petitieDepusa.numere.join(" și ")}</span>. Așteptăm
+                    răspunsul instituției în termenul legal.
                   </p>
                 </div>
               )}
