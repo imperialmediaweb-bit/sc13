@@ -36,8 +36,9 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
 ];
 
-// Câți oameni lucrează acum pe șantier (estimativ). Influențează ritmul și data.
-export const muncitori = 3;
+// Câți oameni lucrează acum pe șantier. Influențează ritmul și data.
+// 27 iulie 2026: 19 muncitori (raportat de părinți, la vizita pe șantier).
+export const muncitori = 19;
 
 // Etapele de finisaj și cât cântărește fiecare din total (%). Suma = 100.
 export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = [
@@ -63,15 +64,15 @@ export type Etaj = {
 // Stadiul pe etaje (de sus în jos). Procentul se ia din etapele văzute în poze
 // (fallback pe `procent`). `mp` sunt estimați și ponderează progresul general.
 export const etaje: Etaj[] = [
-  { nume: "Etajul 3", mp: 1200, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 2", mp: 1200, procent: 99, nota: "Practic finalizat." },
-  { nume: "Etajul 1", mp: 1200, procent: 90, nota: "Aproape gata, finisaje finale." },
+  { nume: "Etajul 3", mp: 1200, procent: 97, nota: "Din poze (27 iulie): parchet montat, calorifere montate, pereți finisați. Se fac retușuri." },
+  { nume: "Etajul 2", mp: 1200, procent: 97, nota: "Din poze (27 iulie): parchet montat, calorifere montate, pereți finisați. Se fac retușuri." },
+  { nume: "Etajul 1", mp: 1200, procent: 93, nota: "Din poze (27 iulie): parchet montat, se montează caloriferele; urmează retușurile." },
   {
     nume: "Parter",
     mp: 1200,
-    etapeGata: ["tamplarie"],
-    etapePartial: ["glet", "pardoseli"],
-    nota: "Din poze: ferestre montate; gletul e început dar nu terminat (mai e de dat var/finisat), șapă parțial pe holuri; instalații electrice și sanitare, tavane și zugrăveală neîncepute.",
+    etapeGata: ["tamplarie", "glet"],
+    etapePartial: ["instalatii_el"],
+    nota: "Din poze (27 iulie): ferestre montate și pereți gletuiți, dar pardoseala e încă desfăcută — pământ și moloz, fără șapă. Șapele se toarnă săptămâna viitoare. Instalația electrică e trasă parțial (doze în pereți); tavane, zugrăveală și finisaje neîncepute.",
   },
 ];
 
@@ -89,9 +90,12 @@ export function procentEtaj(e: Etaj): number {
 export const progresSaptamanaTrecuta = 78;
 
 export const ramasDeFacut = [
-  "Finisaje interioare la parter (glet, gletuire, vopsire)",
-  "Sala de sport — intervenții importante rămase",
-  "Montaj final gresie/parchet acolo unde nu e gata",
+  "Parter: turnarea șapelor (anunțată pentru săptămâna 27 iulie – 2 august)",
+  "Parter: pardoseli (gresie/parchet), tavane, zugrăveală, uși și finisaje",
+  "Parter: finalizarea instalațiilor electrice și sanitare",
+  "Soclul clădirii — în lucru",
+  "Etajul 1: finalizarea montajului caloriferelor; retușuri la etajele 1, 2 și 3",
+  "Sala de sport — NU intră în termenul de 8 septembrie; rămâne pentru mai târziu",
   "Recepția și curățenia finală / curtea școlii",
 ];
 
@@ -99,7 +103,12 @@ export const termene: { cand: string; status: Status; text: string }[] = [
   { cand: "16 octombrie 2025", status: "bad", text: "primul termen anunțat pentru finalizare" },
   { cand: "„Din toamnă” 2025", status: "bad", text: "termen anunțat public" },
   { cand: "Iunie 2026", status: "bad", text: "termen intermediar anunțat" },
-  { cand: "1 septembrie 2026", status: "progress", text: "termenul anunțat în prezent pentru finalizare" },
+  { cand: "1 septembrie 2026", status: "progress", text: "termenul anunțat pentru finalizare" },
+  {
+    cand: "8 septembrie 2026",
+    status: "current",
+    text: "garanția Primarului și a constructorului (27 iulie): școala finalizată, fără sala de sport",
+  },
 ];
 
 // Jurnal: cele mai noi săptămâni primele.
@@ -114,6 +123,15 @@ export const saptamani: {
   analizaAI?: string;
   media: string[];
 }[] = [
+  {
+    titlu: "27 iulie 2026 — vizită cu Primarul și constructorul",
+    data: "27 iulie 2026",
+    progres: "da",
+    nota: "Vizită a părinților la școală, împreună cu Primarul și un reprezentant al constructorului. 19 muncitori pe șantier. Următoarea vizită: 3 august 2026.",
+    analizaAI:
+      "Analiză din pozele raportate de părinți (27 iulie 2026). <strong>Progres real față de 16 iulie:</strong> pe șantier lucrează acum 19 muncitori (față de 2–3 înainte) — la soclu, la calorifere la etajul 1 și la retușuri la etajele 1–3. <strong>Etajele:</strong> pozele arată săli cu parchet montat, calorifere albe noi sub ferestre, pereți gletuiți și finisați — etajele sunt aproape gata. <strong>Parterul:</strong> pereții sunt gletuiți și albi (etapa de glet e încheiată), tâmplăria e montată, dar pardoseala e încă pământ și moloz, fără șapă; instalația electrică e trasă doar parțial (doze și trasee în pereți); la baza pereților mai e brut, unde vine șapa. Constructorul anunță că șapele la parter se toarnă săptămâna 27 iulie – 2 august. <strong>Concluzie:</strong> ritmul a crescut vizibil; parterul rămâne punctul critic — șapă, pardoseli, tavane, zugrăveală și finisaje în ~6 săptămâni. Garanția dată de Primar și constructor: școala gata pe 8 septembrie 2026, fără sala de sport.",
+    media: [],
+  },
   {
     titlu: "16 iulie 2026 — parter",
     data: "16 iulie 2026",
@@ -155,14 +173,37 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
     detalii: "Comunitatea de părinți lansează petiția pentru finalizarea lucrărilor la timp.",
   },
   {
-    data: "1 septembrie 2026",
+    data: "22 iulie 2026",
+    status: "done",
+    titlu: "Petiția depusă la Primărie",
+    detalii: "Petiția semnată pe hârtie, înregistrată la Primărie și Consiliul Local cu numerele 19849 și 19850.",
+  },
+  {
+    data: "27 iulie 2026",
+    status: "done",
+    titlu: "Vizită pe șantier cu Primarul și constructorul",
+    detalii:
+      "19 muncitori pe șantier. Garanție primită: școala finalizată până pe 8 septembrie 2026, fără sala de sport. Șapele la parter se toarnă în săptămâna următoare.",
+  },
+  {
+    data: "3 august 2026",
     status: "current",
+    titlu: "Următoarea vizită pe șantier",
+    detalii: "Verificăm dacă șapele de la parter au fost turnate, conform promisiunii.",
+  },
+  {
+    data: "1 septembrie 2026",
+    status: "none",
     titlu: "Termenul anunțat pentru finalizare",
     detalii: "Elevii ar urma să înceapă anul școlar 2026–2027 în școala reabilitată.",
   },
 ];
 
 export const actualizari = [
+  {
+    data: "27 iulie 2026",
+    text: "Vizită la școală împreună cu Primarul și un reprezentant al constructorului. Garanție primită: școala va fi finalizată până pe 8 septembrie 2026, fără sala de sport. Pe șantier lucrau 19 muncitori — la soclu, la montarea caloriferelor la etajul 1 și la retușuri la etajele 1–3. Șapele de la parter se toarnă săptămâna viitoare. Următoarea vizită: 3 august 2026.",
+  },
   {
     data: "22 iulie 2026",
     text: "Presa locală a preluat subiectul: Botoșani Expres și BotosaniNews scriu despre depunerea petiției la Primărie și despre această platformă pe care poate fi urmărit stadiul lucrărilor.",

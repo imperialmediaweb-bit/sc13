@@ -171,21 +171,23 @@ export default function Page() {
       estDetail = `Cu ~${muncitori} muncitori (${ritmLabel}), dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă: ${dataFinal}.`;
       sanse = 8;
     } else {
-      // puțini muncitori → ritm efectiv mai mic → mai multe săptămâni → data se împinge
-      const factorMuncitori = muncitori <= 3 ? 1.3 : muncitori <= 7 ? 1.05 : 1;
+      // numărul de muncitori ajustează ritmul: puțini → mai lent (data se împinge),
+      // mulți (mobilizare ca acum, 19) → mai rapid
+      const factorMuncitori = muncitori <= 3 ? 1.3 : muncitori <= 7 ? 1.05 : muncitori <= 14 ? 0.85 : 0.6;
       const saptNecesare = Math.ceil((ramas / ritm) * factorMuncitori);
       const finalMs = now + saptNecesare * 7 * 86400000;
-      const laTimp = finalMs <= deadline;
+      // „la timp” = elevii pot intra în școală la începutul anului școlar (8 septembrie),
+      // data garantată de Primar și constructor la vizita din 27 iulie
+      const laTimp = finalMs <= startScoala;
       dataFinal = fmt(finalMs);
-      // șanse ca elevii să înceapă la timp = raportat la începutul anului școlar (8 sept),
-      // nu la termenul de finalizare (1 sept). 50% dacă finalizarea pică fix pe 8 sept.
+      // 50% dacă finalizarea pică fix pe 8 septembrie
       const diffZile = Math.round((startScoala - finalMs) / 86400000);
       sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 4 + (prog - 80) * 0.4)));
       estVerdict = laTimp
-        ? "La ritmul actual, lucrările s-ar încadra în termenul anunțat."
-        : "La ritmul actual, finalizarea ar depăși termenul anunțat.";
+        ? "La ritmul actual, elevii ar putea intra în școală pe 8 septembrie."
+        : "La ritmul actual, finalizarea ar depăși data de 8 septembrie (începutul școlii).";
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
-      estDetail = `Ritm: ${ritm}% pe săptămână · ~${muncitori} muncitori (${ritmLabel}) · Rest de executat: ${ramas}% · Dată realistă estimată: ${dataFinal}.`;
+      estDetail = `Ritm: ${ritm}% pe săptămână · ~${muncitori} muncitori (${ritmLabel}) · Rest de executat: ${ramas}% · Dată realistă estimată: ${dataFinal}. Garanția Primarului și a constructorului (27 iulie): finalizare până pe 8 septembrie 2026, fără sala de sport.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
