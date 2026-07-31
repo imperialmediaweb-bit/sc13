@@ -18,6 +18,7 @@ import {
   Share2,
   Link2,
   CheckCircle2,
+  Landmark,
   type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -45,6 +46,8 @@ import {
   cronologie,
   actualizari,
   surse,
+  contextNational,
+  contextSurse,
   type Status,
 } from "@/lib/data";
 
@@ -85,6 +88,7 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   revendicari: ListChecks,
   actualizari: Bell,
   distribuie: Share2,
+  context: Landmark,
   surse: Link2,
 };
 
@@ -657,6 +661,58 @@ export default function Page() {
         </Section>
 
         {/* DISTRIBUIE */}
+        {/* CONTEXT NAȚIONAL */}
+        <Section id="context" title="Context național: cine e de vină?">
+          <p className="mb-4 text-sm text-muted-foreground">
+            Cercetare pe surse publice: e adevărat că „nu au fost bani”? Cine poartă responsabilitatea
+            întârzierilor — guvernul, constructorul sau Primăria? Sursele complete sunt la finalul secțiunii.
+          </p>
+          <div className="space-y-4">
+            {contextNational.map((c, i) => (
+              <div
+                key={i}
+                className={
+                  i === contextNational.length - 1
+                    ? "rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4"
+                    : "border-b border-border pb-4 last:border-0"
+                }
+              >
+                <h3 className="font-semibold">{c.titlu}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{c.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5 rounded-md border border-ok/40 bg-ok-soft p-4">
+            <p className="text-sm font-semibold text-ok">Important: ACUM banii există.</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Din vara 2026, guvernul a pus la dispoziție ~12 miliarde de lei pentru primăriile cu proiecte
+              PNRR — împrumuturi fără dobândă de la Trezorerie pentru proiectele cu progres de peste 60%.
+              Școala 13 este la ~80%, deci se califică. Orice întârziere de acum înainte nu mai poate fi pusă
+              pe seama lipsei banilor de la guvern.
+            </p>
+          </div>
+          <details className="mt-4">
+            <summary className="cursor-pointer text-sm font-semibold text-primary">
+              Sursele cercetării ({contextSurse.length})
+            </summary>
+            <ul className="mt-2 space-y-2 text-sm">
+              {contextSurse.map((s, i) => (
+                <li key={i} className="relative pl-4 leading-snug">
+                  <span className="absolute left-0 text-primary">›</span>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary underline-offset-2 hover:underline"
+                  >
+                    {s.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </Section>
+
         <Section id="distribuie" title="Distribuie pagina">
           <ShareButtons />
         </Section>

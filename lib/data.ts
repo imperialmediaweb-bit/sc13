@@ -242,6 +242,50 @@ export const actualizari = [
   },
 ];
 
+// Context național: cercetare despre blocajul plăților PNRR și cine poartă vina.
+// Toate afirmațiile au sursă în lista `contextSurse` de mai jos.
+export const contextNational: { titlu: string; text: string }[] = [
+  {
+    titlu: "Blocajul plăților PNRR e real, la nivel național",
+    text: "Facturi PNRR de peste 500 de milioane de euro au stat neplătite mai mult de 3 luni, iar constructorii din toată țara au cerut primăriilor să încetinească sau să oprească șantierele. Premierul Ilie Bolojan a recunoscut public: „Există întârzieri de plată la proiecte PNRR. Fără să ne plătim constructorii, greu să fie finalizate în august.” În primele 4 luni din 2026 s-au plătit doar ~60 de milioane de euro, în timp ce 82 de cereri de rambursare (~135 mil. €) stăteau neprocesate — unele depuse încă din 2024.",
+  },
+  {
+    titlu: "Dar guvernul a deblocat banii în vara 2026",
+    text: "Guvernul a aprobat de urgență un pachet de ~12 miliarde de lei: 10 miliarde ca împrumuturi fără dobândă de la Trezorerie pentru primăriile cu proiecte PNRR cu progres de peste 60% (cazul Școlii 13) și 2 miliarde pentru închiderea proiectelor. Concluzia practică: din vară, scuza „nu sunt bani” nu mai ține — banii pot fi accesați.",
+  },
+  {
+    titlu: "România a gestionat prost PNRR la nivel central",
+    text: "La renegocierea din 2025, România a renunțat la ~7 miliarde de euro din plan pentru că nu-și îndeplinea jaloanele, iar cererea de plată 5 a intrat în analiză cu doar 33 din 75 de jaloane îndeplinite. România a încasat doar ~61% din banii alocați — penultima din UE. Termenul absolut pentru toate lucrările PNRR: 31 august 2026.",
+  },
+  {
+    titlu: "Școala 13 nu e caz izolat",
+    text: "Multe școli PNRR din țară sunt încă în șantier. Exemplu aproape identic: Școala „Elena Cuza” din Vaslui nu va fi gata la timp, iar primăria de acolo riscă să returneze ~6 milioane de lei deja cheltuiți; elevii încep anul școlar în spații temporare.",
+  },
+  {
+    titlu: "Verificare: „unele școli au terminat pentru că firmele au avut bani; la Școala 13 firma nu a primit bani” (viceprimarul)",
+    text: "PARȚIAL ADEVĂRAT. Ce se confirmă: tranșele PNRR au venit cu întârzieri de 3–4 luni, iar la Botoșani, Colegiul Național „Mihai Eminescu” (31,3 mil. lei, constructor Sud-Est Construct) a fost recepționat integral — acolo firma a mers înainte și a prefinanțat. Ce NU se confirmă: că firma de la Școala 13 nu ar fi avut de unde. Katar Conneg SRL e cea mai mare firmă de construcții din județul Vaslui după cifra de afaceri — ~121 de milioane de lei în 2024, în creștere cu 30% — deci a avut capacitatea financiară, dar a ales să nu prefinanțeze Școala 13, în timp ce pe alt șantier al ei din Botoșani (ambulatoriul Spitalului „Mavromati”) lucrările sunt mai avansate. Presa mai relatează că firma a aparținut, până în 2020, unui om de afaceri condamnat definitiv pentru fraudă cu fonduri europene (fiind administrată acum de un membru al familiei) și că la un alt contract public a primit lucrări suplimentare de 6,3 mil. lei în afara licitației.",
+  },
+  {
+    titlu: "Concluzia cercetării",
+    text: "Vina e împărțită, în trei trepte: (1) guvernul și ministerele au blocat real plățile luni întregi — documentat și recunoscut de premier; (2) constructorul a folosit blocajul ca acoperire și a ținut șantierul la ritm minim, cu mobilizare doar la vizitele oficiale (19 muncitori cu Primarul de față, 2–3 în restul zilelor); (3) Primăria a tolerat patru amânări de termen fără penalități vizibile. După deblocarea celor 12 miliarde de lei, responsabilitatea ritmului aparține constructorului și Primăriei — nu mai există scuza banilor.",
+  },
+];
+
+export const contextSurse = [
+  { url: "https://www.puterea.ro/romania-in-blocaj-total-facturi-pnrr-neplatite-de-peste-trei-luni-si-constructori-gata-sa-opreasca-lucrarile/", text: "Puterea — Facturi PNRR neplătite de peste 3 luni; constructori gata să oprească lucrările" },
+  { url: "https://economedia.ro/bolojan-exista-intarzieri-de-plata-la-proiecte-pnrr-fara-sa-ne-platim-constructorii-greu-sa-fie-finalizate-in-august-cinci-loturi-din-autostrada-a7-sunt-in-pnrr.html", text: "Economedia — Bolojan: „Există întârzieri de plată la proiecte PNRR”" },
+  { url: "https://www.digi24.ro/digieconomic/financiar/guvernul-bolojan-in-sedinta-extraordinara-inainte-de-motiune-12-miliarde-de-lei-pentru-salvarea-proiectelor-pnrr-99813", text: "Digi24 — Guvernul deblochează 12 miliarde de lei pentru salvarea proiectelor PNRR" },
+  { url: "https://www.mediafax.ro/politic/ceasul-ticaie-pentru-63-miliarde-de-euro-din-pnrr-romania-intra-in-sprintul-final-al-pnrr-cu-doar-33-din-75-de-jaloane-indeplinite-23773861", text: "Mediafax — România, în sprintul final PNRR cu 33 din 75 de jaloane îndeplinite" },
+  { url: "https://www.antena3.ro/externe/uniunea-europeana/romania-si-bulgaria-sunt-codasele-ue-la-atragerea-fondurilor-din-pnrr-bucurestiul-a-incasat-doar-61-din-miliardele-alocate-796261.html", text: "Antena 3 — România a încasat doar 61% din banii PNRR, penultima din UE" },
+  { url: "https://stirileprotv.ro/romania-te-iubesc/unde-s-au-blocat-miliardele-din-pnrr-pentru-modernizarea-scolilor-multe-proiecte-sunt-inca-in-faza-de-santier.html", text: "Știrile ProTV — Unde s-au blocat miliardele PNRR pentru modernizarea școlilor" },
+  { url: "https://www.monitoruldevaslui.ro/2026/07/reabilitarea-scolii-elena-cuza-nu-va-fi-gata-la-timp-primaria-vaslui-ar-putea-fi-obligata-sa-returneze-6-milioane-de-lei/", text: "Monitorul de Vaslui — Școala „Elena Cuza”: nu va fi gata la timp; risc de returnare a 6 mil. lei" },
+  { url: "https://arenaconstruct.ro/colegiul-national-mihai-eminescu-din-botosani-reabilitat-integral-prin-pnrr-receptie-final-pentru-o-investitie-de-313-milioane-lei/", text: "ArenaConstruct — Colegiul „Mihai Eminescu” Botoșani, reabilitat integral prin PNRR (31,3 mil. lei)" },
+  { url: "https://termene.ro/firma/40314681-KATAR-CONNEG-SRL", text: "Termene.ro — Katar Conneg SRL: locul 1 în Vaslui după cifra de afaceri (~121 mil. lei în 2024, +30%)" },
+  { url: "https://www.vremeanoua.ro/lovitura-pentru-constructorul-de-casa-al-psd-vaslui-a-prins-o-lucrare-de-peste-40-de-milioane-de-euro-in-judet/", text: "Vremea Nouă — Katar Conneg, „constructorul de casă” al PSD Vaslui; lucrare de 40 mil. €" },
+  { url: "https://www.bzi.ro/incredibil-aceasta-a-fost-manevra-prin-care-katar-conneg-a-ajuns-sa-semneze-contractul-de-reabilitare-a-casei-patrate-firma-a-primit-in-afara-licitatiei-63-milioane-de-lei-5431600", text: "BZI — Katar Conneg a primit 6,3 mil. lei în afara licitației la Casa Pătrată (Iași)" },
+  { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Viceprimarul: întârzierile la Școala 13, provocate de blocajele la plăți (tranșe la 3–4 luni)" },
+];
+
 // Surse din presă, în ordine cronologică (de la cele mai vechi la cele mai noi).
 export const surse = [
   { url: "https://vivafm.ro/stire/2025/07/14/modernizare-completa-la-scoala-gimnaziala-nr-13/", text: "VIVA FM — Modernizare completă la Școala Gimnazială nr. 13 (14 iulie 2025)" },
