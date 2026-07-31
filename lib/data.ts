@@ -114,9 +114,9 @@ export const termene: { cand: string; status: Status; text: string }[] = [
     text: "garanția Primarului și a constructorului (27 iulie): școala finalizată, fără sala de sport",
   },
   {
-    cand: "~Octombrie 2026 (posibil)",
+    cand: "Sept.–Oct. 2026 (risc)",
     status: "bad",
-    text: "viceprimarul admite în Consiliul Local (31 iulie) o posibilă întârziere de încă o lună; elevii ar fi relocați de Inspectoratul Școlar",
+    text: "viceprimarul admite în Consiliul Local (31 iulie) că unele școli pot începe cu 2 săptămâni – o lună mai târziu, cu relocare prin Inspectoratul Școlar (fără a nominaliza Școala 13)",
   },
 ];
 
@@ -197,9 +197,9 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
   {
     data: "31 iulie 2026",
     status: "done",
-    titlu: "Viceprimarul admite posibila întârziere, în Consiliul Local",
+    titlu: "Viceprimarul, în Consiliul Local: unele școli pot începe mai târziu",
     detalii:
-      "La 4 zile după garanția de 8 septembrie, viceprimarul Bogdan Buhăianu declară că lucrările se pot întârzia cu încă o lună și că elevii ar urma să fie relocați de Inspectoratul Școlar Județean.",
+      "Viceprimarul Bogdan Buhăianu declară că unele școli aflate în șantier ar putea începe anul școlar cu 2 săptămâni – o lună mai târziu, elevii urmând a fi relocați de Inspectoratul Școlar Județean. Nu a nominalizat Școala 13.",
   },
   {
     data: "3 august 2026",
@@ -218,7 +218,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "31 iulie 2026",
-    text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: lucrările se pot întârzia cu încă o lună, iar elevii vor fi relocați de Inspectoratul Școlar Județean, care are această atribuție. La doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de Primar și constructor, se admite oficial că termenul poate fi depășit — exact ce arăta deja estimarea platformei pe ritmul real de lucru.",
+    text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: unele școli aflate în șantier ar putea începe anul școlar mai târziu, cu două săptămâni până la o lună, iar elevii ar urma să fie relocați de Inspectoratul Școlar Județean, care are această atribuție. Nu a nominalizat Școala 13 — dar declarația vine la doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de Primar și constructor, și confirmă că riscul de întârziere e luat în calcul oficial.",
   },
   {
     data: "28 iulie 2026",
@@ -263,7 +263,7 @@ export const contextNational: { titlu: string; text: string }[] = [
   },
   {
     titlu: "Verificare: „unele școli au terminat pentru că firmele au avut bani; la Școala 13 firma nu a primit bani” (viceprimarul)",
-    text: "PARȚIAL ADEVĂRAT. Ce se confirmă: tranșele PNRR au venit cu întârzieri de 3–4 luni, iar la Botoșani, Colegiul Național „Mihai Eminescu” (31,3 mil. lei, constructor Sud-Est Construct) a fost recepționat integral — acolo firma a mers înainte și a prefinanțat. Ce NU se confirmă: că firma de la Școala 13 nu ar fi avut de unde. Katar Conneg SRL e cea mai mare firmă de construcții din județul Vaslui după cifra de afaceri — ~121 de milioane de lei în 2024, în creștere cu 30% — deci a avut capacitatea financiară, dar a ales să nu prefinanțeze Școala 13, în timp ce pe alt șantier al ei din Botoșani (ambulatoriul Spitalului „Mavromati”) lucrările sunt mai avansate. Presa mai relatează că firma a aparținut, până în 2020, unui om de afaceri condamnat definitiv pentru fraudă cu fonduri europene (fiind administrată acum de un membru al familiei) și că la un alt contract public a primit lucrări suplimentare de 6,3 mil. lei în afara licitației.",
+    text: "PARȚIAL ADEVĂRAT. Ce se confirmă: tranșele PNRR au venit cu întârzieri de 3–4 luni, iar la Botoșani, Colegiul Național „Mihai Eminescu” (31,3 mil. lei, constructor Sud-Est Construct) a fost recepționat integral — acolo firma a mers înainte și a prefinanțat. Ce NU se confirmă: că firma de la Școala 13 nu ar fi avut de unde. Katar Conneg SRL e cea mai mare firmă de construcții din județul Vaslui după cifra de afaceri — ~121 de milioane de lei în 2024, în creștere cu 30% — deci a avut capacitatea financiară, dar a ales să nu prefinanțeze Școala 13, în timp ce pe alt șantier al ei din Botoșani (ambulatoriul Spitalului „Mavromati”) lucrările sunt mai avansate.",
   },
   {
     titlu: "Concluzia cercetării",
@@ -281,8 +281,6 @@ export const contextSurse = [
   { url: "https://www.monitoruldevaslui.ro/2026/07/reabilitarea-scolii-elena-cuza-nu-va-fi-gata-la-timp-primaria-vaslui-ar-putea-fi-obligata-sa-returneze-6-milioane-de-lei/", text: "Monitorul de Vaslui — Școala „Elena Cuza”: nu va fi gata la timp; risc de returnare a 6 mil. lei" },
   { url: "https://arenaconstruct.ro/colegiul-national-mihai-eminescu-din-botosani-reabilitat-integral-prin-pnrr-receptie-final-pentru-o-investitie-de-313-milioane-lei/", text: "ArenaConstruct — Colegiul „Mihai Eminescu” Botoșani, reabilitat integral prin PNRR (31,3 mil. lei)" },
   { url: "https://termene.ro/firma/40314681-KATAR-CONNEG-SRL", text: "Termene.ro — Katar Conneg SRL: locul 1 în Vaslui după cifra de afaceri (~121 mil. lei în 2024, +30%)" },
-  { url: "https://www.vremeanoua.ro/lovitura-pentru-constructorul-de-casa-al-psd-vaslui-a-prins-o-lucrare-de-peste-40-de-milioane-de-euro-in-judet/", text: "Vremea Nouă — Katar Conneg, „constructorul de casă” al PSD Vaslui; lucrare de 40 mil. €" },
-  { url: "https://www.bzi.ro/incredibil-aceasta-a-fost-manevra-prin-care-katar-conneg-a-ajuns-sa-semneze-contractul-de-reabilitare-a-casei-patrate-firma-a-primit-in-afara-licitatiei-63-milioane-de-lei-5431600", text: "BZI — Katar Conneg a primit 6,3 mil. lei în afara licitației la Casa Pătrată (Iași)" },
   { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Viceprimarul: întârzierile la Școala 13, provocate de blocajele la plăți (tranșe la 3–4 luni)" },
 ];
 

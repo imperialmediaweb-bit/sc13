@@ -202,7 +202,7 @@ export default function Page() {
       estDetail =
         `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
         `Scenariul REAL (${muncitori} muncitori, câți văd părinții în zilele obișnuite): gata în jur de ${fmt(finalReal)}. ` +
-        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată. Pe 31 iulie, viceprimarul a admis în Consiliul Local o posibilă întârziere de încă o lună — în linie cu scenariul real de mai sus.`;
+        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată. Pe 31 iulie, viceprimarul a admis în Consiliul Local că unele școli pot începe cu 2 săptămâni – o lună mai târziu (fără a nominaliza Școala 13).`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
