@@ -3,7 +3,12 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/** Dezvăluie conținutul la scroll (fade + translate), stil Magic UI. */
+/**
+ * Dezvăluie conținutul la scroll (fade + translate), stil Magic UI.
+ * Important pentru viteză: conținutul e VIZIBIL din start (inclusiv înainte de
+ * hidratare). Doar elementele aflate sub fold sunt ascunse — după montare —
+ * și se animează când intră în viewport. Așa pagina nu mai „așteaptă" JS-ul.
+ */
 export function Reveal({
   children,
   className,
@@ -14,16 +19,24 @@ export function Reveal({
   delay?: number;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
-  const [shown, setShown] = React.useState(false);
+  // null = nemontat încă (vizibil, fără animație); false = ascuns, așteaptă scroll; true = animat
+  const [shown, setShown] = React.useState<boolean | null>(null);
 
   React.useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
       setShown(true);
       return;
     }
-    const node = ref.current;
-    if (!node) return;
+    // dacă elementul e deja (măcar parțial) în viewport, rămâne vizibil — fără animație
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.95) {
+      setShown(true);
+      return;
+    }
+    setShown(false);
     const io = new IntersectionObserver(
       (entries) =>
         entries.forEach((e) => {
@@ -32,7 +45,7 @@ export function Reveal({
             io.unobserve(e.target);
           }
         }),
-      { threshold: 0.12 }
+      { threshold: 0.08 }
     );
     io.observe(node);
     return () => io.disconnect();
@@ -43,8 +56,8 @@ export function Reveal({
       ref={ref}
       style={{ transitionDelay: `${delay}ms` }}
       className={cn(
-        "transition-all duration-700 ease-out will-change-transform motion-reduce:transition-none",
-        shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4",
+        "transition-all duration-500 ease-out motion-reduce:transition-none",
+        shown === false ? "translate-y-3 opacity-0" : "translate-y-0 opacity-100",
         className
       )}
     >

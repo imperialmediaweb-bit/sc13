@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { Camera, Film } from "lucide-react";
+import { cldOpt, cldPoster } from "@/lib/img";
 
 const isVideo = (p: string) => /\.(mp4|webm|mov|m4v|ogg)$/i.test(p);
 
@@ -35,7 +36,8 @@ export function MediaItem({ src, alt }: { src: string; alt: string }) {
         <video
           src={src}
           controls
-          preload="metadata"
+          preload="none"
+          poster={cldPoster(src, 700) || undefined}
           className="aspect-[4/3] w-full object-cover"
           onError={() => setBroken(true)}
         />
@@ -47,9 +49,10 @@ export function MediaItem({ src, alt }: { src: string; alt: string }) {
     <a href={src} target="_blank" rel="noopener noreferrer" className={shell}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={src}
+        src={cldOpt(src, 700)}
         alt={alt}
         loading="lazy"
+        decoding="async"
         className="aspect-[4/3] w-full object-cover"
         onError={() => setBroken(true)}
       />

@@ -27,7 +27,9 @@ import { ReportForm } from "@/components/report-form";
 import { ParentReports } from "@/components/parent-reports";
 import { SantierGallery } from "@/components/santier-gallery";
 import { AppCTA } from "@/components/app-cta";
+import { PetitionEmbed } from "@/components/petition-embed";
 import { cn } from "@/lib/utils";
+import { cldOpt } from "@/lib/img";
 import {
   petitie,
   petitieDepusa,
@@ -219,7 +221,7 @@ export default function Page() {
       .then((r) => r.json())
       .then((d) => {
         const img = (d.items || []).find((it: { type: string; url: string }) => it.type === "image");
-        if (img) setHeroImg(img.url);
+        if (img) setHeroImg(cldOpt(img.url, 1600));
       })
       .catch(() => {});
   }, []);
@@ -341,14 +343,10 @@ export default function Page() {
           {/* Petiția oficială — semnare direct în pagină (numărul live e aici) */}
           <div className="mt-5">
             <p className="mb-2 text-sm font-semibold">Semnează direct aici (număr de semnături în timp real):</p>
-            <div className="overflow-hidden rounded-lg border border-border">
-              <iframe
-                src="https://www.petitieonline.com/embed/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor"
-                title="Semnează petiția: Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani"
-                className="h-[600px] w-full"
-                loading="lazy"
-              />
-            </div>
+            <PetitionEmbed
+              src="https://www.petitieonline.com/embed/finalizati_lucrrile_la_coala_gimnazial_nr_13_botoani_ca_elevii_s_inceap_noul_an_colar_in_coala_lor"
+              title="Semnează petiția: Finalizați lucrările la Școala Gimnazială nr. 13 Botoșani"
+            />
           </div>
         </Section>
 
