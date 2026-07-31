@@ -179,7 +179,7 @@ export default function Page() {
       // numărul de muncitori ajustează ritmul: puțini → mai lent, mulți → mai rapid
       const factorOf = (n: number) => (n <= 3 ? 1.3 : n <= 7 ? 1.05 : n <= 14 ? 0.85 : 0.6);
       // Două scenarii: ritmul REAL din zilele obișnuite (2–3 muncitori, raportat de părinți)
-      // vs. ritmul PROMIS, ca la vizita oficială (19 muncitori aduși când vine Primarul).
+      // vs. ritmul PROMIS, ca la vizita oficială (19 muncitori aduși când vin oficialii).
       const saptReal = Math.ceil((ramas / ritm) * factorOf(muncitori));
       const saptPromis = Math.ceil((ramas / ritm) * factorOf(muncitoriVizita.numar));
       const finalReal = now + saptReal * 7 * 86400000;
@@ -429,9 +429,9 @@ export default function Page() {
               zilelor.
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              La vizita din {muncitoriVizita.data}, cu Primarul de față, constructorul avea{" "}
+              La vizita din {muncitoriVizita.data}, cu oficialii de față, constructorul avea{" "}
               {muncitoriVizita.numar} muncitori pe șantier. Părinții raportează însă că, în zilele obișnuite,
-              se lucrează în continuare cu doar 2–3 oameni. Dacă mobilizarea există doar când vine Primarul,
+              se lucrează în continuare cu doar 2–3 oameni. Dacă mobilizarea există doar când vin oficialii,
               termenul nu poate fi ținut — de aceea estimarea de mai jos folosește ritmul din zilele obișnuite,
               nu pe cel de la vizite. Urmărim la fiecare raportare câți muncitori sunt cu adevărat.
             </p>
@@ -479,7 +479,7 @@ export default function Page() {
             <div>
               <p className="text-lg font-semibold">
                 Șanse ca elevii să înceapă anul școlar în școala reabilitată. Anul școlar începe pe{" "}
-                <strong>7 septembrie 2026</strong> — iar garanția dată de Primar și constructor pe 27 iulie e
+                <strong>7 septembrie 2026</strong> — iar garanția dată de oficialii Primăriei și de constructor pe 27 iulie e
                 „finalizat până pe 8 septembrie", adică la o zi <em>după</em> începerea școlii.
               </p>
               <div className="mt-4 rounded-lg border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">

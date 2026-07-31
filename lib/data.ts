@@ -40,7 +40,7 @@ export const proiect: { eticheta: string; valoare: string }[] = [
 // Estimarea se face pe acest număr — el dă ritmul real, susținut.
 export const muncitori = 3;
 
-// Câți muncitori erau la vizita oficială (când vine Primarul, șantierul se umple).
+// Câți muncitori erau la vizita oficială (când vin oficialii, șantierul se umple).
 // Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
 export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 
@@ -111,7 +111,7 @@ export const termene: { cand: string; status: Status; text: string }[] = [
   {
     cand: "8 septembrie 2026",
     status: "current",
-    text: "garanția Primarului și a constructorului (27 iulie): școala finalizată, fără sala de sport",
+    text: "garanția oficialilor Primăriei și a constructorului (27 iulie): școala finalizată, fără sala de sport",
   },
   {
     cand: "Sept.–Oct. 2026 (risc)",
@@ -133,12 +133,12 @@ export const saptamani: {
   media: string[];
 }[] = [
   {
-    titlu: "27 iulie 2026 — vizită cu Primarul și constructorul",
+    titlu: "27 iulie 2026 — vizită cu oficialii Primăriei și constructorul",
     data: "27 iulie 2026",
     progres: "da",
-    nota: "Vizită a părinților la școală, împreună cu Primarul și un reprezentant al constructorului. 19 muncitori pe șantier. Următoarea vizită: 3 august 2026.",
+    nota: "Vizită a părinților la școală, împreună cu oficiali din administrația locală și un reprezentant al constructorului. 19 muncitori pe șantier. Următoarea vizită: 3 august 2026.",
     analizaAI:
-      "Analiză din pozele raportate de părinți (27 iulie 2026). <strong>Progres real față de 16 iulie:</strong> pe șantier lucrează acum 19 muncitori (față de 2–3 înainte) — la soclu, la calorifere la etajul 1 și la retușuri la etajele 1–3. <strong>Etajele:</strong> pozele arată săli cu parchet montat, calorifere albe noi sub ferestre, pereți gletuiți și finisați — etajele sunt aproape gata. <strong>Parterul:</strong> pereții sunt gletuiți și albi (etapa de glet e încheiată), tâmplăria e montată, dar pardoseala e încă pământ și moloz, fără șapă; instalația electrică e trasă doar parțial (doze și trasee în pereți); la baza pereților mai e brut, unde vine șapa. Constructorul anunță că șapele la parter se toarnă săptămâna 27 iulie – 2 august. <strong>Concluzie:</strong> ritmul a crescut vizibil; parterul rămâne punctul critic — șapă, pardoseli, tavane, zugrăveală și finisaje în ~6 săptămâni. Garanția dată de Primar și constructor: școala gata pe 8 septembrie 2026, fără sala de sport.",
+      "Analiză din pozele raportate de părinți (27 iulie 2026). <strong>Progres real față de 16 iulie:</strong> pe șantier lucrează acum 19 muncitori (față de 2–3 înainte) — la soclu, la calorifere la etajul 1 și la retușuri la etajele 1–3. <strong>Etajele:</strong> pozele arată săli cu parchet montat, calorifere albe noi sub ferestre, pereți gletuiți și finisați — etajele sunt aproape gata. <strong>Parterul:</strong> pereții sunt gletuiți și albi (etapa de glet e încheiată), tâmplăria e montată, dar pardoseala e încă pământ și moloz, fără șapă; instalația electrică e trasă doar parțial (doze și trasee în pereți); la baza pereților mai e brut, unde vine șapa. Constructorul anunță că șapele la parter se toarnă săptămâna 27 iulie – 2 august. <strong>Concluzie:</strong> ritmul a crescut vizibil; parterul rămâne punctul critic — șapă, pardoseli, tavane, zugrăveală și finisaje în ~6 săptămâni. Garanția dată de oficialii Primăriei și de constructor: școala gata pe 8 septembrie 2026, fără sala de sport.",
     media: [],
   },
   {
@@ -190,7 +190,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
   {
     data: "27 iulie 2026",
     status: "done",
-    titlu: "Vizită pe șantier cu Primarul și constructorul",
+    titlu: "Vizită pe șantier cu oficialii Primăriei și constructorul",
     detalii:
       "19 muncitori pe șantier. Garanție primită: școala finalizată până pe 8 septembrie 2026, fără sala de sport. Șapele la parter se toarnă în săptămâna următoare.",
   },
@@ -218,15 +218,15 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "31 iulie 2026",
-    text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: unele școli aflate în șantier ar putea începe anul școlar mai târziu, cu două săptămâni până la o lună, iar elevii ar urma să fie relocați de Inspectoratul Școlar Județean, care are această atribuție. Nu a nominalizat Școala 13 — dar declarația vine la doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de Primar și constructor, și confirmă că riscul de întârziere e luat în calcul oficial.",
+    text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: unele școli aflate în șantier ar putea începe anul școlar mai târziu, cu două săptămâni până la o lună, iar elevii ar urma să fie relocați de Inspectoratul Școlar Județean, care are această atribuție. Nu a nominalizat Școala 13 — dar declarația vine la doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de oficialii Primăriei și de constructor, și confirmă că riscul de întârziere e luat în calcul oficial.",
   },
   {
     data: "28 iulie 2026",
-    text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu Primarul de față. În zilele obișnuite se lucrează în continuare cu 2–3 oameni. Am ajustat estimarea pe ritmul real din zilele obișnuite și urmărim la fiecare raportare câți muncitori sunt de fapt.",
+    text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu oficialii de față. În zilele obișnuite se lucrează în continuare cu 2–3 oameni. Am ajustat estimarea pe ritmul real din zilele obișnuite și urmărim la fiecare raportare câți muncitori sunt de fapt.",
   },
   {
     data: "27 iulie 2026",
-    text: "Vizită la școală împreună cu Primarul și un reprezentant al constructorului. Garanție primită: școala va fi finalizată până pe 8 septembrie 2026, fără sala de sport. Pe șantier lucrau 19 muncitori — la soclu, la montarea caloriferelor la etajul 1 și la retușuri la etajele 1–3. Șapele de la parter se toarnă săptămâna viitoare. Următoarea vizită: 3 august 2026.",
+    text: "Vizită la școală împreună cu oficiali din administrația locală și un reprezentant al constructorului. Garanție primită: școala va fi finalizată până pe 8 septembrie 2026, fără sala de sport. Pe șantier lucrau 19 muncitori — la soclu, la montarea caloriferelor la etajul 1 și la retușuri la etajele 1–3. Șapele de la parter se toarnă săptămâna viitoare. Următoarea vizită: 3 august 2026.",
   },
   {
     data: "22 iulie 2026",
@@ -267,7 +267,7 @@ export const contextNational: { titlu: string; text: string }[] = [
   },
   {
     titlu: "Concluzia cercetării",
-    text: "Vina e împărțită, în trei trepte: (1) guvernul și ministerele au blocat real plățile luni întregi — documentat și recunoscut de premier; (2) constructorul a folosit blocajul ca acoperire și a ținut șantierul la ritm minim, cu mobilizare doar la vizitele oficiale (19 muncitori cu Primarul de față, 2–3 în restul zilelor); (3) Primăria a tolerat patru amânări de termen fără penalități vizibile. După deblocarea celor 12 miliarde de lei, responsabilitatea ritmului aparține constructorului și Primăriei — nu mai există scuza banilor.",
+    text: "Vina e împărțită, în trei trepte: (1) guvernul și ministerele au blocat real plățile luni întregi — documentat și recunoscut de premier; (2) constructorul a folosit blocajul ca acoperire și a ținut șantierul la ritm minim, cu mobilizare doar la vizitele oficiale (19 muncitori cu oficialii de față, 2–3 în restul zilelor); (3) Primăria a tolerat patru amânări de termen fără penalități vizibile. După deblocarea celor 12 miliarde de lei, responsabilitatea ritmului aparține constructorului și Primăriei — nu mai există scuza banilor.",
   },
 ];
 
