@@ -113,6 +113,11 @@ export const termene: { cand: string; status: Status; text: string }[] = [
     status: "current",
     text: "garanția Primarului și a constructorului (27 iulie): școala finalizată, fără sala de sport",
   },
+  {
+    cand: "~Octombrie 2026 (posibil)",
+    status: "bad",
+    text: "viceprimarul admite în Consiliul Local (31 iulie) o posibilă întârziere de încă o lună; elevii ar fi relocați de Inspectoratul Școlar",
+  },
 ];
 
 // Jurnal: cele mai noi săptămâni primele.
@@ -190,6 +195,13 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
       "19 muncitori pe șantier. Garanție primită: școala finalizată până pe 8 septembrie 2026, fără sala de sport. Șapele la parter se toarnă în săptămâna următoare.",
   },
   {
+    data: "31 iulie 2026",
+    status: "done",
+    titlu: "Viceprimarul admite posibila întârziere, în Consiliul Local",
+    detalii:
+      "La 4 zile după garanția de 8 septembrie, viceprimarul Bogdan Buhăianu declară că lucrările se pot întârzia cu încă o lună și că elevii ar urma să fie relocați de Inspectoratul Școlar Județean.",
+  },
+  {
     data: "3 august 2026",
     status: "current",
     titlu: "Următoarea vizită pe șantier",
@@ -204,6 +216,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "31 iulie 2026",
+    text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: lucrările se pot întârzia cu încă o lună, iar elevii vor fi relocați de Inspectoratul Școlar Județean, care are această atribuție. La doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de Primar și constructor, se admite oficial că termenul poate fi depășit — exact ce arăta deja estimarea platformei pe ritmul real de lucru.",
+  },
   {
     data: "28 iulie 2026",
     text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu Primarul de față. În zilele obișnuite se lucrează în continuare cu 2–3 oameni. Am ajustat estimarea pe ritmul real din zilele obișnuite și urmărim la fiecare raportare câți muncitori sunt de fapt.",

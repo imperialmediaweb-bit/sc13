@@ -188,7 +188,9 @@ export default function Page() {
         const diffZile = Math.round((startScoala - finalMs) / 86400000);
         return Math.max(5, Math.min(95, Math.round(50 + diffZile * 4 + (prog - 80) * 0.4)));
       };
-      sanse = Math.round(sanseDe(finalReal) * 0.6 + sanseDe(finalPromis) * 0.4);
+      // 31 iulie: viceprimarul a admis în Consiliul Local o posibilă întârziere de o lună,
+      // deci scenariul real primește greutate mai mare
+      sanse = Math.round(sanseDe(finalReal) * 0.75 + sanseDe(finalPromis) * 0.25);
       estVerdict = laTimp
         ? "La ritmul actual, elevii ar putea intra în școală pe 7 septembrie."
         : "Cu ritmul din zilele obișnuite, finalizarea ar depăși 7 septembrie (începutul școlii).";
@@ -196,7 +198,7 @@ export default function Page() {
       estDetail =
         `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
         `Scenariul REAL (${muncitori} muncitori, câți văd părinții în zilele obișnuite): gata în jur de ${fmt(finalReal)}. ` +
-        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată.`;
+        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată. Pe 31 iulie, viceprimarul a admis în Consiliul Local o posibilă întârziere de încă o lună — în linie cu scenariul real de mai sus.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
