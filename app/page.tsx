@@ -37,6 +37,7 @@ import {
   etapeLucrare,
   procentEtaj,
   muncitori,
+  muncitoriVizita,
   progresSaptamanaTrecuta,
   ramasDeFacut,
   termene,
@@ -171,23 +172,31 @@ export default function Page() {
       estDetail = `Cu ~${muncitori} muncitori (${ritmLabel}), dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă: ${dataFinal}.`;
       sanse = 8;
     } else {
-      // numărul de muncitori ajustează ritmul: puțini → mai lent (data se împinge),
-      // mulți (mobilizare ca acum, 19) → mai rapid
-      const factorMuncitori = muncitori <= 3 ? 1.3 : muncitori <= 7 ? 1.05 : muncitori <= 14 ? 0.85 : 0.6;
-      const saptNecesare = Math.ceil((ramas / ritm) * factorMuncitori);
-      const finalMs = now + saptNecesare * 7 * 86400000;
-      // „la timp” = elevii pot intra în școală la începutul anului școlar (8 septembrie),
-      // data garantată de Primar și constructor la vizita din 27 iulie
-      const laTimp = finalMs <= startScoala;
-      dataFinal = fmt(finalMs);
-      // 50% dacă finalizarea pică fix pe 8 septembrie
-      const diffZile = Math.round((startScoala - finalMs) / 86400000);
-      sanse = Math.max(5, Math.min(95, Math.round(50 + diffZile * 4 + (prog - 80) * 0.4)));
+      // numărul de muncitori ajustează ritmul: puțini → mai lent, mulți → mai rapid
+      const factorOf = (n: number) => (n <= 3 ? 1.3 : n <= 7 ? 1.05 : n <= 14 ? 0.85 : 0.6);
+      // Două scenarii: ritmul REAL din zilele obișnuite (2–3 muncitori, raportat de părinți)
+      // vs. ritmul PROMIS, ca la vizita oficială (19 muncitori aduși când vine Primarul).
+      const saptReal = Math.ceil((ramas / ritm) * factorOf(muncitori));
+      const saptPromis = Math.ceil((ramas / ritm) * factorOf(muncitoriVizita.numar));
+      const finalReal = now + saptReal * 7 * 86400000;
+      const finalPromis = now + saptPromis * 7 * 86400000;
+      // „la timp” = elevii pot intra în școală la începutul anului școlar (7 septembrie)
+      const laTimp = finalReal <= startScoala;
+      dataFinal = fmt(finalReal);
+      // șansele: media celor două scenarii, înclinată spre ce se vede zilnic pe șantier
+      const sanseDe = (finalMs: number) => {
+        const diffZile = Math.round((startScoala - finalMs) / 86400000);
+        return Math.max(5, Math.min(95, Math.round(50 + diffZile * 4 + (prog - 80) * 0.4)));
+      };
+      sanse = Math.round(sanseDe(finalReal) * 0.6 + sanseDe(finalPromis) * 0.4);
       estVerdict = laTimp
-        ? "La ritmul actual, elevii ar putea intra în școală pe 8 septembrie."
-        : "La ritmul actual, finalizarea ar depăși data de 8 septembrie (începutul școlii).";
+        ? "La ritmul actual, elevii ar putea intra în școală pe 7 septembrie."
+        : "Cu ritmul din zilele obișnuite, finalizarea ar depăși 7 septembrie (începutul școlii).";
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
-      estDetail = `Ritm: ${ritm}% pe săptămână · ~${muncitori} muncitori (${ritmLabel}) · Rest de executat: ${ramas}% · Dată realistă estimată: ${dataFinal}. Garanția Primarului și a constructorului (27 iulie): finalizare până pe 8 septembrie 2026, fără sala de sport.`;
+      estDetail =
+        `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
+        `Scenariul REAL (${muncitori} muncitori, câți văd părinții în zilele obișnuite): gata în jur de ${fmt(finalReal)}. ` +
+        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
@@ -408,6 +417,20 @@ export default function Page() {
             îl dau etapele văzute în pozele de pe șantier.
           </p>
 
+          <div className="mt-5 rounded-md border-l-4 border-bad bg-bad-soft p-4">
+            <p className="font-semibold text-bad">
+              ⚠ Muncitori doar la vizite? {muncitoriVizita.numar} la vizita oficială, ~{muncitori} în restul
+              zilelor.
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              La vizita din {muncitoriVizita.data}, cu Primarul de față, constructorul avea{" "}
+              {muncitoriVizita.numar} muncitori pe șantier. Părinții raportează însă că, în zilele obișnuite,
+              se lucrează în continuare cu doar 2–3 oameni. Dacă mobilizarea există doar când vine Primarul,
+              termenul nu poate fi ținut — de aceea estimarea de mai jos folosește ritmul din zilele obișnuite,
+              nu pe cel de la vizite. Urmărim la fiecare raportare câți muncitori sunt cu adevărat.
+            </p>
+          </div>
+
           <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
             <p className="font-semibold" style={{ color: view?.estColor }}>
               {view?.estVerdict ?? "Se calculează…"}
@@ -450,7 +473,8 @@ export default function Page() {
             <div>
               <p className="text-lg font-semibold">
                 Șanse ca elevii să înceapă anul școlar în școala reabilitată. Anul școlar începe pe{" "}
-                <strong>8 septembrie 2026</strong> (termenul promis de finalizare este 1 septembrie).
+                <strong>7 septembrie 2026</strong> — iar garanția dată de Primar și constructor pe 27 iulie e
+                „finalizat până pe 8 septembrie", adică la o zi <em>după</em> începerea școlii.
               </p>
               <div className="mt-4 rounded-lg border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

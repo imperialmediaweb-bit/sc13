@@ -21,8 +21,8 @@ export const petitieDepusa = {
 
 // Termenul promis de finalizare a lucrărilor (an, luna 0-11, zi) — 1 septembrie 2026
 export const termenFinal: [number, number, number] = [2026, 8, 1];
-// Începutul anului școlar — 8 septembrie 2026 (data reală până la care elevii trebuie să poată intra)
-export const anScolarStart: [number, number, number] = [2026, 8, 8];
+// Începutul anului școlar — 7 septembrie 2026 (data reală până la care elevii trebuie să poată intra)
+export const anScolarStart: [number, number, number] = [2026, 8, 7];
 
 // Detalii proiect (informații publice, din presă și comunicate)
 export const proiect: { eticheta: string; valoare: string }[] = [
@@ -36,9 +36,13 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
 ];
 
-// Câți oameni lucrează acum pe șantier. Influențează ritmul și data.
-// 27 iulie 2026: 19 muncitori (raportat de părinți, la vizita pe șantier).
-export const muncitori = 19;
+// Câți oameni lucrează pe șantier ÎN ZILELE OBIȘNUITE (raportat de părinți).
+// Estimarea se face pe acest număr — el dă ritmul real, susținut.
+export const muncitori = 3;
+
+// Câți muncitori erau la vizita oficială (când vine Primarul, șantierul se umple).
+// Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
+export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 
 // Etapele de finisaj și cât cântărește fiecare din total (%). Suma = 100.
 export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = [
@@ -200,6 +204,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "28 iulie 2026",
+    text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu Primarul de față. În zilele obișnuite se lucrează în continuare cu 2–3 oameni. Am ajustat estimarea pe ritmul real din zilele obișnuite și urmărim la fiecare raportare câți muncitori sunt de fapt.",
+  },
   {
     data: "27 iulie 2026",
     text: "Vizită la școală împreună cu Primarul și un reprezentant al constructorului. Garanție primită: școala va fi finalizată până pe 8 septembrie 2026, fără sala de sport. Pe șantier lucrau 19 muncitori — la soclu, la montarea caloriferelor la etajul 1 și la retușuri la etajele 1–3. Șapele de la parter se toarnă săptămâna viitoare. Următoarea vizită: 3 august 2026.",
