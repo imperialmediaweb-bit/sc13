@@ -36,13 +36,30 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
 ];
 
-// Câți oameni lucrează pe șantier ÎN ZILELE OBIȘNUITE (raportat de părinți).
-// Estimarea se face pe acest număr — el dă ritmul real, susținut.
-export const muncitori = 3;
+// Media zilnică REALĂ de muncitori, estimată prin calcul invers din poze:
+// câtă muncă se vede făcută între 16 și 27 iulie ÷ zile lucrătoare (vezi calculMuncitori).
+// Părinții văd 2–3 în vizitele spontane; media cu tot cu zilele de mobilizare iese ~5.
+export const muncitori = 5;
 
 // Câți muncitori erau la vizita oficială (când vin oficialii, șantierul se umple).
 // Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
 export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
+
+// Calcul invers: din diferența dintre pozele din 16 iulie și cele din 27 iulie
+// deducem câtă muncă s-a depus efectiv — și deci câți oameni au lucrat în medie.
+export const calculMuncitori = {
+  perioada: "16 – 27 iulie 2026 (≈10 zile lucrătoare)",
+  lucrari: [
+    { ce: "Finalizarea gletului la parter (pereții apar albi, finisați, în pozele din 27 iulie)", omZile: "~12–15" },
+    { ce: "Calorifere montate la etajele 2–3 (~40 de bucăți, cu racorduri)", omZile: "~20–25" },
+    { ce: "Parchet montat în sălile de la etaje (~300 mp vizibili în poze)", omZile: "~8–12" },
+    { ce: "Trasee electrice parțiale la parter (doze, tuburi în pereți)", omZile: "~8–10" },
+    { ce: "Retușuri la etajele 1–3 + început de lucru la soclu", omZile: "~8–10" },
+  ],
+  totalOmZile: "≈ 55–70 om-zile",
+  concluzie:
+    "55–70 de om-zile împărțite la ~10 zile lucrătoare înseamnă, în medie, 5–7 muncitori pe zi — cu vârf doar în ziua vizitei oficiale. Dacă 19 muncitori ar fi lucrat zilnic (≈190 de om-zile), volumul de muncă vizibil în poze ar fi trebuit să fie de aproape 3 ori mai mare: șapa și pardoselile parterului ar fi fost demult turnate. Pozele arată că mobilizarea de 19 a fost excepția, nu regula.",
+};
 
 // Etapele de finisaj și cât cântărește fiecare din total (%). Suma = 100.
 export const etapeLucrare: { cheie: string; nume: string; pondere: number }[] = [

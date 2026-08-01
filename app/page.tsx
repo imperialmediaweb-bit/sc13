@@ -41,6 +41,7 @@ import {
   procentEtaj,
   muncitori,
   muncitoriVizita,
+  calculMuncitori,
   progresSaptamanaTrecuta,
   ramasDeFacut,
   termene,
@@ -203,7 +204,7 @@ export default function Page() {
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
       estDetail =
         `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
-        `Scenariul REAL (${muncitori} muncitori, câți văd părinții în zilele obișnuite): gata în jur de ${fmt(finalReal)}. ` +
+        `Scenariul REAL (~${muncitori} muncitori pe zi în medie, estimat din progresul dintre pozele din 16 și 27 iulie): gata în jur de ${fmt(finalReal)}. ` +
         `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată. Pe 31 iulie, viceprimarul a admis în Consiliul Local că unele școli pot începe cu 2 săptămâni – o lună mai târziu (fără a nominaliza Școala 13).`;
     }
 
@@ -423,16 +424,32 @@ export default function Page() {
 
           <div className="mt-5 rounded-md border-l-4 border-bad bg-bad-soft p-4">
             <p className="font-semibold text-bad">
-              ⚠ Muncitori doar la vizite? {muncitoriVizita.numar} la vizita oficială, ~{muncitori} în restul
-              zilelor.
+              ⚠ Muncitori doar la vizite? {muncitoriVizita.numar} la vizita oficială — dar pozele arată o medie
+              de ~5–7 pe zi.
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               La vizita din {muncitoriVizita.data}, cu oficialii de față, constructorul avea{" "}
-              {muncitoriVizita.numar} muncitori pe șantier. Părinții raportează însă că, în zilele obișnuite,
-              se lucrează în continuare cu doar 2–3 oameni. Dacă mobilizarea există doar când vin oficialii,
-              termenul nu poate fi ținut — de aceea estimarea de mai jos folosește ritmul din zilele obișnuite,
-              nu pe cel de la vizite. Urmărim la fiecare raportare câți muncitori sunt cu adevărat.
+              {muncitoriVizita.numar} muncitori pe șantier. Părinții văd însă doar 2–3 în vizitele spontane.
+              Am verificat cine are dreptate printr-un calcul invers: cât s-a lucrat efectiv între pozele din
+              16 iulie și cele din 27 iulie?
             </p>
+            <div className="mt-3 rounded-md border border-border bg-card p-3.5">
+              <p className="text-sm font-semibold">
+                Verificare din poze: câtă muncă s-a depus în {calculMuncitori.perioada}
+              </p>
+              <ul className="mt-2 space-y-1 text-sm text-muted-foreground">
+                {calculMuncitori.lucrari.map((l, i) => (
+                  <li key={i} className="flex justify-between gap-3">
+                    <span>{l.ce}</span>
+                    <span className="shrink-0 font-semibold tnum">{l.omZile} om-zile</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 border-t border-border pt-2 text-sm font-semibold">
+                Total: {calculMuncitori.totalOmZile}
+              </p>
+              <p className="mt-1.5 text-sm text-muted-foreground">{calculMuncitori.concluzie}</p>
+            </div>
           </div>
 
           <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
