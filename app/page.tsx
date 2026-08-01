@@ -628,20 +628,24 @@ export default function Page() {
         </Section>
 
         {/* CE CEREM */}
-        <Section id="revendicari" title="Ce cerem" plain>
-          <div className="grid gap-4 sm:grid-cols-3">
+        <Section id="revendicari" title="Ce cerem Primăriei" plain>
+          <div className="grid gap-4 sm:grid-cols-2">
             {[
               {
-                t: "Finalizarea până la 1 septembrie 2026",
-                d: "termenul anunțat public, astfel încât elevii să înceapă anul școlar în incinta școlii.",
+                t: "Graficul de execuție, făcut public",
+                d: "graficul semnat cu constructorul, cu jaloane săptămânale verificabile (șapele până la data X, tavanele până la Y) și numărul de muncitori prevăzut pe zi. Așa oricine poate compara promisiunea cu realitatea din poze.",
               },
               {
-                t: "Verificare săptămânală",
-                d: "vizite pe șantier ale părinților, alături de reprezentanții Primăriei și ai constructorului.",
+                t: "Penalitățile din contract, aplicate",
+                d: "primul termen (16 octombrie 2025) e depășit de aproape un an. Cerem dovada, în scris, a penalităților de întârziere calculate și reținute constructorului până azi. Dacă suma e zero, părinții merită să știe de ce.",
               },
               {
-                t: "Informare transparentă",
-                d: "comunicare publică și constantă a stadiului real și a eventualelor întârzieri.",
+                t: "Mobilizare reală, nu doar la vizite",
+                d: "echipe pe șantier în fiecare zi lucrătoare, la nivelul arătat la vizita oficială (19 muncitori), nu 3–4 câți se văd în zilele obișnuite. Verificăm prin raportările și pozele părinților.",
+              },
+              {
+                t: "Informare transparentă, săptămânal",
+                d: "comunicare publică a stadiului real și a oricărei întârzieri, plus continuarea vizitelor cu părinții (următoarea: 3 august). Elevii trebuie să intre în școala lor pe 7 septembrie 2026.",
               },
             ].map((c, i) => (
               <div
