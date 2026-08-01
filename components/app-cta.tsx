@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Smartphone, Share, CheckCircle2 } from "lucide-react";
 import { NotifyButton } from "@/components/notify-button";
-import { subscribeToPush } from "@/lib/push";
+import { subscribeToPush, isSubscribed } from "@/lib/push";
 
 type BIPEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
 
@@ -20,7 +20,17 @@ export function AppCTA() {
       window.matchMedia("(display-mode: standalone)").matches ||
       // @ts-expect-error iOS Safari
       window.navigator.standalone === true;
-    if (standalone) setInstalled(true);
+    if (standalone) {
+      setInstalled(true);
+      // Aplicația e instalată: dacă permisiunea de notificări e deja dată dar
+      // abonamentul lipsește (expirat/șters), ne reabonăm automat — ca toți cei
+      // cu aplicația instalată să primească notificările.
+      if ("Notification" in window && Notification.permission === "granted") {
+        isSubscribed().then((sub) => {
+          if (!sub) subscribeToPush().catch(() => {});
+        });
+      }
+    }
 
     const onBIP = (e: Event) => {
       e.preventDefault();

@@ -38,7 +38,7 @@ export const proiect: { eticheta: string; valoare: string }[] = [
 
 // Media zilnică REALĂ de muncitori, estimată prin calcul invers din poze:
 // câtă muncă se vede făcută între 16 și 27 iulie ÷ zile lucrătoare (vezi calculMuncitori).
-// Părinții văd 2–3 în vizitele spontane; media cu tot cu zilele de mobilizare iese ~5.
+// În zilele obișnuite lucrează 3–4; media pe perioadă (cu ziua vizitei inclusă) iese 5–7.
 export const muncitori = 5;
 
 // Câți muncitori erau la vizita oficială (când vin oficialii, șantierul se umple).
@@ -239,7 +239,7 @@ export const actualizari = [
   },
   {
     data: "28 iulie 2026",
-    text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu oficialii de față. În zilele obișnuite se lucrează în continuare cu 2–3 oameni. Am ajustat estimarea pe ritmul real din zilele obișnuite și urmărim la fiecare raportare câți muncitori sunt de fapt.",
+    text: "Semnal de la părinți: cei 19 muncitori au fost pe șantier doar la vizita oficială, cu oficialii de față. În zilele obișnuite se lucrează în continuare cu 3–4 oameni (media pe perioadă, cu ziua vizitei inclusă, iese 5–7). Am ajustat estimarea pe ritmul real și urmărim la fiecare raportare câți muncitori sunt de fapt.",
   },
   {
     data: "27 iulie 2026",
@@ -284,7 +284,7 @@ export const contextNational: { titlu: string; text: string }[] = [
   },
   {
     titlu: "Concluzia cercetării",
-    text: "Vina e împărțită, în trei trepte: (1) guvernul și ministerele au blocat real plățile luni întregi — documentat și recunoscut de premier; (2) constructorul a folosit blocajul ca acoperire și a ținut șantierul la ritm minim, cu mobilizare doar la vizitele oficiale (19 muncitori cu oficialii de față, 2–3 în restul zilelor); (3) Primăria a tolerat patru amânări de termen fără penalități vizibile. După deblocarea celor 12 miliarde de lei, responsabilitatea ritmului aparține constructorului și Primăriei — nu mai există scuza banilor.",
+    text: "Vina e împărțită, în trei trepte: (1) guvernul și ministerele au blocat real plățile luni întregi — documentat și recunoscut de premier; (2) constructorul a folosit blocajul ca acoperire și a ținut șantierul la ritm minim, cu mobilizare doar la vizitele oficiale (19 muncitori cu oficialii de față, 3–4 în restul zilelor); (3) Primăria a tolerat patru amânări de termen fără penalități vizibile. După deblocarea celor 12 miliarde de lei, responsabilitatea ritmului aparține constructorului și Primăriei — nu mai există scuza banilor.",
   },
 ];
 

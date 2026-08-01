@@ -1,5 +1,5 @@
 /* Service worker — Școala 13 Monitor (PWA + notificări) */
-const CACHE = "sc13-v1";
+const CACHE = "sc13-v2";
 const OFFLINE_URLS = ["/"];
 
 self.addEventListener("install", (event) => {
@@ -61,5 +61,27 @@ self.addEventListener("notificationclick", (event) => {
       }
       return self.clients.openWindow(url);
     })
+  );
+});
+
+// Dacă abonamentul push expiră sau se schimbă, ne reabonăm automat și
+// trimitem noul abonament la server — nimeni nu rămâne fără notificări.
+self.addEventListener("pushsubscriptionchange", (event) => {
+  event.waitUntil(
+    (async () => {
+      try {
+        const old = event.oldSubscription || (await self.registration.pushManager.getSubscription());
+        const key = old && old.options && old.options.applicationServerKey;
+        const sub = await self.registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: key,
+        });
+        await fetch("/api/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sub),
+        });
+      } catch (e) {}
+    })()
   );
 });

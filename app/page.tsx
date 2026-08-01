@@ -181,7 +181,7 @@ export default function Page() {
     } else {
       // numărul de muncitori ajustează ritmul: puțini → mai lent, mulți → mai rapid
       const factorOf = (n: number) => (n <= 3 ? 1.3 : n <= 7 ? 1.05 : n <= 14 ? 0.85 : 0.6);
-      // Două scenarii: ritmul REAL din zilele obișnuite (2–3 muncitori, raportat de părinți)
+      // Două scenarii: ritmul REAL (medie ~5/zi, estimată din progresul dintre poze)
       // vs. ritmul PROMIS, ca la vizita oficială (19 muncitori aduși când vin oficialii).
       const saptReal = Math.ceil((ramas / ritm) * factorOf(muncitori));
       const saptPromis = Math.ceil((ramas / ritm) * factorOf(muncitoriVizita.numar));
@@ -286,11 +286,12 @@ export default function Page() {
           </div>
 
           {/* bandă de date esențiale */}
-          <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-5">
             {[
               { v: view ? String(view.zile) : "—", l: view?.overdue ? "zile peste termen" : "zile până la termen", warn: view?.overdue },
               { v: "1 sept. 2026", l: "termenul anunțat" },
               { v: PROGRES_GENERAL + "%", l: "progres estimat" },
+              { v: `~${muncitori}/zi`, l: "muncitori, medie reală din poze", warn: muncitori < 10 },
               { v: view ? view.sanse + "%" : "—", l: "șanse la timp", warn: (view?.sanse ?? 50) < 40 },
             ].map((c, i) => (
               <div key={i} className="rounded-xl bg-white/10 p-4 text-center ring-1 ring-white/15 backdrop-blur-md">
@@ -429,7 +430,7 @@ export default function Page() {
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               La vizita din {muncitoriVizita.data}, cu oficialii de față, constructorul avea{" "}
-              {muncitoriVizita.numar} muncitori pe șantier. Părinții văd însă doar 2–3 în vizitele spontane.
+              {muncitoriVizita.numar} muncitori pe șantier. În zilele obișnuite se lucrează însă cu doar 3–4 oameni.
               Am verificat cine are dreptate printr-un calcul invers: cât s-a lucrat efectiv între pozele din
               16 iulie și cele din 27 iulie?
             </p>
