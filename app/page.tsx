@@ -751,20 +751,6 @@ export default function Page() {
             ))}
           </ul>
         </Section>
-
-        {/* NOTĂ */}
-        <div className="mt-12 rounded-2xl border-l-4 border-primary bg-card p-6 shadow-[0_1px_2px_rgba(20,25,40,.04),0_12px_32px_rgba(20,25,40,.07)] sm:p-7">
-          <p className="font-display text-lg font-bold">Notă din partea părinților</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Această pagină este făcută <strong className="text-foreground">din suflet, voluntar</strong>, cu un
-            singur scop: <strong className="text-foreground">informarea corectă a părinților</strong>. Nu este
-            împotriva nimănui — nici a Primăriei, nici a constructorului, nici a școlii. Toate datele sunt reale
-            și verificabile: pozele vin de pe șantier, de la părinți; declarațiile sunt din presă și din ședințe
-            publice, cu sursa lângă ele; estimările sunt calculate transparent din aceste date și marcate mereu ca
-            estimări. Ne dorim un singur lucru: ca pe <strong className="text-foreground">7 septembrie 2026</strong>{" "}
-            copiii să intre în școala lor.
-          </p>
-        </div>
       </div>
 
       <footer className="mt-4 border-t-[3px] border-primary bg-[#14151a] text-white/75">
