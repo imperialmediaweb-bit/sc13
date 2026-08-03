@@ -49,16 +49,16 @@ export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 // Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
 export const anuntOficial = {
   data: "3 august 2026",
-  sursa: "audiență la primar, relatată de părinții prezenți",
+  sursa: "audiență la primarul Cosmin Andrei, relatată de părintele prezent",
   termen: "cel târziu în octombrie 2026",
-  text: "Primarul a comunicat părinților că elevii vor intra în școală „cel târziu în octombrie”. Termenul de 1 septembrie și garanția de 8 septembrie, date pe 27 iulie, sunt astfel abandonate. Anul școlar începe pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv.",
+  text: "Primarul Cosmin Andrei a comunicat, în audiență, că elevii vor intra în școală „cel târziu în octombrie”. Termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt astfel abandonate. Anul școlar începe pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv.",
 };
 
 // Accesul părinților pe șantier (monitorizarea independentă).
 export const accesParinti = {
   permis: false,
   dinData: "3 august 2026",
-  text: "Din 3 august 2026, părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Pe 16 iulie, după protest, fuseseră promise public vizite săptămânale de monitorizare, la care să participe și părinții. Fără acces, verificarea independentă a stadiului lucrărilor — baza acestei pagini — nu mai este posibilă.",
+  text: "Din 3 august 2026, părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Pe 16 iulie, după protest, viceprimarul Bogdan Buhăianu a promis public vizite săptămânale de monitorizare, la care să participe și părinții. Fără acces, verificarea independentă a stadiului lucrărilor — baza acestei pagini — nu mai este posibilă.",
 };
 
 // Calcul invers: din diferența dintre pozele din 16 iulie și cele din 27 iulie
@@ -244,7 +244,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
     status: "bad",
     titlu: "Audiență la primar: termen „cel târziu octombrie” și acces interzis",
     detalii:
-      "Primarul comunică părinților, în audiență, că elevii vor intra în școală cel târziu în octombrie. Din aceeași zi, accesul părinților în școală este oprit și nu se mai pot face fotografii — deși pe 16 iulie fuseseră promise public vizite săptămânale de monitorizare.",
+      "Primarul Cosmin Andrei comunică, într-o audiență acordată unui părinte, că elevii vor intra în școală cel târziu în octombrie. Din aceeași zi, accesul părinților în școală este oprit și nu se mai pot face fotografii — deși pe 16 iulie viceprimarul Bogdan Buhăianu promisese public vizite săptămânale de monitorizare.",
   },
   {
     data: "1 septembrie 2026",
@@ -257,7 +257,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "3 august 2026",
-    text: "Părinții au fost în audiență la domnul primar. Două anunțuri importante: (1) elevii vor intra în școală „cel târziu în octombrie” — deci termenul de 1 septembrie și garanția de 8 septembrie sunt oficial abandonate; (2) de astăzi părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Vizitele de monitorizare și jurnalul foto de pe această pagină se opresc, deși vizitele săptămânale fuseseră promise public pe 16 iulie. Estimarea platformei, calculată din ritmul real de lucru, indica finalizarea în jurul datei de 17 octombrie — ceea ce se confirmă acum din sursă oficială.",
+    text: "Un părinte a fost în audiență la primarul Cosmin Andrei. Două anunțuri importante: (1) elevii vor intra în școală „cel târziu în octombrie” — deci termenul de 1 septembrie și garanția de 8 septembrie sunt oficial abandonate; (2) de astăzi părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Vizitele de monitorizare și jurnalul foto de pe această pagină se opresc, deși vizitele săptămânale fuseseră promise public de viceprimarul Bogdan Buhăianu pe 16 iulie. Estimarea platformei, calculată din ritmul real de lucru, indica finalizarea în jurul datei de 17 octombrie — ceea ce se confirmă acum din sursă oficială.",
   },
   {
     data: "31 iulie 2026",
