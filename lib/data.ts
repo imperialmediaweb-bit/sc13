@@ -45,6 +45,22 @@ export const muncitori = 5;
 // Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
 export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 
+// Anunț oficial care schimbă totul (lăsați null dacă nu e cazul).
+// Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
+export const anuntOficial = {
+  data: "3 august 2026",
+  sursa: "audiență la primar, relatată de părinții prezenți",
+  termen: "cel târziu în octombrie 2026",
+  text: "Primarul a comunicat părinților că elevii vor intra în școală „cel târziu în octombrie”. Termenul de 1 septembrie și garanția de 8 septembrie, date pe 27 iulie, sunt astfel abandonate. Anul școlar începe pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv.",
+};
+
+// Accesul părinților pe șantier (monitorizarea independentă).
+export const accesParinti = {
+  permis: false,
+  dinData: "3 august 2026",
+  text: "Din 3 august 2026, părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Pe 16 iulie, după protest, fuseseră promise public vizite săptămânale de monitorizare, la care să participe și părinții. Fără acces, verificarea independentă a stadiului lucrărilor — baza acestei pagini — nu mai este posibilă.",
+};
+
 // Calcul invers: din diferența dintre pozele din 16 iulie și cele din 27 iulie
 // deducem câtă muncă s-a depus efectiv — și deci câți oameni au lucrat în medie.
 export const calculMuncitori = {
@@ -135,6 +151,11 @@ export const termene: { cand: string; status: Status; text: string }[] = [
     status: "bad",
     text: "viceprimarul admite în Consiliul Local (31 iulie) că unele școli pot începe cu 2 săptămâni – o lună mai târziu, cu relocare prin Inspectoratul Școlar (fără a nominaliza Școala 13)",
   },
+  {
+    cand: "„Cel târziu octombrie” 2026",
+    status: "current",
+    text: "termenul comunicat de primar părinților, în audiență (3 august 2026) — elevii NU încep anul școlar în școala lor",
+  },
 ];
 
 // Jurnal: cele mai noi săptămâni primele.
@@ -220,9 +241,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
   },
   {
     data: "3 august 2026",
-    status: "current",
-    titlu: "Următoarea vizită pe șantier",
-    detalii: "Verificăm dacă șapele de la parter au fost turnate, conform promisiunii.",
+    status: "bad",
+    titlu: "Audiență la primar: termen „cel târziu octombrie” și acces interzis",
+    detalii:
+      "Primarul comunică părinților, în audiență, că elevii vor intra în școală cel târziu în octombrie. Din aceeași zi, accesul părinților în școală este oprit și nu se mai pot face fotografii — deși pe 16 iulie fuseseră promise public vizite săptămânale de monitorizare.",
   },
   {
     data: "1 septembrie 2026",
@@ -233,6 +255,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "3 august 2026",
+    text: "Părinții au fost în audiență la domnul primar. Două anunțuri importante: (1) elevii vor intra în școală „cel târziu în octombrie” — deci termenul de 1 septembrie și garanția de 8 septembrie sunt oficial abandonate; (2) de astăzi părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Vizitele de monitorizare și jurnalul foto de pe această pagină se opresc, deși vizitele săptămânale fuseseră promise public pe 16 iulie. Estimarea platformei, calculată din ritmul real de lucru, indica finalizarea în jurul datei de 17 octombrie — ceea ce se confirmă acum din sursă oficială.",
+  },
   {
     data: "31 iulie 2026",
     text: "Declarație a viceprimarului Bogdan Buhăianu, azi în Consiliul Local: unele școli aflate în șantier ar putea începe anul școlar mai târziu, cu două săptămâni până la o lună, iar elevii ar urma să fie relocați de Inspectoratul Școlar Județean, care are această atribuție. Nu a nominalizat Școala 13 — dar declarația vine la doar 4 zile după garanția „finalizat până pe 8 septembrie” dată de oficialii Primăriei și de constructor, și confirmă că riscul de întârziere e luat în calcul oficial.",

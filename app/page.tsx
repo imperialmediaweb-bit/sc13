@@ -42,6 +42,8 @@ import {
   muncitori,
   muncitoriVizita,
   calculMuncitori,
+  anuntOficial,
+  accesParinti,
   progresSaptamanaTrecuta,
   ramasDeFacut,
   termene,
@@ -205,7 +207,19 @@ export default function Page() {
       estDetail =
         `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
         `Scenariul REAL (~${muncitori} muncitori pe zi în medie, estimat din progresul dintre pozele din 16 și 27 iulie): gata în jur de ${fmt(finalReal)}. ` +
-        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)} — doar așa se poate ține garanția dată (8 septembrie). Atenție: școala începe pe 7 septembrie, cu o zi ÎNAINTE de data garantată. Pe 31 iulie, viceprimarul a admis în Consiliul Local că unele școli pot începe cu 2 săptămâni – o lună mai târziu (fără a nominaliza Școala 13).`;
+        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)}.`;
+    }
+
+    // Anunț oficial: primarul a comunicat un termen nou. Verdictul nu mai e o
+    // estimare — e o certitudine comunicată de autoritate.
+    if (anuntOficial) {
+      estVerdict = `Confirmat oficial: elevii NU încep anul școlar în școala lor. Termen nou: ${anuntOficial.termen}.`;
+      estColor = "hsl(var(--bad))";
+      dataFinal = anuntOficial.termen;
+      sanse = 2;
+      estDetail =
+        `${anuntOficial.text} Estimarea acestei pagini, calculată din ritmul real de lucru (~${muncitori} muncitori pe zi), ` +
+        `indica finalizarea în jurul lui 17 octombrie — ceea ce se confirmă acum din sursă oficială (${anuntOficial.sursa}, ${anuntOficial.data}).`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
@@ -305,6 +319,36 @@ export default function Page() {
 
       {/* ===== Conținut ===== */}
       <div className="mx-auto max-w-4xl px-5 pb-10">
+        {/* ANUNȚ OFICIAL — termen nou + acces interzis */}
+        {(anuntOficial || accesParinti?.permis === false) && (
+          <div className="mt-8 space-y-3">
+            {anuntOficial && (
+              <div className="rounded-2xl border-2 border-bad bg-bad-soft p-5 sm:p-6">
+                <div className="text-xs font-bold uppercase tracking-[0.16em] text-bad">
+                  Anunț oficial · {anuntOficial.data}
+                </div>
+                <h2 className="mt-1.5 font-display text-xl font-extrabold sm:text-2xl">
+                  Elevii nu încep anul școlar în școala lor. Termen nou: {anuntOficial.termen}.
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{anuntOficial.text}</p>
+                <p className="mt-2 text-xs text-muted-foreground">Sursa: {anuntOficial.sursa}.</p>
+              </div>
+            )}
+            {accesParinti?.permis === false && (
+              <div className="rounded-2xl border border-bad/40 bg-card p-5 sm:p-6">
+                <h3 className="font-display text-lg font-bold text-bad">
+                  Accesul părinților pe șantier a fost oprit ({accesParinti.dinData})
+                </h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{accesParinti.text}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Datele de mai jos rămân cele verificate până la această dată. Vom actualiza pagina cu orice
+                  informație oficială primită și cu observațiile părinților din afara curții școlii.
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* PETIȚIE */}
         <Section id="petitie" title="Petiția părinților">
           <div className="space-y-5">
