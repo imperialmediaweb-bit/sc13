@@ -48,18 +48,15 @@ export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 // Anunț oficial care schimbă totul (lăsați null dacă nu e cazul).
 // Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
 export const anuntOficial = {
-  data: "3 august 2026",
-  sursa: "audiență la primarul Cosmin Andrei, relatată de părintele prezent",
-  termen: "cel târziu în octombrie 2026",
-  text: "Primarul Cosmin Andrei a comunicat, în audiență, că elevii vor intra în școală „cel târziu în octombrie”. Termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt astfel abandonate. Anul școlar începe pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv.",
+  data: "4 august 2026",
+  sursa: "întâlnire a părinților cu primarul Cosmin Andrei",
+  termen: "1 octombrie 2026",
+  text: "În urma întâlnirii părinților cu primarul Cosmin Andrei, termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026. Primarul a declarat că are tot interesul ca lucrările să fie terminate. Anul școlar începe însă pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv, iar termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt depășite.",
 };
 
 // Accesul părinților pe șantier (monitorizarea independentă).
-export const accesParinti = {
-  permis: false,
-  dinData: "3 august 2026",
-  text: "Din 3 august 2026, părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Pe 16 iulie, după protest, viceprimarul Bogdan Buhăianu a promis public vizite săptămânale de monitorizare, la care să participe și părinții. Fără acces, verificarea independentă a stadiului lucrărilor — baza acestei pagini — nu mai este posibilă.",
-};
+// Setați pe null când accesul e permis; altfel completați cu detaliile restricției.
+export const accesParinti: { permis: boolean; dinData: string; text: string } | null = null;
 
 // Calcul invers: din diferența dintre pozele din 16 iulie și cele din 27 iulie
 // deducem câtă muncă s-a depus efectiv — și deci câți oameni au lucrat în medie.
@@ -152,9 +149,9 @@ export const termene: { cand: string; status: Status; text: string }[] = [
     text: "viceprimarul admite în Consiliul Local (31 iulie) că unele școli pot începe cu 2 săptămâni – o lună mai târziu, cu relocare prin Inspectoratul Școlar (fără a nominaliza Școala 13)",
   },
   {
-    cand: "„Cel târziu octombrie” 2026",
+    cand: "1 octombrie 2026",
     status: "current",
-    text: "termenul comunicat de primar părinților, în audiență (3 august 2026) — elevii NU încep anul școlar în școala lor",
+    text: "termenul comunicat de primar părinților (4 august 2026) — elevii NU încep anul școlar în școala lor",
   },
 ];
 
@@ -240,11 +237,11 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
       "Viceprimarul Bogdan Buhăianu declară că unele școli aflate în șantier ar putea începe anul școlar cu 2 săptămâni – o lună mai târziu, elevii urmând a fi relocați de Inspectoratul Școlar Județean. Nu a nominalizat Școala 13.",
   },
   {
-    data: "3 august 2026",
+    data: "4 august 2026",
     status: "bad",
-    titlu: "Audiență la primar: termen „cel târziu octombrie” și acces interzis",
+    titlu: "Întâlnire cu primarul: termen nou, 1 octombrie 2026",
     detalii:
-      "Primarul Cosmin Andrei comunică, într-o audiență acordată unui părinte, că elevii vor intra în școală cel târziu în octombrie. Din aceeași zi, accesul părinților în școală este oprit și nu se mai pot face fotografii — deși pe 16 iulie viceprimarul Bogdan Buhăianu promisese public vizite săptămânale de monitorizare.",
+      "Primarul Cosmin Andrei comunică părinților termenul de 1 octombrie 2026 pentru finalizarea lucrărilor și declară că are tot interesul ca acestea să fie terminate. Elevii nu vor începe anul școlar (7 septembrie) în școala lor.",
   },
   {
     data: "1 septembrie 2026",
@@ -256,8 +253,8 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 
 export const actualizari = [
   {
-    data: "3 august 2026",
-    text: "Un părinte a fost în audiență la primarul Cosmin Andrei. Două anunțuri importante: (1) elevii vor intra în școală „cel târziu în octombrie” — deci termenul de 1 septembrie și garanția de 8 septembrie sunt oficial abandonate; (2) de astăzi părinților nu li se mai permite accesul în școală și nu mai pot face fotografii. Vizitele de monitorizare și jurnalul foto de pe această pagină se opresc, deși vizitele săptămânale fuseseră promise public de viceprimarul Bogdan Buhăianu pe 16 iulie. Estimarea platformei, calculată din ritmul real de lucru, indica finalizarea în jurul datei de 17 octombrie — ceea ce se confirmă acum din sursă oficială.",
+    data: "4 august 2026",
+    text: "Părinții s-au întâlnit din nou cu primarul Cosmin Andrei. Termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026, iar primarul a declarat că are tot interesul ca lucrările să fie terminate. Rămâne faptul că anul școlar începe pe 7 septembrie: elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv. Estimarea acestei pagini, calculată din ritmul real de lucru (~5 muncitori pe zi), indica finalizarea în jurul datei de 17 octombrie — apropiată de termenul comunicat acum oficial.",
   },
   {
     data: "31 iulie 2026",
