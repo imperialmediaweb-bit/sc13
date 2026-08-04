@@ -19,6 +19,7 @@ import {
   Link2,
   CheckCircle2,
   Landmark,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -42,6 +43,7 @@ import {
   muncitori,
   muncitoriVizita,
   calculMuncitori,
+  conditiiTemporare,
   anuntOficial,
   accesParinti,
   progresSaptamanaTrecuta,
@@ -93,6 +95,7 @@ const SECTION_ICONS: Record<string, LucideIcon> = {
   revendicari: ListChecks,
   actualizari: Bell,
   distribuie: Share2,
+  conditii: Users,
   context: Landmark,
   surse: Link2,
 };
@@ -704,6 +707,25 @@ export default function Page() {
         </Section>
 
         {/* CE CEREM */}
+        {/* CONDIȚIILE ACTUALE */}
+        <Section id="conditii" title="În ce condiții învață copiii acum">
+          <p className="text-sm text-muted-foreground">
+            Cât timp școala e în șantier, elevii învață la {conditiiTemporare.loc} — {conditiiTemporare.durata}.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {conditiiTemporare.detalii.map((d, i) => (
+              <li key={i} className="relative pl-5 text-sm leading-relaxed">
+                <span className="absolute left-0 top-[0.45rem] h-1.5 w-1.5 rounded-full bg-primary" />
+                {d}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-xs text-muted-foreground">
+            Date din hotărârea Consiliului Local Botoșani privind relocarea și din relatările presei locale
+            (linkuri în secțiunea Surse).
+          </p>
+        </Section>
+
         <Section id="revendicari" title="Ce cerem Primăriei" plain>
           <div className="grid gap-4 sm:grid-cols-2">
             {[

@@ -51,12 +51,25 @@ export const anuntOficial = {
   data: "4 august 2026",
   sursa: "întâlnire a părinților cu primarul Cosmin Andrei",
   termen: "1 octombrie 2026",
-  text: "În urma întâlnirii părinților cu primarul Cosmin Andrei, termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026. Primarul a declarat că are tot interesul ca lucrările să fie terminate. Anul școlar începe însă pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv, iar termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt depășite.",
+  text: "În urma întâlnirii părinților cu primarul Cosmin Andrei, termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026. Primarul a declarat că are tot interesul ca lucrările să fie terminate. Anul școlar începe însă pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, unde învață deja de aproape trei ani, iar termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt depășite.",
 };
 
 // Accesul părinților pe șantier (monitorizarea independentă).
 // Setați pe null când accesul e permis; altfel completați cu detaliile restricției.
 export const accesParinti: { permis: boolean; dinData: string; text: string } | null = null;
+
+// În ce condiții învață copiii acum — date din hotărârea Consiliului Local și din presă.
+export const conditiiTemporare = {
+  loc: "Fundația Hand of Help (centrul de plasament), str. Pacea nr. 118, Botoșani",
+  durata: "de aproape trei ani",
+  detalii: [
+    "Ciclul primar a fost relocat la etajul I al clădirii Fundației Hand of Help.",
+    "Programul se face în două schimburi: 8:00–11:00 și 11:00–14:00.",
+    "Orele durează 40 de minute, iar pauzele sunt de 5 minute.",
+    "Părinții au reclamat că unele săli au fost amenajate în foste dormitoare, în magazii sau chiar la subsol.",
+    "Peste 540 de elevi învață astfel de aproape trei ani.",
+  ],
+};
 
 // Calcul invers: din diferența dintre pozele din 16 iulie și cele din 27 iulie
 // deducem câtă muncă s-a depus efectiv — și deci câți oameni au lucrat în medie.
@@ -254,7 +267,7 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 export const actualizari = [
   {
     data: "4 august 2026",
-    text: "Părinții s-au întâlnit din nou cu primarul Cosmin Andrei. Termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026, iar primarul a declarat că are tot interesul ca lucrările să fie terminate. Rămâne faptul că anul școlar începe pe 7 septembrie: elevii Școlii 13 îl vor începe din nou în spații temporare, al patrulea an consecutiv. Estimarea acestei pagini, calculată din ritmul real de lucru (~5 muncitori pe zi), indica finalizarea în jurul datei de 17 octombrie — apropiată de termenul comunicat acum oficial.",
+    text: "Părinții s-au întâlnit din nou cu primarul Cosmin Andrei. Termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026, iar primarul a declarat că are tot interesul ca lucrările să fie terminate. Rămâne faptul că anul școlar începe pe 7 septembrie: elevii Școlii 13 îl vor începe din nou în spații temporare, unde învață deja de aproape trei ani. Estimarea acestei pagini, calculată din ritmul real de lucru (~5 muncitori pe zi), indica finalizarea în jurul datei de 17 octombrie — apropiată de termenul comunicat acum oficial.",
   },
   {
     data: "31 iulie 2026",
@@ -322,6 +335,8 @@ export const contextSurse = [
   { url: "https://arenaconstruct.ro/colegiul-national-mihai-eminescu-din-botosani-reabilitat-integral-prin-pnrr-receptie-final-pentru-o-investitie-de-313-milioane-lei/", text: "ArenaConstruct — Colegiul „Mihai Eminescu” Botoșani, reabilitat integral prin PNRR (31,3 mil. lei)" },
   { url: "https://termene.ro/firma/40314681-KATAR-CONNEG-SRL", text: "Termene.ro — Katar Conneg SRL: locul 1 în Vaslui după cifra de afaceri (~121 mil. lei în 2024, +30%)" },
   { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Viceprimarul: întârzierile la Școala 13, provocate de blocajele la plăți (tranșe la 3–4 luni)" },
+  { url: "https://primariabt.ro/storage/formidable/9/524_25.pdf", text: "Consiliul Local Botoșani — hotărâre privind relocarea elevilor la Fundația Hand of Help (două schimburi, ore de 40 min, pauze de 5 min)" },
+  { url: "https://www.botosaninews.ro/645361/social/inspectoratul-scolar-botosani-a-decis-relocarea-mai-multor-scoli-din-cauza-lucrarilor-de-reabilitare-sunt-mai-multe-scoli-in-trei-schimburi-vezi-lista/", text: "BotosaniNews.ro — Inspectoratul Școlar a decis relocarea mai multor școli; unele în trei schimburi" },
 ];
 
 // Surse din presă, în ordine cronologică (de la cele mai vechi la cele mai noi).
