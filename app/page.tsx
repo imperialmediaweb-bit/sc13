@@ -143,6 +143,7 @@ export default function Page() {
     estDetail: string;
     sanse: number;
     dataFinal: string;
+    dataEstimataNoi: string;
   }>(null);
 
   React.useEffect(() => {
@@ -161,6 +162,8 @@ export default function Page() {
     let estDetail = "";
     let sanse = 50;
     let dataFinal = "—";
+    // data rezultată din calculul nostru independent (pe ritmul real de lucru)
+    let dataEstimataNoi = "—";
 
     const fmt = (ms: number) =>
       new Date(ms).toLocaleDateString("ro-RO", { day: "numeric", month: "long", year: "numeric" });
@@ -192,6 +195,7 @@ export default function Page() {
       // „la timp” = elevii pot intra în școală la începutul anului școlar (7 septembrie)
       const laTimp = finalReal <= startScoala;
       dataFinal = fmt(finalReal);
+      dataEstimataNoi = fmt(finalReal);
       // șansele: media celor două scenarii, înclinată spre ce se vede zilnic pe șantier
       const sanseDe = (finalMs: number) => {
         const diffZile = Math.round((startScoala - finalMs) / 86400000);
@@ -210,19 +214,23 @@ export default function Page() {
         `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)}.`;
     }
 
-    // Anunț oficial: primarul a comunicat un termen nou. Verdictul nu mai e o
-    // estimare — e o certitudine comunicată de autoritate.
+    // Anunț oficial: primarul a comunicat un termen nou. Îl afișăm alături de
+    // calculul nostru independent — diferența dintre ele e ea însăși informație.
     if (anuntOficial) {
-      estVerdict = `Confirmat oficial: elevii NU încep anul școlar în școala lor. Termen nou: ${anuntOficial.termen}.`;
+      estVerdict = `Elevii NU încep anul școlar în școala lor. Termen oficial: ${anuntOficial.termen}.`;
       estColor = "hsl(var(--bad))";
       dataFinal = anuntOficial.termen;
       sanse = 2;
       estDetail =
-        `${anuntOficial.text} Estimarea acestei pagini, calculată din ritmul real de lucru (~${muncitori} muncitori pe zi), ` +
-        `indica finalizarea în jurul lui 17 octombrie — ceea ce se confirmă acum din sursă oficială (${anuntOficial.sursa}, ${anuntOficial.data}).`;
+        `${anuntOficial.text} ` +
+        `Calculul independent al acestei pagini, făcut pe ritmul real de lucru (~${muncitori} muncitori pe zi, ` +
+        `estimat din progresul dintre pozele din 16 și 27 iulie), indică finalizarea în jurul datei de ${dataEstimataNoi}. ` +
+        `Cele două date sunt apropiate, dar termenul oficial poate fi respectat doar dacă pe șantier lucrează constant ` +
+        `${muncitoriVizita.numar} oameni, ca în ziua vizitei — nu ${muncitori}, cât s-a lucrat în medie până acum. ` +
+        `Vom urmări asta săptămânal.`;
     }
 
-    setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal });
+    setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal, dataEstimataNoi });
   }, []);
 
   const [dbUpdates, setDbUpdates] = React.useState<{ id: string; data: string; text: string }[]>([]);
@@ -497,7 +505,31 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="mt-5 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
+          {/* Termenul oficial vs. calculul independent */}
+          {anuntOficial && (
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-lg border border-border bg-[hsl(var(--card-2))] p-4">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Termenul oficial
+                </div>
+                <div className="mt-1 font-display text-2xl font-bold">{anuntOficial.termen}</div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Comunicat de primar părinților ({anuntOficial.data}).
+                </p>
+              </div>
+              <div className="rounded-lg border border-border bg-[hsl(var(--card-2))] p-4">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  Calculul acestei pagini
+                </div>
+                <div className="mt-1 font-display text-2xl font-bold">{view?.dataEstimataNoi ?? "—"}</div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Din ritmul real de lucru (~{muncitori} muncitori pe zi), măsurat din poze.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-3 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
             <p className="font-semibold" style={{ color: view?.estColor }}>
               {view?.estVerdict ?? "Se calculează…"}
             </p>
