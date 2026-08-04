@@ -48,11 +48,33 @@ export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 // Anunț oficial care schimbă totul (lăsați null dacă nu e cazul).
 // Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
 export const anuntOficial = {
-  data: "4 august 2026",
-  sursa: "întâlnire a părinților cu primarul Cosmin Andrei",
-  termen: "1 octombrie 2026",
-  text: "În urma întâlnirii părinților cu primarul Cosmin Andrei, termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026. Primarul a declarat că are tot interesul ca lucrările să fie terminate. Anul școlar începe însă pe 7 septembrie — elevii Școlii 13 îl vor începe din nou în spații temporare, unde învață deja de aproape trei ani, iar termenul de 1 septembrie și garanția de 8 septembrie, dată pe 27 iulie, sunt depășite.",
+  data: "5 august 2026",
+  sursa: "întâlnirile părinților cu primarul și cu prefectul",
+  termen: "între sfârșitul lui august și 1 octombrie",
+  text: "Două termene diferite, comunicate la o zi distanță. Primarul Cosmin Andrei le-a spus părinților, pe 4 august, că lucrările se finalizează până la 1 octombrie 2026. A doua zi, la întâlnirea de la Prefectură, doamna prefect a transmis părinților că, din discuțiile ei cu constructorul, acesta face tot posibilul să termine până la finalul lunii august, cu posibilitatea prelungirii cel târziu în septembrie, dacă apar situații neprevăzute. Rămâne cert doar că anul școlar începe pe 7 septembrie, iar elevii Școlii 13 învață deja de aproape trei ani în spații temporare.",
 };
+
+// Termenele comunicate de fiecare parte — pentru comparație publică.
+export const termeneComunicate: { cine: string; cand: string; termen: string; nota?: string }[] = [
+  {
+    cine: "Constructorul (prin doamna prefect)",
+    cand: "5 august 2026",
+    termen: "finalul lui august, cel târziu septembrie",
+    nota: "Constructorul face tot posibilul să termine până la finalul lunii august; prelungire până cel târziu în septembrie doar dacă apar situații neprevăzute.",
+  },
+  {
+    cine: "Primarul Cosmin Andrei",
+    cand: "4 august 2026",
+    termen: "1 octombrie 2026",
+    nota: "Comunicat părinților în întâlnire; primarul a declarat că are tot interesul ca lucrările să fie terminate.",
+  },
+  {
+    cine: "Calculul acestei pagini",
+    cand: "din pozele din 16 și 27 iulie",
+    termen: "mijlocul lui octombrie",
+    nota: "Calculat pe ritmul real de lucru (~5 muncitori pe zi). Termenul constructorului e realizabil doar cu mobilizare mare și constantă, ca în ziua vizitei oficiale (19 oameni).",
+  },
+];
 
 // Accesul părinților pe șantier (monitorizarea independentă).
 // Setați pe null când accesul e permis; altfel completați cu detaliile restricției.
@@ -266,8 +288,12 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 
 export const actualizari = [
   {
+    data: "5 august 2026",
+    text: "Părinții au participat la o întâlnire la Prefectură. Doamna prefect le-a transmis că, din discuțiile purtate cu constructorul, acesta face tot posibilul să finalizeze lucrările până la finalul lunii august, existând și posibilitatea prelungirii până cel târziu în septembrie, în cazul unor situații neprevăzute. Sunt vești mai bune decât termenul de 1 octombrie comunicat cu o zi înainte de primar. Urmărim în continuare ritmul real de pe șantier: termenul constructorului e realizabil doar cu mobilizare mare și constantă, nu cu 3–5 oameni pe zi.",
+  },
+  {
     data: "4 august 2026",
-    text: "Părinții s-au întâlnit din nou cu primarul Cosmin Andrei. Termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026, iar primarul a declarat că are tot interesul ca lucrările să fie terminate. Rămâne faptul că anul școlar începe pe 7 septembrie: elevii Școlii 13 îl vor începe din nou în spații temporare, unde învață deja de aproape trei ani. Estimarea acestei pagini, calculată din ritmul real de lucru (~5 muncitori pe zi), indica finalizarea în jurul datei de 17 octombrie — apropiată de termenul comunicat acum oficial.",
+    text: "Părinții s-au întâlnit cu primarul Cosmin Andrei. Termenul comunicat pentru finalizarea lucrărilor este 1 octombrie 2026, iar primarul a declarat că are tot interesul ca lucrările să fie terminate. Rămâne faptul că anul școlar începe pe 7 septembrie: elevii Școlii 13 îl vor începe din nou în spații temporare, unde învață deja de aproape trei ani.",
   },
   {
     data: "31 iulie 2026",

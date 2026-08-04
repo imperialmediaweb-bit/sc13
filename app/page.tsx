@@ -45,6 +45,7 @@ import {
   calculMuncitori,
   conditiiTemporare,
   anuntOficial,
+  termeneComunicate,
   accesParinti,
   progresSaptamanaTrecuta,
   ramasDeFacut,
@@ -220,17 +221,17 @@ export default function Page() {
     // Anunț oficial: primarul a comunicat un termen nou. Îl afișăm alături de
     // calculul nostru independent — diferența dintre ele e ea însăși informație.
     if (anuntOficial) {
-      estVerdict = `Elevii NU încep anul școlar în școala lor. Termen oficial: ${anuntOficial.termen}.`;
+      estVerdict = `Elevii nu încep anul școlar (7 septembrie) în școala lor. Termene comunicate: ${anuntOficial.termen}.`;
       estColor = "hsl(var(--bad))";
       dataFinal = anuntOficial.termen;
-      sanse = 2;
+      sanse = 12;
       estDetail =
         `${anuntOficial.text} ` +
         `Calculul independent al acestei pagini, făcut pe ritmul real de lucru (~${muncitori} muncitori pe zi, ` +
         `estimat din progresul dintre pozele din 16 și 27 iulie), indică finalizarea în jurul datei de ${dataEstimataNoi}. ` +
-        `Cele două date sunt apropiate, dar termenul oficial poate fi respectat doar dacă pe șantier lucrează constant ` +
-        `${muncitoriVizita.numar} oameni, ca în ziua vizitei — nu ${muncitori}, cât s-a lucrat în medie până acum. ` +
-        `Vom urmări asta săptămânal.`;
+        `Termenul anunțat de constructor (finalul lui august) e realizabil doar cu mobilizare mare și constantă — ` +
+        `${muncitoriVizita.numar} oameni pe zi, ca în ziua vizitei oficiale, nu ${muncitori}, cât s-a lucrat în medie până acum. ` +
+        `Asta e ce urmărim săptămânal.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal, dataEstimataNoi });
@@ -508,29 +509,22 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Termenul oficial vs. calculul independent */}
-          {anuntOficial && (
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              <div className="rounded-lg border border-border bg-[hsl(var(--card-2))] p-4">
-                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Termenul oficial
+          {/* Ce termen spune fiecare parte */}
+          <div className="mt-5">
+            <h3 className="mb-2 font-semibold">Ce termen spune fiecare</h3>
+            <div className="space-y-2.5">
+              {termeneComunicate.map((t, i) => (
+                <div key={i} className="rounded-lg border border-border bg-[hsl(var(--card-2))] p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                    <span className="font-semibold">{t.cine}</span>
+                    <span className="font-display text-lg font-bold text-primary">{t.termen}</span>
+                  </div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t.cand}</div>
+                  {t.nota && <p className="mt-1.5 text-sm text-muted-foreground">{t.nota}</p>}
                 </div>
-                <div className="mt-1 font-display text-2xl font-bold">{anuntOficial.termen}</div>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Comunicat de primar părinților ({anuntOficial.data}).
-                </p>
-              </div>
-              <div className="rounded-lg border border-border bg-[hsl(var(--card-2))] p-4">
-                <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Calculul acestei pagini
-                </div>
-                <div className="mt-1 font-display text-2xl font-bold">{view?.dataEstimataNoi ?? "—"}</div>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  Din ritmul real de lucru (~{muncitori} muncitori pe zi), măsurat din poze.
-                </p>
-              </div>
+              ))}
             </div>
-          )}
+          </div>
 
           <div className="mt-3 rounded-md border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
             <p className="font-semibold" style={{ color: view?.estColor }}>
