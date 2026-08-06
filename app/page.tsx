@@ -42,6 +42,7 @@ import {
   procentEtaj,
   muncitori,
   muncitoriVizita,
+  muncitoriReferinta,
   calculMuncitori,
   conditiiTemporare,
   anuntOficial,
@@ -188,12 +189,12 @@ export default function Page() {
       estDetail = `Cu ~${muncitori} muncitori (${ritmLabel}), dacă ritmul rămâne oprit, data la care elevii ar putea reveni în școală se împinge tot mai târziu. Estimare pesimistă: ${dataFinal}.`;
       sanse = 8;
     } else {
-      // numărul de muncitori ajustează ritmul: puțini → mai lent, mulți → mai rapid
-      const factorOf = (n: number) => (n <= 3 ? 1.3 : n <= 7 ? 1.05 : n <= 14 ? 0.85 : 0.6);
-      // Două scenarii: ritmul REAL (medie ~5/zi, estimată din progresul dintre poze)
-      // vs. ritmul PROMIS, ca la vizita oficială (19 muncitori aduși când vin oficialii).
-      const saptReal = Math.ceil((ramas / ritm) * factorOf(muncitori));
-      const saptPromis = Math.ceil((ramas / ritm) * factorOf(muncitoriVizita.numar));
+      // Ritmul măsurat (2%/săpt.) a fost obținut cu ~5 oameni pe șantier. Dacă acum
+      // lucrează mai mulți, ritmul crește proporțional cu numărul lor.
+      const ritmCu = (n: number) => Math.max(0.5, (ritm * n) / muncitoriReferinta);
+      // Scenariul REAL = câți oameni sunt acum; scenariul de vârf = câți au fost la vizită.
+      const saptReal = Math.ceil(ramas / ritmCu(muncitori));
+      const saptPromis = Math.ceil(ramas / ritmCu(muncitoriVizita.numar));
       const finalReal = now + saptReal * 7 * 86400000;
       const finalPromis = now + saptPromis * 7 * 86400000;
       // „la timp” = elevii pot intra în școală la începutul anului școlar (7 septembrie)
@@ -214,8 +215,8 @@ export default function Page() {
       estColor = laTimp ? "hsl(var(--ok))" : "hsl(var(--bad))";
       estDetail =
         `Rest de executat: ${ramas}% · Ritm măsurat: ${ritm}% pe săptămână. ` +
-        `Scenariul REAL (~${muncitori} muncitori pe zi în medie, estimat din progresul dintre pozele din 16 și 27 iulie): gata în jur de ${fmt(finalReal)}. ` +
-        `Scenariul PROMIS (${muncitoriVizita.numar} muncitori, câți erau la vizita oficială din ${muncitoriVizita.data}): gata în jur de ${fmt(finalPromis)}.`;
+        `Cu ~${muncitori} muncitori pe zi, câți sunt acum pe șantier: gata în jur de ${fmt(finalReal)}. ` +
+        `Dacă mobilizarea urcă la ${muncitoriVizita.numar} oameni, ca în ziua vizitei oficiale: gata în jur de ${fmt(finalPromis)}.`;
     }
 
     // Anunț oficial: primarul a comunicat un termen nou. Îl afișăm alături de
@@ -229,8 +230,8 @@ export default function Page() {
         `${anuntOficial.text} ` +
         `Calculul independent al acestei pagini, făcut pe ritmul real de lucru (~${muncitori} muncitori pe zi, ` +
         `estimat din progresul dintre pozele din 16 și 27 iulie), indică finalizarea în jurul datei de ${dataEstimataNoi}. ` +
-        `Termenul anunțat de constructor (finalul lui august) e realizabil doar cu mobilizare mare și constantă — ` +
-        `${muncitoriVizita.numar} oameni pe zi, ca în ziua vizitei oficiale, nu ${muncitori}, cât s-a lucrat în medie până acum. ` +
+        `Calculul ține cont de faptul că pe șantier lucrează acum ~${muncitori} oameni (observație din 6 august), ` +
+        `față de ~${muncitoriReferinta} cât s-a lucrat în medie în iulie. Cu ${muncitoriVizita.numar} oameni zilnic, termenul anunțat de constructor devine realizabil. ` +
         `Asta e ce urmărim săptămânal.`;
     }
 

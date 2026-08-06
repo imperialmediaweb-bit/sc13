@@ -36,10 +36,14 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
 ];
 
-// Media zilnică REALĂ de muncitori, estimată prin calcul invers din poze:
-// câtă muncă se vede făcută între 16 și 27 iulie ÷ zile lucrătoare (vezi calculMuncitori).
-// În zilele obișnuite lucrează 3–4; media pe perioadă (cu ziua vizitei inclusă) iese 5–7.
-export const muncitori = 5;
+// Câți muncitori sunt ACUM pe șantier (ultima observație a părinților).
+// 6 august 2026: 10 oameni numărați la parter, în trecere; se auzeau lucrări
+// și la etaje, deci numărul real poate fi mai mare.
+export const muncitori = 10;
+
+// Media zilnică din perioada în care a fost măsurat ritmul (16–27 iulie): ~5 oameni.
+// Serveşte ca reper: dacă acum sunt mai mulți, ritmul se accelerează proporțional.
+export const muncitoriReferinta = 5;
 
 // Câți muncitori erau la vizita oficială (când vin oficialii, șantierul se umple).
 // Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
@@ -70,9 +74,9 @@ export const termeneComunicate: { cine: string; cand: string; termen: string; no
   },
   {
     cine: "Calculul acestei pagini",
-    cand: "din pozele din 16 și 27 iulie",
-    termen: "mijlocul lui octombrie",
-    nota: "Calculat pe ritmul real de lucru (~5 muncitori pe zi). Termenul constructorului e realizabil doar cu mobilizare mare și constantă, ca în ziua vizitei oficiale (19 oameni).",
+    cand: "actualizat 6 august 2026",
+    termen: "mijlocul lui septembrie",
+    nota: "Calculat pe ritmul real de lucru, ajustat după numărul de oameni de pe șantier. Pe 6 august au fost numărați ~10 muncitori (față de ~5 media din iulie), ceea ce a apropiat data cu câteva săptămâni. Cu 19 oameni zilnic, termenul anunțat de constructor devine realizabil.",
   },
 ];
 
@@ -141,7 +145,7 @@ export const etaje: Etaj[] = [
     mp: 1200,
     etapeGata: ["tamplarie", "glet"],
     etapePartial: ["instalatii_el"],
-    nota: "Din poze (27 iulie): ferestre montate și pereți gletuiți, dar pardoseala e încă desfăcută — pământ și moloz, fără șapă. Șapele se toarnă săptămâna viitoare. Instalația electrică e trasă parțial (doze în pereți); tavane, zugrăveală și finisaje neîncepute.",
+    nota: "Din poze (27 iulie): ferestre montate și pereți gletuiți, dar pardoseala e încă desfăcută — pământ și moloz, fără șapă. Pe 6 august se lucra la spartul șapei vechi, în pregătirea turnării celei noi. Instalația electrică e trasă parțial (doze în pereți); tavane, zugrăveală și finisaje neîncepute.",
   },
 ];
 
@@ -287,6 +291,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "6 august 2026",
+    text: "Veste bună de pe șantier: un părinte a numărat, în trecere, aproximativ 10 muncitori care lucrau la parter — la spartul șapei vechi, pregătind turnarea celei noi. Se auzeau lucrări și la etaje, deci numărul real poate fi mai mare. E dublu față de media de ~5 oameni pe zi din iulie și e exact la punctul critic al lucrării. Am recalculat estimarea în consecință: dacă ritmul ăsta se menține, data de finalizare se apropie serios.",
+  },
   {
     data: "5 august 2026",
     text: "Părinții au participat la o întâlnire la Prefectură. Doamna prefect le-a transmis că, din discuțiile purtate cu constructorul, acesta face tot posibilul să finalizeze lucrările până la finalul lunii august, existând și posibilitatea prelungirii până cel târziu în septembrie, în cazul unor situații neprevăzute. Sunt vești mai bune decât termenul de 1 octombrie comunicat cu o zi înainte de primar. Urmărim în continuare ritmul real de pe șantier: termenul constructorului e realizabil doar cu mobilizare mare și constantă, nu cu 3–5 oameni pe zi.",
