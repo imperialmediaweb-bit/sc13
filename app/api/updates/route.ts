@@ -4,15 +4,20 @@ import { addUpdate, listUpdates, deleteUpdate } from "@/lib/updates";
 import { correctGrammar } from "@/lib/correct";
 import { authorized } from "@/lib/auth";
 import { notifyAll } from "@/lib/notify";
+import { announceStaticUpdates } from "@/lib/announce";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 
 // Public — actualizările afișate pe pagină.
+// Tot aici verificăm dacă a apărut o actualizare nouă scrisă în cod și, dacă da,
+// trimitem notificarea o singură dată (vezi lib/announce.ts).
 export async function GET() {
   try {
-    return NextResponse.json({ updates: await listUpdates() });
+    const updates = await listUpdates();
+    announceStaticUpdates().catch(() => {});
+    return NextResponse.json({ updates });
   } catch {
     return NextResponse.json({ updates: [] });
   }

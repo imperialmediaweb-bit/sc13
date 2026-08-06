@@ -14,3 +14,17 @@ export async function setSetting(key: string, value: string): Promise<void> {
     [key, value]
   );
 }
+
+/**
+ * Marchează o cheie ca „revendicată”, o singură dată.
+ * Întoarce true DOAR pentru primul apel — folosit ca să nu trimitem
+ * aceeași notificare de două ori, chiar dacă rulează mai multe instanțe.
+ */
+export async function claimOnce(key: string): Promise<boolean> {
+  await ensureTables();
+  const { rowCount } = await getPool().query(
+    `INSERT INTO settings (key, value) VALUES ($1, $2) ON CONFLICT (key) DO NOTHING`,
+    [key, new Date().toISOString()]
+  );
+  return rowCount === 1;
+}
