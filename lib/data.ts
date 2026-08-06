@@ -33,7 +33,7 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Finanțare", valoare: "PNRR — aproximativ 14 milioane lei" },
   { eticheta: "Constructor", valoare: "Katar Conneg SRL (Vaslui)" },
   { eticheta: "Primul termen anunțat", valoare: "16 octombrie 2025" },
-  { eticheta: "Termenul anunțat în prezent", valoare: "1 septembrie 2026" },
+  { eticheta: "Termenul anunțat în prezent", valoare: "finalul lui august – 1 octombrie 2026" },
 ];
 
 // Câți muncitori sunt ACUM pe șantier (ultima observație a părinților).
@@ -163,12 +163,12 @@ export function procentEtaj(e: Etaj): number {
 export const progresSaptamanaTrecuta = 78;
 
 export const ramasDeFacut = [
-  "Parter: turnarea șapelor (anunțată pentru săptămâna 27 iulie – 2 august)",
+  "Parter: turnarea șapelor — în lucru din 6 august (se sparge șapa veche). Fusese anunțată pentru 27 iulie – 2 august",
   "Parter: pardoseli (gresie/parchet), tavane, zugrăveală, uși și finisaje",
   "Parter: finalizarea instalațiilor electrice și sanitare",
   "Soclul clădirii — în lucru",
   "Etajul 1: finalizarea montajului caloriferelor; retușuri la etajele 1, 2 și 3",
-  "Sala de sport — NU intră în termenul de 8 septembrie; rămâne pentru mai târziu",
+  "Sala de sport — NU intră în termenele anunțate; rămâne pentru mai târziu",
   "Recepția și curățenia finală / curtea școlii",
 ];
 
@@ -176,16 +176,21 @@ export const termene: { cand: string; status: Status; text: string }[] = [
   { cand: "16 octombrie 2025", status: "bad", text: "primul termen anunțat pentru finalizare" },
   { cand: "„Din toamnă” 2025", status: "bad", text: "termen anunțat public" },
   { cand: "Iunie 2026", status: "bad", text: "termen intermediar anunțat" },
-  { cand: "1 septembrie 2026", status: "progress", text: "termenul anunțat pentru finalizare" },
+  { cand: "1 septembrie 2026", status: "bad", text: "termen anunțat pentru finalizare — abandonat" },
   {
     cand: "8 septembrie 2026",
-    status: "current",
-    text: "garanția oficialilor Primăriei și a constructorului (27 iulie): școala finalizată, fără sala de sport",
+    status: "bad",
+    text: "garanția oficialilor Primăriei și a constructorului (27 iulie): școala finalizată, fără sala de sport — depășită de anunțurile ulterioare",
   },
   {
     cand: "Sept.–Oct. 2026 (risc)",
     status: "bad",
     text: "viceprimarul admite în Consiliul Local (31 iulie) că unele școli pot începe cu 2 săptămâni – o lună mai târziu, cu relocare prin Inspectoratul Școlar (fără a nominaliza Școala 13)",
+  },
+  {
+    cand: "Finalul lui august 2026",
+    status: "current",
+    text: "ținta constructorului, comunicată prin doamna prefect (5 august) — cel târziu septembrie, dacă apar situații neprevăzute",
   },
   {
     cand: "1 octombrie 2026",
@@ -283,10 +288,24 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
       "Primarul Cosmin Andrei comunică părinților termenul de 1 octombrie 2026 pentru finalizarea lucrărilor și declară că are tot interesul ca acestea să fie terminate. Elevii nu vor începe anul școlar (7 septembrie) în școala lor.",
   },
   {
-    data: "1 septembrie 2026",
-    status: "none",
-    titlu: "Termenul anunțat pentru finalizare",
-    detalii: "Elevii ar urma să înceapă anul școlar 2026–2027 în școala reabilitată.",
+    data: "5 august 2026",
+    status: "done",
+    titlu: "Întâlnire la Prefectură: constructorul țintește finalul lui august",
+    detalii:
+      "Doamna prefect transmite părinților că, din discuțiile cu constructorul, acesta face tot posibilul să termine până la finalul lunii august, cu prelungire cel târziu în septembrie dacă apar situații neprevăzute.",
+  },
+  {
+    data: "6 august 2026",
+    status: "done",
+    titlu: "Ritmul crește: ~10 muncitori la parter",
+    detalii:
+      "Un părinte numără, în trecere, aproximativ 10 muncitori care lucrau la spartul șapei vechi de la parter — dublu față de media din iulie, exact la punctul critic al lucrării.",
+  },
+  {
+    data: "7 septembrie 2026",
+    status: "current",
+    titlu: "Începe anul școlar 2026–2027",
+    detalii: "Data până la care elevii ar trebui să poată intra în școala reabilitată.",
   },
 ];
 

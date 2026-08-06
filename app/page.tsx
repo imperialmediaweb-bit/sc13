@@ -83,6 +83,7 @@ const termenLabel: Record<string, string> = {
   done: "Finalizat",
   progress: "În așteptare",
   bad: "Depășit",
+  current: "Termenul actual",
   none: "—",
 };
 
@@ -482,12 +483,12 @@ export default function Page() {
 
           <div className="mt-5 rounded-md border-l-4 border-bad bg-bad-soft p-4">
             <p className="font-semibold text-bad">
-              ⚠ Muncitori doar la vizite? {muncitoriVizita.numar} la vizita oficială — dar pozele arată o medie
-              de ~5–7 pe zi.
+              Câți oameni lucrează de fapt? În iulie: {muncitoriVizita.numar} la vizita oficială, 3–4 în zilele
+              obișnuite.
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               La vizita din {muncitoriVizita.data}, cu oficialii de față, constructorul avea{" "}
-              {muncitoriVizita.numar} muncitori pe șantier. În zilele obișnuite se lucrează însă cu doar 3–4 oameni.
+              {muncitoriVizita.numar} muncitori pe șantier. În zilele obișnuite se lucra însă cu doar 3–4 oameni.
               Am verificat cine are dreptate printr-un calcul invers: cât s-a lucrat efectiv între pozele din
               16 iulie și cele din 27 iulie?
             </p>
@@ -507,6 +508,11 @@ export default function Page() {
                 Total: {calculMuncitori.totalOmZile}
               </p>
               <p className="mt-1.5 text-sm text-muted-foreground">{calculMuncitori.concluzie}</p>
+              <p className="mt-2.5 rounded-md border border-ok/40 bg-ok-soft px-3 py-2 text-sm">
+                <strong className="text-ok">Situația de acum (6 august):</strong> au fost numărați ~{muncitori}{" "}
+                muncitori la parter, la spartul șapei vechi — dublu față de media din iulie și exact la punctul
+                critic. Dacă ritmul se menține, data de finalizare se apropie. Continuăm să numărăm.
+              </p>
             </div>
           </div>
 
@@ -738,7 +744,7 @@ export default function Page() {
               },
               {
                 t: "Informare transparentă, săptămânal",
-                d: "comunicare publică a stadiului real și a oricărei întârzieri, plus continuarea vizitelor cu părinții (următoarea: 3 august). Elevii trebuie să intre în școala lor pe 7 septembrie 2026.",
+                d: "comunicare publică a stadiului real și a oricărei întârzieri, plus reluarea și continuarea vizitelor de monitorizare cu părinții. Elevii trebuie să intre în școala lor pe 7 septembrie 2026.",
               },
             ].map((c, i) => (
               <div
