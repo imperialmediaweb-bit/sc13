@@ -722,8 +722,8 @@ export default function Page() {
             ))}
           </ul>
           <p className="mt-3 text-xs text-muted-foreground">
-            Date din hotărârea Consiliului Local Botoșani privind relocarea și din relatările presei locale
-            (linkuri în secțiunea Surse).
+            Date din hotărârea Consiliului Local Botoșani privind relocarea elevilor și din relatările presei
+            locale (linkuri în secțiunea Surse).
           </p>
         </Section>
 

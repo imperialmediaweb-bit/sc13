@@ -388,7 +388,7 @@ export const contextSurse = [
   { url: "https://arenaconstruct.ro/colegiul-national-mihai-eminescu-din-botosani-reabilitat-integral-prin-pnrr-receptie-final-pentru-o-investitie-de-313-milioane-lei/", text: "ArenaConstruct — Colegiul „Mihai Eminescu” Botoșani, reabilitat integral prin PNRR (31,3 mil. lei)" },
   { url: "https://termene.ro/firma/40314681-KATAR-CONNEG-SRL", text: "Termene.ro — Katar Conneg SRL: locul 1 în Vaslui după cifra de afaceri (~121 mil. lei în 2024, +30%)" },
   { url: "https://www.botosaneanul.ro/tensiuni-la-primarie-din-cauza-intarzierilor-de-la-scoala-13-viceprimarul-intarzierile-au-fost-provocate-de-blocajele-la-plati", text: "Botoșăneanul — Viceprimarul: întârzierile la Școala 13, provocate de blocajele la plăți (tranșe la 3–4 luni)" },
-  { url: "https://primariabt.ro/storage/formidable/9/524_25.pdf", text: "Consiliul Local Botoșani — hotărâre privind relocarea elevilor la Fundația Hand of Help (două schimburi, ore de 40 min, pauze de 5 min)" },
+  { url: "https://primariabt.ro/hotarari-de-consiliu-local/", text: "Primăria Botoșani — hotărârile Consiliului Local (inclusiv cea privind relocarea elevilor Școlii 13 la Fundația Hand of Help: două schimburi, ore de 40 min, pauze de 5 min)" },
   { url: "https://www.botosaninews.ro/645361/social/inspectoratul-scolar-botosani-a-decis-relocarea-mai-multor-scoli-din-cauza-lucrarilor-de-reabilitare-sunt-mai-multe-scoli-in-trei-schimburi-vezi-lista/", text: "BotosaniNews.ro — Inspectoratul Școlar a decis relocarea mai multor școli; unele în trei schimburi" },
 ];
 
