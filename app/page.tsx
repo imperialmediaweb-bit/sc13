@@ -42,6 +42,7 @@ import {
   procentEtaj,
   muncitori,
   muncitoriVizita,
+  muncitoriDeclarati,
   muncitoriReferinta,
   calculMuncitori,
   conditiiTemporare,
@@ -513,6 +514,16 @@ export default function Page() {
                 muncitori la parter, la spartul șapei vechi — dublu față de media din iulie și exact la punctul
                 critic. Dacă ritmul se menține, data de finalizare se apropie. Continuăm să numărăm.
               </p>
+              {muncitoriDeclarati && (
+                <p className="mt-2 rounded-md border border-border bg-[hsl(var(--card-2))] px-3 py-2 text-sm">
+                  <strong>Declarat vs. numărat:</strong> {muncitoriDeclarati.cine} a declarat în presă că pe
+                  șantier lucrează intens ~{muncitoriDeclarati.numar} de muncitori. Părinții au numărat ~
+                  {muncitori} pe 6 august, la parter (se auzeau lucrări și la etaje, deci numărul real poate fi
+                  mai mare). Estimarea de pe această pagină folosește numărul{" "}
+                  <strong>numărat</strong>, nu cel declarat — iar dacă cei {muncitoriDeclarati.numar} sunt
+                  confirmați, data de finalizare se apropie și mai mult.
+                </p>
+              )}
             </div>
           </div>
 

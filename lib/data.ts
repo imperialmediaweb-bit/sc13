@@ -49,6 +49,14 @@ export const muncitoriReferinta = 5;
 // Diferența față de zilele obișnuite e afișată pe pagină ca semnal de alarmă.
 export const muncitoriVizita = { numar: 19, data: "27 iulie 2026" };
 
+// Câți muncitori declară autoritățile că lucrează — comparat cu ce numără părinții.
+export const muncitoriDeclarati = {
+  numar: 30,
+  cine: "viceprimarul Bogdan Buhăianu",
+  data: "august 2026",
+  nota: "Declarat în presă: ~30 de muncitori care lucrează intens. Ultima numărătoare a părinților, pe 6 august, a fost de ~10 oameni la parter (se auzeau lucrări și la etaje). Verificăm diferența la fiecare trecere pe lângă șantier.",
+};
+
 // Anunț oficial care schimbă totul (lăsați null dacă nu e cazul).
 // Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
 export const anuntOficial = {
@@ -310,6 +318,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "7 august 2026",
+    text: "Din presă: Primăria Botoșani a semnat un act adițional prin care termenul de finalizare a lucrărilor la Școala 13 a fost prelungit oficial, prin contract. Tot din presă, viceprimarul Bogdan Buhăianu a declarat că pe șantier lucrează intens aproximativ 30 de muncitori. Părinții au numărat ~10 oameni pe 6 august, la parter — verificăm diferența la fiecare trecere pe lângă șantier. Dacă cei 30 sunt confirmați, lucrările se pot încheia semnificativ mai repede decât arată estimarea noastră.",
+  },
   {
     data: "6 august 2026",
     text: "Veste bună de pe șantier: un părinte a numărat, în trecere, aproximativ 10 muncitori care lucrau la parter — la spartul șapei vechi, pregătind turnarea celei noi. Se auzeau lucrări și la etaje, deci numărul real poate fi mai mare. E dublu față de media de ~5 oameni pe zi din iulie și e exact la punctul critic al lucrării. Am recalculat estimarea în consecință: dacă ritmul ăsta se menține, data de finalizare se apropie serios.",
