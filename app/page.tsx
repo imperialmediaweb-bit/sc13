@@ -224,17 +224,17 @@ export default function Page() {
     // Anunț oficial: primarul a comunicat un termen nou. Îl afișăm alături de
     // calculul nostru independent — diferența dintre ele e ea însăși informație.
     if (anuntOficial) {
-      estVerdict = `Elevii nu încep anul școlar (7 septembrie) în școala lor. Termene comunicate: ${anuntOficial.termen}.`;
-      estColor = "hsl(var(--bad))";
+      estVerdict = `Termen contractual: ${anuntOficial.termen} — cu o săptămână înainte de începerea anului școlar.`;
+      estColor = "hsl(var(--primary))";
       dataFinal = anuntOficial.termen;
-      sanse = 12;
+      sanse = 45;
       estDetail =
         `${anuntOficial.text} ` +
         `Calculul independent al acestei pagini, făcut pe ritmul real de lucru (~${muncitori} muncitori pe zi, ` +
         `estimat din progresul dintre pozele din 16 și 27 iulie), indică finalizarea în jurul datei de ${dataEstimataNoi}. ` +
-        `Calculul ține cont de faptul că pe șantier lucrează acum ~${muncitori} oameni (observație din 6 august), ` +
-        `față de ~${muncitoriReferinta} cât s-a lucrat în medie în iulie. Cu ${muncitoriVizita.numar} oameni zilnic, termenul anunțat de constructor devine realizabil. ` +
-        `Asta e ce urmărim săptămânal.`;
+        `Calculul ține cont de faptul că pe șantier au fost numărați ~${muncitori} oameni (6 august), ` +
+        `față de ~${muncitoriReferinta} cât s-a lucrat în medie în iulie. Cu ${muncitoriDeclarati.numar} de muncitori, câți anunță viceprimarul, ` +
+        `termenul contractual de 30 august devine realizabil. Asta e ce urmărim în continuare.`;
     }
 
     setView({ zile: Math.abs(zile), overdue: zile < 0, estVerdict, estColor, estDetail, sanse, dataFinal, dataEstimataNoi });
@@ -318,7 +318,7 @@ export default function Page() {
           <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-5">
             {[
               { v: view ? String(view.zile) : "—", l: view?.overdue ? "zile peste termen" : "zile până la termen", warn: view?.overdue },
-              { v: "1 sept. 2026", l: "termenul anunțat" },
+              { v: "30 aug. 2026", l: "termen contractual" },
               { v: PROGRES_GENERAL + "%", l: "progres estimat" },
               { v: `~${muncitori}/zi`, l: "muncitori, medie reală din poze", warn: muncitori < 10 },
               { v: view ? view.sanse + "%" : "—", l: "șanse la timp", warn: (view?.sanse ?? 50) < 40 },
@@ -586,8 +586,9 @@ export default function Page() {
             <div>
               <p className="text-lg font-semibold">
                 Șanse ca elevii să înceapă anul școlar în școala reabilitată. Anul școlar începe pe{" "}
-                <strong>7 septembrie 2026</strong> — iar garanția dată de oficialii Primăriei și de constructor pe 27 iulie e
-                „finalizat până pe 8 septembrie", adică la o zi <em>după</em> începerea școlii.
+                <strong>7 septembrie 2026</strong>, iar termenul asumat prin contract (actul adițional semnat pe
+                13 august) este <strong>30 august 2026</strong> — cu o săptămână înainte. Dacă e respectat, copiii
+                intră în școala lor.
               </p>
               <div className="mt-4 rounded-lg border-l-4 border-primary bg-[hsl(var(--card-2))] p-4">
                 <div className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">

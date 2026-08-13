@@ -19,8 +19,9 @@ export const petitieDepusa = {
   numere: ["19849", "19850"], // numere de înregistrare (petiția + adresa)
 };
 
-// Termenul promis de finalizare a lucrărilor (an, luna 0-11, zi) — 1 septembrie 2026
-export const termenFinal: [number, number, number] = [2026, 8, 1];
+// Termenul contractual de finalizare (an, luna 0-11, zi) — 30 august 2026,
+// stabilit prin actul adițional semnat de Primărie cu constructorul (13 august 2026).
+export const termenFinal: [number, number, number] = [2026, 7, 30];
 // Începutul anului școlar — 7 septembrie 2026 (data reală până la care elevii trebuie să poată intra)
 export const anScolarStart: [number, number, number] = [2026, 8, 7];
 
@@ -33,7 +34,7 @@ export const proiect: { eticheta: string; valoare: string }[] = [
   { eticheta: "Finanțare", valoare: "PNRR — aproximativ 14 milioane lei" },
   { eticheta: "Constructor", valoare: "Katar Conneg SRL (Vaslui)" },
   { eticheta: "Primul termen anunțat", valoare: "16 octombrie 2025" },
-  { eticheta: "Termenul anunțat în prezent", valoare: "finalul lui august – 1 octombrie 2026" },
+  { eticheta: "Termen contractual actual", valoare: "30 august 2026 (act adițional semnat)" },
 ];
 
 // Câți muncitori sunt ACUM pe șantier (ultima observație a părinților).
@@ -60,31 +61,37 @@ export const muncitoriDeclarati = {
 // Anunț oficial care schimbă totul (lăsați null dacă nu e cazul).
 // Când există, verdictul și șansele se raportează la el, nu la calculul din ritm.
 export const anuntOficial = {
-  data: "5 august 2026",
-  sursa: "întâlnirile părinților cu primarul și cu prefectul",
-  termen: "între sfârșitul lui august și 1 octombrie",
-  text: "Două termene diferite, comunicate la o zi distanță. Primarul Cosmin Andrei le-a spus părinților, pe 4 august, că lucrările se finalizează până la 1 octombrie 2026. A doua zi, la întâlnirea de la Prefectură, doamna prefect a transmis părinților că, din discuțiile ei cu constructorul, acesta face tot posibilul să termine până la finalul lunii august, cu posibilitatea prelungirii cel târziu în septembrie, dacă apar situații neprevăzute. Rămâne cert doar că anul școlar începe pe 7 septembrie, iar elevii Școlii 13 învață deja de aproape trei ani în spații temporare.",
+  data: "13 august 2026",
+  sursa: "act adițional semnat de Primăria Botoșani cu Katar Conneg SRL, relatat de BotosaniNews",
+  termen: "30 august 2026",
+  text: "Primăria Botoșani a semnat un act adițional la contractul cu Katar Conneg SRL, prin care termenul de finalizare a lucrărilor este stabilit la 30 august 2026. Spre deosebire de termenele anunțate verbal până acum, acesta este asumat prin contract. Vestea bună: 30 august este înainte de începerea anului școlar (7 septembrie), deci, dacă termenul e respectat, elevii ar putea intra în școala lor. Este însă a cincea prelungire a contractului, după termenul inițial din octombrie 2025.",
 };
 
 // Termenele comunicate de fiecare parte — pentru comparație publică.
 export const termeneComunicate: { cine: string; cand: string; termen: string; nota?: string }[] = [
   {
+    cine: "Contractul (act adițional semnat)",
+    cand: "13 august 2026",
+    termen: "30 august 2026",
+    nota: "Singurul termen asumat juridic, nu doar declarat. Primăria a semnat actul adițional cu Katar Conneg SRL. Este a cincea prelungire față de termenul inițial din octombrie 2025.",
+  },
+  {
     cine: "Constructorul (prin doamna prefect)",
     cand: "5 august 2026",
     termen: "finalul lui august, cel târziu septembrie",
-    nota: "Constructorul face tot posibilul să termine până la finalul lunii august; prelungire până cel târziu în septembrie doar dacă apar situații neprevăzute.",
+    nota: "Constructorul face tot posibilul să termine până la finalul lunii august; prelungire până cel târziu în septembrie doar dacă apar situații neprevăzute. Se potrivește cu termenul din contract.",
   },
   {
     cine: "Primarul Cosmin Andrei",
     cand: "4 august 2026",
     termen: "1 octombrie 2026",
-    nota: "Comunicat părinților în întâlnire; primarul a declarat că are tot interesul ca lucrările să fie terminate.",
+    nota: "Comunicat părinților în întâlnire. Cu o săptămână înainte de semnarea actului adițional, care prevede 30 august.",
   },
   {
     cine: "Calculul acestei pagini",
-    cand: "actualizat 6 august 2026",
+    cand: "ultima verificare: 6 august 2026",
     termen: "mijlocul lui septembrie",
-    nota: "Calculat pe ritmul real de lucru, ajustat după numărul de oameni de pe șantier. Pe 6 august au fost numărați ~10 muncitori (față de ~5 media din iulie), ceea ce a apropiat data cu câteva săptămâni. Cu 19 oameni zilnic, termenul anunțat de constructor devine realizabil.",
+    nota: "Calculat pe ritmul real de lucru, ajustat după numărul de oameni numărați pe șantier (~10 pe 6 august). Dacă cei ~30 de muncitori anunțați de viceprimar sunt confirmați, termenul contractual de 30 august devine realizabil.",
   },
 ];
 
@@ -181,29 +188,29 @@ export const ramasDeFacut = [
 ];
 
 export const termene: { cand: string; status: Status; text: string }[] = [
-  { cand: "16 octombrie 2025", status: "bad", text: "primul termen anunțat pentru finalizare" },
+  { cand: "16 octombrie 2025", status: "bad", text: "primul termen contractual pentru finalizare" },
   { cand: "„Din toamnă” 2025", status: "bad", text: "termen anunțat public" },
   { cand: "Iunie 2026", status: "bad", text: "termen intermediar anunțat" },
   { cand: "1 septembrie 2026", status: "bad", text: "termen anunțat pentru finalizare — abandonat" },
   {
     cand: "8 septembrie 2026",
     status: "bad",
-    text: "garanția oficialilor Primăriei și a constructorului (27 iulie): școala finalizată, fără sala de sport — depășită de anunțurile ulterioare",
-  },
-  {
-    cand: "Sept.–Oct. 2026 (risc)",
-    status: "bad",
-    text: "viceprimarul admite în Consiliul Local (31 iulie) că unele școli pot începe cu 2 săptămâni – o lună mai târziu, cu relocare prin Inspectoratul Școlar (fără a nominaliza Școala 13)",
-  },
-  {
-    cand: "Finalul lui august 2026",
-    status: "current",
-    text: "ținta constructorului, comunicată prin doamna prefect (5 august) — cel târziu septembrie, dacă apar situații neprevăzute",
+    text: "garanția oficialilor Primăriei și a constructorului (27 iulie) — depășită de anunțurile ulterioare",
   },
   {
     cand: "1 octombrie 2026",
+    status: "bad",
+    text: "termen comunicat verbal de primar părinților (4 august) — infirmat de actul adițional semnat pe 13 august",
+  },
+  {
+    cand: "30 august 2026",
     status: "current",
-    text: "termenul comunicat de primar părinților (4 august 2026) — elevii NU încep anul școlar în școala lor",
+    text: "TERMEN CONTRACTUAL, prin actul adițional semnat de Primărie cu Katar Conneg SRL (13 august 2026) — singurul asumat juridic",
+  },
+  {
+    cand: "7 septembrie 2026",
+    status: "none",
+    text: "începe anul școlar 2026–2027; termenul contractual e cu o săptămână înainte",
   },
 ];
 
@@ -310,6 +317,13 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
       "Un părinte numără, în trecere, aproximativ 10 muncitori care lucrau la spartul șapei vechi de la parter — dublu față de media din iulie, exact la punctul critic al lucrării.",
   },
   {
+    data: "13 august 2026",
+    status: "done",
+    titlu: "Prelungire semnată prin act adițional: termen 30 august",
+    detalii:
+      "Primăria Botoșani semnează un act adițional la contractul cu Katar Conneg SRL, stabilind termenul de finalizare la 30 august 2026. Este primul termen asumat prin contract după cel inițial, din octombrie 2025, și cade cu o săptămână înainte de începerea anului școlar.",
+  },
+  {
     data: "7 septembrie 2026",
     status: "current",
     titlu: "Începe anul școlar 2026–2027",
@@ -318,6 +332,10 @@ export const cronologie: { data: string; status: Status; titlu: string; detalii?
 ];
 
 export const actualizari = [
+  {
+    data: "13 august 2026",
+    text: "Primăria Botoșani a semnat un act adițional la contractul cu Katar Conneg SRL: termenul de finalizare a lucrărilor este acum 30 august 2026. Este important pentru că, spre deosebire de termenele anunțate verbal până acum (1 septembrie, 8 septembrie, 1 octombrie), acesta este asumat prin contract. Vestea bună: 30 august vine cu o săptămână înainte de începerea anului școlar, pe 7 septembrie — deci, dacă e respectat, copiii ar putea intra în școala lor. Rămâne însă a cincea prelungire față de termenul inițial, din octombrie 2025. Urmărim în continuare ritmul real de pe șantier.",
+  },
   {
     data: "7 august 2026",
     text: "Din presă: Primăria Botoșani a semnat un act adițional prin care termenul de finalizare a lucrărilor la Școala 13 a fost prelungit oficial, prin contract. Tot din presă, viceprimarul Bogdan Buhăianu a declarat că pe șantier lucrează intens aproximativ 30 de muncitori. Părinții au numărat ~10 oameni pe 6 august, la parter — verificăm diferența la fiecare trecere pe lângă șantier. Dacă cei 30 sunt confirmați, lucrările se pot încheia semnificativ mai repede decât arată estimarea noastră.",
